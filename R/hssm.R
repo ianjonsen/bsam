@@ -1,3 +1,14 @@
+#' @param loc.list 
+#'
+#' @param model 
+#' @param adapt 
+#' @param samples 
+#' @param thin 
+#' @param chains 
+#' @param ... 
+#'
+#' @export
+#' @importFrom rjags jags.model
 `hssm` =
 function (loc.list, model = "hDCRWS", adapt, samples, thin, chains, ...)
 {

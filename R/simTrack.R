@@ -1,3 +1,10 @@
+#' @param theta 
+#'
+#' @param gamma 
+#' @param alpha 
+#' @param vcov 
+#'
+#' @export
 `simTrack` = function(T = 100, theta = c(0, pi), gamma = c(0.9, 0.2), alpha = c(0.2, 0.8), vcov = c(0.01, 0, 0, 0.02)){
 
 start.date <- strptime(format(Sys.time(), "%d/%m/%y %H:%M:%S"), "%d/%m/%y %H:%M:%S", tz = "GMT")

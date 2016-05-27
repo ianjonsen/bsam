@@ -1,3 +1,9 @@
+#' @param fit.in 
+#'
+#' @param save.to.pdf 
+#'
+#' @export
+#' @importFrom PBSmapping plotMap
 `plotSSM` = function(fit.in, save.to.pdf=FALSE) 
 {
 options(warn=-1)

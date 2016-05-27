@@ -1,13 +1,21 @@
 Package: bsam
 Type: Package
 Title: Bayesian state-space models for animal movement
-Version: 0.43.1
-Date: 2015-01-21
-Author: Ian Jonsen <ian.jonsen@mq.edu.au> with contributions from S. Luque, A. Winship, and M.W. Pedersen
+Version: 0.43.1.9001
+Date: 2016-05-27
+Author: Ian Jonsen <ian.jonsen@mq.edu.au> with contributions from S. Luque, A.
+    Winship, and M.W. Pedersen
 Maintainer: Ian Jonsen <ian.jonsen@mq.edu.au>
-Depends: rjags, PBSmapping
-Description: Fit Bayesian state-space models to Argos satellite tracking data. Currently, models provided are DCRW (for location filtering), DCRWS (for location filtering and behavioural state estimation), and hierarchical models, hDCRW and hDCRWS, for location filtering and behavioural state estimation across multiple animals, respectively.
+Depends:
+    rjags,
+    PBSmapping
+Description: Fit Bayesian state-space models to Argos satellite tracking
+    data. Currently, models provided are DCRW (for location filtering), DCRWS (for
+    location filtering and behavioural state estimation), and hierarchical models,
+    hDCRW and hDCRWS, for location filtering and behavioural state estimation across
+    multiple animals, respectively.
 License: GPL-2
 URL: http://www.r-project.org
 LazyLoad: yes
 Packaged: 2015-01-21 03:15:53 UTC; jonsen
+RoxygenNote: 5.0.1

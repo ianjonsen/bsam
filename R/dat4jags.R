@@ -1,3 +1,19 @@
+#' Prepares and writes input data for DCRW/DCRWS/hDCRWS models
+#' 
+#' Takes an R data.frame of Argos tracking data restructures it for the models.
+#' Intended for internal use, called by fitSSM.
+#' 
+#' 
+#' @param locfile An R data.frame of Argos tracking data. See fitSSM (indata)
+#' for details on structure.
+#' @param tstep The time step to be assumed for the state-space model,
+#' specified in days.
+#' @param tod Logical. Specifies if absolute time of day of observations is
+#' relevant.
+#' @param \dots Other arguments may be passed.
+#' @return Returns a list to be used by ssm/hssm.
+#' @seealso Function to be called by \code{\link{fitSSM}}.
+#' @export
 `dat4jags` <-
 function (indata, tstep = 1, ...) 
 {

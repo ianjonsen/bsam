@@ -1,3 +1,8 @@
+#' @param fit.in 
+#'
+#' @param save.to.pdf 
+#'
+#' @export
 diagSSM = function(fit.in, save.to.pdf=FALSE){
 
 if(names(fit.in)[1]=="summary") fit.in = list(fit.in)
