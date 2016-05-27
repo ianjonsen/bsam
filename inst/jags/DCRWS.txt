@@ -1,0 +1,90 @@
+data {
+	pi <- 3.141592653589
+
+	Omega[1,1] <- 1
+	Omega[1,2] <- 0
+	Omega[2,1] <- 0
+	Omega[2,2] <- 1
+	
+	first.loc[1] <- y[1,1]
+	first.loc[2] <- y[1,2]
+	}
+model
+{
+
+#  "DCRWS" model from Ian D Jonsen, Joanna Mills Flemming and Ransom A Myers
+#    Robust state-space modeling of animal movement data
+#    ijonsen@dal.ca
+#    Created by Ian Jonsen, 10/29/2004, last modified, 01/08/2013
+
+
+## priors on process uncertainty
+iSigma[1:2,1:2] ~ dwish(Omega[,], 2)	
+Sigma[1:2,1:2] <- inverse(iSigma[,])
+
+tmp[1] ~ dbeta(20, 20)
+
+tmp[2] ~ dbeta(1, 1)
+
+
+theta[1] <- (2 * tmp[1] - 1) * pi
+theta[2] <- tmp[2] * pi * 2
+
+gamma[1] ~ dbeta(2, 1.5) 	## prior for gamma in b=1
+dev ~ dbeta(1, 1)			## rnd deviate to ensure gamma[2] > gamma[1]
+gamma[2] <- gamma[1] * dev
+
+alpha[1] ~ dbeta(1, 1)		## prob of being in b 1 at t, given in b 1 at t-1
+alpha[2] ~ dbeta(1, 1)		## prob of being in b 1 at t, given in b 2 at t-1
+
+lambda[1] ~ dunif(0, 1)
+lambda[2] <- 1 - lambda[1]
+b[1] ~ dcat(lambda[]) 		## assign b for first obs
+
+logpsi ~ dunif(-10, 10)		## inflation/deflation factor for estimation error
+psi <- exp(logpsi)
+
+
+## Priors for first location
+for(k in 1:2){
+	x[1,k] ~ dt(first.loc[k], itau2[1,k] * psi, nu[1,k])
+	}
+
+## Assume simple random walk to estimate 2nd regular position
+x[2,1:2] ~ dmnorm(x[1,], iSigma[,])
+
+## Transition equation
+for(t in 2:(RegN-1)){
+
+	phi[t,1] <- alpha[b[t-1]]
+	phi[t,2] <- 1 - alpha[b[t-1]]
+	b[t] ~ dcat(phi[t,])
+	
+  Tdx[t,1] <- cos(theta[b[t]]) * (x[t,1] - x[t-1,1]) + sin(theta[b[t]]) * (x[t,2] - x[t-1,2])      
+     
+  x.mn[t,1] <- x[t,1] +  Tdx[t,1] * gamma[b[t]]
+
+     
+  Tdx[t,2] <- -sin(theta[b[t]]) * (x[t,1] - x[t-1,1]) + cos(theta[b[t]]) * (x[t,2] - x[t-1,2])      
+     
+  x.mn[t,2] <- x[t,2] +  Tdx[t,2] * gamma[b[t]]
+
+	
+  x[t+1,1:2] ~ dmnorm(x.mn[t,], iSigma[,])	
+	}
+
+## estimate final b 
+zeta[1] <- alpha[b[RegN-1]]
+zeta[2] <- 1 - zeta[1]
+b[RegN] ~ dcat(zeta[])
+
+##	Measurement equation
+for(t in 2:RegN){					
+	for(i in idx[t-1]:(idx[t]-1)){			
+		for(k in 1:2){
+			zhat[i,k] <- (1-j[i]) * x[t-1,k] + j[i] * x[t,k]
+			y[i,k] ~ dt(zhat[i,k], itau2[i,k] * psi, nu[i,k])
+			} #k
+		} #i
+	}	#t
+} #end
