@@ -1,3 +1,5 @@
+#' plotSSM
+#' 
 #' @param fit.in 
 #'
 #' @param save.to.pdf 
@@ -7,7 +9,9 @@
 `plotSSM` = function(fit.in, save.to.pdf=FALSE) 
 {
 options(warn=-1)
-data(worldLLhigh)
+  on.exit(options(warn=0))
+  worldLLhigh <- NULL
+data("worldLLhigh", envir = environment())
 cols = colorRampPalette(c("blue", "yellow"))
 ncols = 21
 
@@ -151,5 +155,5 @@ else{
 	}
 
 cat("\n Use diagSSM() to examine convergence criteria \n")
-options(warn=0)
+#options(warn=0)
 }

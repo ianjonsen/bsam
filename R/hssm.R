@@ -1,3 +1,5 @@
+#' hssm
+#' 
 #' @param loc.list 
 #'
 #' @param model 

@@ -1,9 +1,11 @@
+#' simTrack
+#' 
 #' @param theta 
 #'
 #' @param gamma 
 #' @param alpha 
 #' @param vcov 
-#'
+#' @importFrom MASS mvrnorm
 #' @export
 `simTrack` = function(T = 100, theta = c(0, pi), gamma = c(0.9, 0.2), alpha = c(0.2, 0.8), vcov = c(0.01, 0, 0, 0.02)){
 
@@ -20,8 +22,8 @@ nu.lat <- c()
 Sigma <- matrix(vcov, 2, 2)
 
 ## Start as random walk
-x[1, ] <- mvrnorm(1, c(-65,40), Sigma) #randomize starting position
-x[2, ] <- mvrnorm(1, x[1,], Sigma)
+x[1, ] <- MASS::mvrnorm(1, c(-65,40), Sigma) #randomize starting position
+x[2, ] <- MASS::mvrnorm(1, x[1,], Sigma)
 
 ## set first behav state
 b[1] <- rbinom(1, 1, 0.5) + 1

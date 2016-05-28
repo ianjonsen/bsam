@@ -1,7 +1,9 @@
+#' diagSSM
+#' 
 #' @param fit.in 
 #'
 #' @param save.to.pdf 
-#'
+#' @importFrom coda autocorr.plot traceplot as.mcmc.list
 #' @export
 diagSSM = function(fit.in, save.to.pdf=FALSE){
 
@@ -40,7 +42,7 @@ if(names(fit.in)[1]=="summary") fit.in = list(fit.in)
 		rug(tmp[[1]], lwd=0.2, ticksize=0.05, col='blue')
 		rug(tmp[[2]], lwd=0.2, ticksize=0.05, col='red')							
 		mtext(expression(gamma), 2, 14)			
-		autocorr.plot(tmp, auto.layout=FALSE, ask=FALSE, las=1, tcl=-0.2,
+		coda::autocorr.plot(tmp, auto.layout=FALSE, ask=FALSE, las=1, tcl=-0.2,
 			col='steelblue3', mgp=c(1,0.5,0))
 		mtext("ACF: chain 1", 3, -1, outer=T, adj=0.635, cex=0.7)
 		mtext("ACF: chain 2", 3, -1, outer=T, adj=0.91, cex=0.7)			

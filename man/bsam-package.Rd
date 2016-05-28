@@ -31,8 +31,8 @@ state estimates compared to fitting DCRW/DCRWS to individual datasets.
 }
 \examples{
 
-data(lbt)
-fit = fitSSM(lbt, model="DCRW", tstep=1, adapt=60000, samples=30000, thin=30, chains=2)
+#data(lbt)
+#fit = fitSSM(lbt, model="DCRW", tstep=1, adapt=60000, samples=30000, thin=30, chains=2)
 
 }
 \author{

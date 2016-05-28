@@ -11,6 +11,7 @@
 #' @return Returns a list of McMC samples from marginal posteriors and a
 #' summary data.frame of mean and median position estimates.
 #' @seealso Function to be called by \code{\link{fitSSM}}.
+#' @importFrom rjags jags.samples
 #' @export
 `ssm` =
 function (loc.list, model = "DCRW", adapt, samples, thin, chains, ...)
@@ -104,7 +105,7 @@ function (loc.list, model = "DCRW", adapt, samples, thin, chains, ...)
 
 	burn = jags.model(model.file, jags.data, jags.inits, n.chains=chains, n.adapt=adapt/2)
 	update(burn, n.iter=adapt/2)
-	psamples = jags.samples(burn, jags.params, n.iter=samples, thin=thin)
+	psamples = rjags::jags.samples(burn, jags.params, n.iter=samples, thin=thin)
 
 	lon = apply(psamples$x[,1,,],1, mean)
 	lat = apply(psamples$x[,2,,],1, mean)
