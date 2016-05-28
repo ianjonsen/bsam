@@ -40,12 +40,12 @@ ncols = 21
 				pdf(paste("ssm", unique(est[[i]]$id), ".pdf", sep=""), width=6,
 					height=5, pointsize=12)
 				}
-			else {
-				if(.Platform$OS.type=="windows") windows()
-				else if(.Platform$OS.type=="unix"){
-					quartz(width = 6, height = 5)	
-					}	
-				}		
+		#	else {
+				#if(.Platform$OS.type=="windows") windows()
+				#else if(.Platform$OS.type=="unix"){
+			#		quartz(width = 6, height = 5)	
+		#			}	
+	#			}		
 			layout(matrix(c(1,1,0),3,1,byrow=TRUE), widths=3, heights=c(4,4,1))	
 			plotMap(worldLLhigh, xlim=xl1, ylim=yl, border=NA, bg=grey(0.7),
 				col=grey(0.05), axes=FALSE, xlab="", ylab="")
@@ -92,12 +92,12 @@ ncols = 21
 			pdf(paste("ssm", unique(fit$summary$id), ".pdf", sep=""), width=6,
 				height=5, pointsize=12)
 			}
-		else {
-			if(.Platform$OS.type=="windows") windows()
-			else if(.Platform$OS.type=="unix"){
-				quartz(width = 6, height = 5)	
-				}
-			}	
+	#	else {
+	#		if(.Platform$OS.type=="windows") windows()
+	#		else if(.Platform$OS.type=="unix"){
+	#			quartz(width = 6, height = 5)	
+	#			}
+	#		}	
 		layout(matrix(c(1,1,0),3,1,byrow=TRUE), widths=3, heights=c(4,4,1))	
 		plotMap(worldLLhigh, xlim=xl1, ylim=yl, border=NA, bg=grey(0.7), col=grey(0.05),
 		    axes=FALSE, xlab="", ylab="")

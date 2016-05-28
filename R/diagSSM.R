@@ -17,12 +17,12 @@ if(names(fit.in)[1]=="summary") fit.in = list(fit.in)
 			pdf(paste("diag", unique(fit$summary$id), "_params.pdf", sep=""), width=6.5, 
 				height=10)
 			}
-		else{
-			if(.Platform$OS.type=="windows") windows()
-			else if(.Platform$OS.type=="unix"){
-				quartz(width =6, height = 6)	
-				}	
-			}		
+		#else{
+			#if(.Platform$OS.type=="windows") windows()
+			#else if(.Platform$OS.type=="unix"){
+		#		quartz(width =6, height = 6)	
+	#			}	
+	#		}		
 		layout(matrix(1:20,5,4,byrow=TRUE), widths=c(3,3,3,3), heights=rep(1,5))
 			par(mar=c(1,1,1,2), oma=c(3,4,2,0))
 		
@@ -131,12 +131,12 @@ if(names(fit.in)[1]=="summary") fit.in = list(fit.in)
 					height=10)
 				}
 			}		
-		else{
-			if(.Platform$OS.type=="windows") windows()
-			else if(.Platform$OS.type=="unix"){
-				quartz(width =6, height = 8)	
-				}	
-			}	
+		#else{
+			#if(.Platform$OS.type=="windows") windows()
+			#else if(.Platform$OS.type=="unix"){
+		#		quartz(width =6, height = 8)	
+		#		}	
+		#	}	
 		if(md=="DCRWS"){
 			layout(matrix(1:36,9,4,byrow=TRUE), widths=c(3,3,3,3), heights=rep(1,9))
 			}
@@ -316,12 +316,12 @@ if(names(fit.in)[1]=="summary") fit.in = list(fit.in)
 				dev.off()		
 				pdf(paste("diag_", md, "_psi.pdf", sep=""), width=6, height=6)
 				}
-			else{
-				if(.Platform$OS.type=="windows") windows()
-				else if(.Platform$OS.type=="unix"){
-					quartz(width =6, height = 6)	
-					}	
-				}	
+			#else{
+				#if(.Platform$OS.type=="windows") windows()
+				#else if(.Platform$OS.type=="unix"){
+				#	quartz(width =6, height = 6)	
+				#	}	
+				#}	
 			# psi's
 			tmp = as.mcmc.list(fit$mcmc$psi)
 			dim.psi = ncol(tmp[[1]])
