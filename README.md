@@ -10,7 +10,7 @@ devtools::install_github("ijonsen/bsam")
 ```
 
 # todo
-- see (https://github.com/ijonsen/bsam/issues)[Issues]
+- see [https://github.com/ijonsen/bsam/issues](Issues)
 - add tests
 - reduce example run time
 - use Authors@R
