@@ -2,7 +2,6 @@ Package: bsam
 Type: Package
 Title: Bayesian state-space models for animal movement
 Version: 0.43.1.9001
-Date: 2016-05-27
 Author: Ian Jonsen <ian.jonsen@mq.edu.au> with contributions from S. Luque, A.
     Winship, and M.W. Pedersen
 Maintainer: Ian Jonsen <ian.jonsen@mq.edu.au>
@@ -18,5 +17,4 @@ Description: Fit Bayesian state-space models to Argos satellite tracking
 License: GPL-2
 URL: http://www.r-project.org
 LazyLoad: yes
-Packaged: 2015-01-21 03:15:53 UTC; jonsen
 RoxygenNote: 5.0.1
