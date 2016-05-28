@@ -1,8 +1,8 @@
 #' plotSSM
 #' 
-#' @param fit.in 
+#' @param fit.in fit.in
 #'
-#' @param save.to.pdf 
+#' @param save.to.pdf save.to.pdf
 #'
 #' @export
 #' @importFrom PBSmapping plotMap
@@ -43,7 +43,7 @@ ncols = 21
 			else {
 				if(.Platform$OS.type=="windows") windows()
 				else if(.Platform$OS.type=="unix"){
-					quartz(w=6,h=5)	
+					quartz(width = 6, height = 5)	
 					}	
 				}		
 			layout(matrix(c(1,1,0),3,1,byrow=TRUE), widths=3, heights=c(4,4,1))	
@@ -55,8 +55,8 @@ ncols = 21
 			axis(1, at=pretty(xl2, n=5), mgp=c(1,0.3,0),tcl=-0.3, cex.axis=0.8, lwd=0.5)
 			axis(2, at=pretty(yl, n=5), mgp=c(1,0.3,0),tcl=-0.3, cex.axis=0.8, lwd=0.5,
 				las=1)
-			axis(3, at=pretty(xl2, n=5), lab=FALSE, mgp=c(1,0.3,0), tcl=-0.3, lwd=0.5)
-			axis(4, at=pretty(yl, n=5), lab=FALSE, mgp=c(1,0.3,0), tcl=-0.3, lwd=0.5)						
+			axis(3, at=pretty(xl2, n=5), labels = FALSE, mgp=c(1,0.3,0), tcl=-0.3, lwd=0.5)
+			axis(4, at=pretty(yl, n=5), labels = FALSE, mgp=c(1,0.3,0), tcl=-0.3, lwd=0.5)						
 		   	points(lat ~ lon, data = dat[[i]], type = "b", pch="+", col = grey(0.5))
 			matpoints(mc[[i]]$x[,1,,], mc[[i]]$x[,2,,], 
 				col = rgb(0.95, 0.95, 0.95, 0.3), lwd = 0.1, pch = ".")    	
@@ -95,7 +95,7 @@ ncols = 21
 		else {
 			if(.Platform$OS.type=="windows") windows()
 			else if(.Platform$OS.type=="unix"){
-				quartz(w=6,h=5)	
+				quartz(width = 6, height = 5)	
 				}
 			}	
 		layout(matrix(c(1,1,0),3,1,byrow=TRUE), widths=3, heights=c(4,4,1))	
@@ -107,8 +107,8 @@ ncols = 21
 		axis(1, at=pretty(xl2, n=5), mgp=c(1,0.3,0),tcl=-0.3, cex.axis=0.8, lwd=0.5)
 		axis(2, at=pretty(yl, n=5), mgp=c(1,0.3,0),tcl=-0.3, cex.axis=0.8, lwd=0.5,
 			las=1)
-		axis(3, at=pretty(xl2, n=5), lab=FALSE, mgp=c(1,0.3,0), tcl=-0.3, lwd=0.5)
-		axis(4, at=pretty(yl, n=5), lab=FALSE, mgp=c(1,0.3,0), tcl=-0.3, lwd=0.5)						
+		axis(3, at=pretty(xl2, n=5), labels = FALSE, mgp=c(1,0.3,0), tcl=-0.3, lwd=0.5)
+		axis(4, at=pretty(yl, n=5), labels = FALSE, mgp=c(1,0.3,0), tcl=-0.3, lwd=0.5)						
 	   	points(lat ~ lon, data = fit$data, type = "b", pch="+", col = grey(0.5))
 		matpoints(fit$mcmc$x[,1,,], fit$mcmc$x[,2,,], 
 			col = rgb(0.95, 0.95, 0.95, 0.3), lwd = 0.1, pch = ".")    	

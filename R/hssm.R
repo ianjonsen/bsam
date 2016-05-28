@@ -1,13 +1,13 @@
 #' hssm
 #' 
-#' @param loc.list 
+#' @param loc.list loc.list
 #'
-#' @param model 
-#' @param adapt 
-#' @param samples 
-#' @param thin 
-#' @param chains 
-#' @param ... 
+#' @param model model
+#' @param adapt adapt
+#' @param samples samples
+#' @param thin thin
+#' @param chains chains
+#' @param ... dots
 #'
 #' @export
 #' @importFrom rjags jags.model

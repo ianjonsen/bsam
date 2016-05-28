@@ -2,7 +2,7 @@
 
 #' Fit Bayesian state-space models to Argos satellite tracking data
 #' 
-#' Currently, models provided are DCRW (for location filtering), DCRWS (for
+#' Currently models provided are DCRW (for location filtering), DCRWS (for
 #' location filtering and behavioural state estimation), and hDCRWS (a
 #' hierarchical model for location filtering and behavioural state estimation
 #' across multiple animals). The models are fit in JAGS using Markov chain
@@ -45,8 +45,20 @@
 #' 
 #' #data(lbt)
 #' #fit = fitSSM(lbt, model="DCRW", tstep=1, adapt=60000, samples=30000, thin=30, chains=2)
-#' 
+#' @importFrom grDevices colorRampPalette dev.off extendrange grey pdf rgb windows
+#' @importFrom graphics axis layout lines matpoints mtext par plot points rug
+#' @importFrom stats IQR approx density median quantile rbinom rt runif sd update
+#' @importFrom utils data
 NULL
 
+
+
+##' @name lbt
+##' @docType data
+##' @title lbt
+##' @format csv
+##' @keywords data
+##' @description lbt data
+NULL
 
 

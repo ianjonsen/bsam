@@ -57,16 +57,11 @@ which fits the specified state-space model to the data, returning a list of
 results.
 }
 \examples{
-
-\%##---- Should be DIRECTLY executable !! ----
-\%##-- ==>  Define data, use random,
-\%##--	or do  help(data=index)  for the standard data sets.
-
 # Fit DCRW model for state filtering and regularization
 data(lbt)
-fit = fitSSM(lbt, model="DCRW", tstep=1, adapt=30000, samples=10000, thin=10, chains=2)
-plotSSM(fit, save.to.pdf=FALSE)
-diagSSM(fit, save.to.pdf=FALSE)
+#fit = fitSSM(lbt, model="DCRW", tstep=1, adapt=30000, samples=10000, thin=10, chains=2)
+#plotSSM(fit, save.to.pdf=FALSE)
+#diagSSM(fit, save.to.pdf=FALSE)
 
 # Fit DCRWS model for state filtering, regularization and behavioural state estimation
 # Not run

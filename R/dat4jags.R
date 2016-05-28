@@ -4,12 +4,10 @@
 #' Intended for internal use, called by fitSSM.
 #' 
 #' 
-#' @param locfile An R data.frame of Argos tracking data. See fitSSM (indata)
+#' @param indata An R data.frame of Argos tracking data. See fitSSM (indata)
 #' for details on structure.
 #' @param tstep The time step to be assumed for the state-space model,
 #' specified in days.
-#' @param tod Logical. Specifies if absolute time of day of observations is
-#' relevant.
 #' @param \dots Other arguments may be passed.
 #' @return Returns a list to be used by ssm/hssm.
 #' @seealso Function to be called by \code{\link{fitSSM}}.
@@ -17,6 +15,9 @@
 `dat4jags` <-
 function (indata, tstep = 1, ...) 
 {
+  
+  # param tod Logical. Specifies if absolute time of day of observations is
+  # relevant.
     tstep.sec <- tstep * 86400
     datetime <- as.POSIXct(indata[,2], format="%Y-%m-%d %H:%M:%S", tz="GMT")
 	if(ncol(indata) == 5){

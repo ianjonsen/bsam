@@ -8,13 +8,15 @@ simTrack(T = 100, theta = c(0, pi), gamma = c(0.9, 0.2), alpha = c(0.2,
   0.8), vcov = c(0.01, 0, 0, 0.02))
 }
 \arguments{
-\item{theta}{}
+\item{T}{T}
 
-\item{gamma}{}
+\item{theta}{theta}
 
-\item{alpha}{}
+\item{gamma}{gamma}
 
-\item{vcov}{}
+\item{alpha}{alpha}
+
+\item{vcov}{vcov}
 }
 \description{
 simTrack

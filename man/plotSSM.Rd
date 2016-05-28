@@ -7,9 +7,9 @@
 plotSSM(fit.in, save.to.pdf = FALSE)
 }
 \arguments{
-\item{fit.in}{}
+\item{fit.in}{fit.in}
 
-\item{save.to.pdf}{}
+\item{save.to.pdf}{save.to.pdf}
 }
 \description{
 plotSSM

@@ -9,7 +9,7 @@ Maintainer: Ian Jonsen <ian.jonsen@mq.edu.au>
 Depends:
     rjags,
     PBSmapping
-Imports: MASS
+Imports: MASS, coda
 Description: Fit Bayesian state-space models to Argos satellite tracking
     data. Currently, models provided are DCRW (for location filtering), DCRWS (for
     location filtering and behavioural state estimation), and hierarchical models,

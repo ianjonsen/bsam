@@ -7,19 +7,19 @@
 hssm(loc.list, model = "hDCRWS", adapt, samples, thin, chains, ...)
 }
 \arguments{
-\item{loc.list}{}
+\item{loc.list}{loc.list}
 
-\item{model}{}
+\item{model}{model}
 
-\item{adapt}{}
+\item{adapt}{adapt}
 
-\item{samples}{}
+\item{samples}{samples}
 
-\item{thin}{}
+\item{thin}{thin}
 
-\item{chains}{}
+\item{chains}{chains}
 
-\item{...}{}
+\item{...}{dots}
 }
 \description{
 hssm

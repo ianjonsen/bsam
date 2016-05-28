@@ -51,16 +51,11 @@
 #' road map. Deep Sea Research II DOI: 10.1016/j.dsr2.2012.07.008
 #' @keywords ~kwd1 ~kwd2
 #' @examples
-#' 
-#' %##---- Should be DIRECTLY executable !! ----
-#' %##-- ==>  Define data, use random,
-#' %##--	or do  help(data=index)  for the standard data sets.
-#' 
 #' # Fit DCRW model for state filtering and regularization
 #' data(lbt)
-#' fit = fitSSM(lbt, model="DCRW", tstep=1, adapt=30000, samples=10000, thin=10, chains=2)
-#' plotSSM(fit, save.to.pdf=FALSE)
-#' diagSSM(fit, save.to.pdf=FALSE)
+#' #fit = fitSSM(lbt, model="DCRW", tstep=1, adapt=30000, samples=10000, thin=10, chains=2)
+#' #plotSSM(fit, save.to.pdf=FALSE)
+#' #diagSSM(fit, save.to.pdf=FALSE)
 #' 
 #' # Fit DCRWS model for state filtering, regularization and behavioural state estimation
 #' # Not run

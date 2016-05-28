@@ -1,10 +1,10 @@
 #' simTrack
 #' 
-#' @param theta 
-#'
-#' @param gamma 
-#' @param alpha 
-#' @param vcov 
+#' @param theta theta 
+#' @param T T
+#' @param gamma gamma
+#' @param alpha alpha
+#' @param vcov vcov
 #' @importFrom MASS mvrnorm
 #' @export
 `simTrack` = function(T = 100, theta = c(0, pi), gamma = c(0.9, 0.2), alpha = c(0.2, 0.8), vcov = c(0.01, 0, 0, 0.02)){

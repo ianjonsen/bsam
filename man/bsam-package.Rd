@@ -6,7 +6,7 @@
 \alias{bsam-package}
 \title{Fit Bayesian state-space models to Argos satellite tracking data}
 \description{
-Currently, models provided are DCRW (for location filtering), DCRWS (for
+Currently models provided are DCRW (for location filtering), DCRWS (for
 location filtering and behavioural state estimation), and hDCRWS (a
 hierarchical model for location filtering and behavioural state estimation
 across multiple animals). The models are fit in JAGS using Markov chain
@@ -33,7 +33,6 @@ state estimates compared to fitting DCRW/DCRWS to individual datasets.
 
 #data(lbt)
 #fit = fitSSM(lbt, model="DCRW", tstep=1, adapt=60000, samples=30000, thin=30, chains=2)
-
 }
 \author{
 Ian Jonsen

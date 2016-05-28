@@ -9,10 +9,17 @@ ssm(loc.list, model = "DCRW", adapt, samples, thin, chains, ...)
 \arguments{
 \item{loc.list}{Data from dat4jags to be passed to JAGS}
 
-\item{model}{The state-space model to be fit. Currently, DCRW and DCRWS are
-the only model options.}
+\item{model}{The state-space model to be fit. Currently, DCRW and DCRWS are}
 
-\item{\dots}{Other arguments can be passed.}
+\item{adapt}{adapt}
+
+\item{samples}{samples}
+
+\item{thin}{thin}
+
+\item{chains}{chains}
+
+\item{...}{the only model options.}
 }
 \value{
 Returns a list of McMC samples from marginal posteriors and a

@@ -1,8 +1,8 @@
 #' diagSSM
 #' 
-#' @param fit.in 
+#' @param fit.in fit.in
 #'
-#' @param save.to.pdf 
+#' @param save.to.pdf save.to.pdf
 #' @importFrom coda autocorr.plot traceplot as.mcmc.list
 #' @export
 diagSSM = function(fit.in, save.to.pdf=FALSE){
@@ -20,7 +20,7 @@ if(names(fit.in)[1]=="summary") fit.in = list(fit.in)
 		else{
 			if(.Platform$OS.type=="windows") windows()
 			else if(.Platform$OS.type=="unix"){
-				quartz(w=6,h=6)	
+				quartz(width =6, height = 6)	
 				}	
 			}		
 		layout(matrix(1:20,5,4,byrow=TRUE), widths=c(3,3,3,3), heights=rep(1,5))
@@ -134,7 +134,7 @@ if(names(fit.in)[1]=="summary") fit.in = list(fit.in)
 		else{
 			if(.Platform$OS.type=="windows") windows()
 			else if(.Platform$OS.type=="unix"){
-				quartz(w=6,h=8)	
+				quartz(width =6, height = 8)	
 				}	
 			}	
 		if(md=="DCRWS"){
@@ -319,7 +319,7 @@ if(names(fit.in)[1]=="summary") fit.in = list(fit.in)
 			else{
 				if(.Platform$OS.type=="windows") windows()
 				else if(.Platform$OS.type=="unix"){
-					quartz(w=6,h=6)	
+					quartz(width =6, height = 6)	
 					}	
 				}	
 			# psi's

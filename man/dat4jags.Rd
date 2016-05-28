@@ -7,14 +7,11 @@
 dat4jags(indata, tstep = 1, ...)
 }
 \arguments{
-\item{tstep}{The time step to be assumed for the state-space model,
-specified in days.}
-
-\item{locfile}{An R data.frame of Argos tracking data. See fitSSM (indata)
+\item{indata}{An R data.frame of Argos tracking data. See fitSSM (indata)
 for details on structure.}
 
-\item{tod}{Logical. Specifies if absolute time of day of observations is
-relevant.}
+\item{tstep}{The time step to be assumed for the state-space model,
+specified in days.}
 
 \item{\dots}{Other arguments may be passed.}
 }
