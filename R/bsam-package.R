@@ -45,7 +45,14 @@
 #' 
 #' #data(lbt)
 #' #fit = fitSSM(lbt, model="DCRW", tstep=1, adapt=60000, samples=30000, thin=30, chains=2)
-#' @importFrom grDevices colorRampPalette dev.off extendrange grey pdf rgb windows
+#' @importFrom grDevices colorRampPalette dev.off extendrange grey pdf rgb
+#' @rawRd 
+#' if(.Platform$OS.type == "windows") {
+#' importFrom(grDevices, windows)
+#' }
+#' if(.Platform$OS.type == "unix") {
+#' importFrom(grDevices, quartz)
+#' }
 #' @importFrom graphics axis layout lines matpoints mtext par plot points rug
 #' @importFrom stats IQR approx density median quantile rbinom rt runif sd update
 #' @importFrom utils data
