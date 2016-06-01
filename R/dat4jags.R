@@ -6,8 +6,7 @@
 #' 
 #' @param indata An R data.frame of Argos tracking data. See fitSSM (indata)
 #' for details on structure.
-#' @param tstep The time step to be assumed for the state-space model,
-#' specified in days.
+#' @param tstep time step in days.
 #' @param \dots Other arguments may be passed.
 #' @return Returns a list to be used by ssm/hssm.
 #' @seealso Function to be called by \code{\link{fitSSM}}.
@@ -15,9 +14,6 @@
 `dat4jags` <-
 function (indata, tstep = 1, ...) 
 {
-  
-  # param tod Logical. Specifies if absolute time of day of observations is
-  # relevant.
     tstep.sec <- tstep * 86400
     datetime <- as.POSIXct(indata[,2], format="%Y-%m-%d %H:%M:%S", tz="GMT")
 	if(ncol(indata) == 5){
@@ -61,7 +57,8 @@ function (indata, tstep = 1, ...)
 
     dostep <- function(k) {
         tt <- k$time                  
-        tst.nona <- cut(tt, paste(tstep.sec, "sec"), labels = FALSE, incl = TRUE)
+        tst.nona <- cut(tt, paste(tstep.sec, "sec"), labels = FALSE, 
+                        incl = TRUE)
         tst.seq <- seq(1, max(tst.nona))
         tst.rle <- rle(tst.nona)
         tst.val <- tst.rle$values
@@ -69,12 +66,14 @@ function (indata, tstep = 1, ...)
         k.idx <- tst.all <- sort(c(tst.nona, tst.seq[tst.isna]))
         tstall.rle <- rle(tst.all)      
         idx <- cumsum(c(1, tstall.rle$lengths))
-        steplims <- seq(tt[1], by = paste(tstep.sec, "sec"), length = length(idx))
+        steplims <- seq(tt[1], by = paste(tstep.sec, "sec"), 
+                        length = length(idx))
         tstall.isna <- tst.all %in% tst.seq[tst.isna]
         k.idx[tstall.isna] <- NA
         k.idx[!tstall.isna] <- seq(nrow(k))
         k.new <- k[k.idx, ]     
-        step.frac <- as.numeric(difftime(k.new$time, steplims[tst.all], units = "sec"))/tstep.sec
+        step.frac <- as.numeric(difftime(k.new$time, steplims[tst.all], 
+                                         units = "sec")) / tstep.sec
         step.frac[is.na(step.frac)] <- 0.5
         itau2lon.isna <- is.na(k.new$itau2.lon)
         itau2lat.isna <- is.na(k.new$itau2.lat)
@@ -84,9 +83,10 @@ function (indata, tstep = 1, ...)
         k.new$nu.lat[k.new$nu.lat < 2 | is.na(k.new$nu.lat)] <- 2       
 
 		list(id = k.new$id[1], y = cbind(k.new$lon, k.new$lat), 
-            itau2 = cbind(k.new$itau2.lon, k.new$itau2.lat), nu = cbind(k.new$nu.lon,
-            k.new$nu.lat), idx = idx, j = step.frac, RegN = length(idx), 
-            first.date = k.new$time[1], tstep = tstep)
+            itau2 = cbind(k.new$itau2.lon, k.new$itau2.lat), 
+		        nu = cbind(k.new$nu.lon, k.new$nu.lat), idx = idx, 
+		        j = step.frac, RegN = length(idx), first.date = k.new$time[1], 
+		        tstep = tstep)
     	}
     by(dat, dat$id, dostep)
 }

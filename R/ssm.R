@@ -105,10 +105,10 @@ function (loc.list, model = "DCRW", adapt, samples, thin, chains, ...)
 	if(chains==2) jags.inits = list(jags.inits[[1]],jags.inits[[2]])
 	if(chains==3) jags.inits = list(jags.inits[[1]],jags.inits[[2]],jags.inits[[3]])
 
-	model.file = paste(system.file('jags',package='bsam'), "/", model, ".txt", sep="")
+	model.file = file.path(system.file("jags", package="bsam"), paste(model, ".txt", sep=""))
 
-	burn = jags.model(model.file, jags.data, jags.inits, n.chains=chains, n.adapt=adapt/2)
-	update(burn, n.iter=adapt/2)
+	burn = rjags::jags.model(model.file, jags.data, jags.inits, n.chains=chains, n.adapt=adapt/2)
+	rjags::update(burn, n.iter=adapt/2)
 	psamples = rjags::jags.samples(burn, jags.params, n.iter=samples, thin=thin)
 
 	lon = apply(psamples$x[,1,,],1, mean)

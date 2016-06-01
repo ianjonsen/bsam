@@ -80,7 +80,7 @@
 #'
 #' @export 
 `fitSSM` <-
-function (indata, model="DCRW", tstep=1, adapt=20000, samples=10000, thin=10, chains=2)
+function (indata, model="DCRW", tstep=1, adapt=40000, samples=20000, thin=20, chains=2)
 {
 	if(!model %in% c('DCRW', 'DCRWS', 'DCRW3S', 'hDCRW', 'hDCRWS')) stop("Model not implemented")
   sf <- system.file(package = "bsam")
@@ -90,7 +90,7 @@ function (indata, model="DCRW", tstep=1, adapt=20000, samples=10000, thin=10, ch
     seed <- sample(1:1e+05, 1)
     st <- proc.time()
       
-	data <- dat4jags(indata, tstep=tstep, tod=TRUE)	
+	data <- dat4jags(indata, tstep=tstep)	
 	switch(model, 
 		DCRW = {
 			fit <- ssm(data, model = model, model.file = model.file, adapt = adapt, 
