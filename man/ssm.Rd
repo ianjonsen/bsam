@@ -4,22 +4,21 @@
 \alias{ssm}
 \title{Fits state-space model to Argos data}
 \usage{
-ssm(loc.list, model = "DCRW", adapt, samples, thin, chains, ...)
+ssm(d, model = "DCRW", adapt, samples, thin, chains, span)
 }
 \arguments{
-\item{loc.list}{Data from dat4jags to be passed to JAGS}
+\item{d}{structured data from dat4jags to be passed to JAGS}
 
-\item{model}{The state-space model to be fit. Currently, DCRW and DCRWS are}
+\item{model}{the state-space model to be fit: DCRW or DCRWS}
 
-\item{adapt}{adapt}
+\item{adapt}{number of samples in adaptation/burnin phase}
 
-\item{samples}{samples}
+\item{samples}{number of posterior samples}
 
-\item{thin}{thin}
+\item{thin}{thinning factor to reduce posterior sample autocorrelation}
 
-\item{chains}{chains}
-
-\item{...}{the only model options.}
+\item{chains}{number of parallel McMC chains to run
+the only model options.}
 }
 \value{
 Returns a list of McMC samples from marginal posteriors and a
@@ -27,7 +26,7 @@ summary data.frame of mean and median position estimates.
 }
 \description{
 Takes output from dat4jags, sets up initial values, calls JAGS, and
-aggregates results. Intended for internal use, called by fitSSM.
+aggregates results. Intended for internal use, called by \code{fitSSM}.
 }
 \seealso{
 Function to be called by \code{\link{fitSSM}}.

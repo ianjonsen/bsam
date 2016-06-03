@@ -13,11 +13,6 @@ data {
 	}
 model
 {
-#  "DCRW" model from Ian D Jonsen, Joanna Mills Flemming and Ransom A Myers
-#    Robust state-space modeling of animal movement data
-#    ijonsen@dal.ca
-#    Created by Ian Jonsen, 10/29/2004, last modified, 01/08/2013
-
 
 ## priors on process uncertainty
 iSigma[1:2,1:2] ~ dwish(Omega[,],2)	
@@ -36,9 +31,8 @@ gamma ~ dbeta(1,1)
 logpsi ~ dunif(-10, 10)		
 psi <- exp(logpsi)
 
-
 ## Transition equation
-for(t in 2:(RegN-1)){
+for(t in 2:(Nx-1)){
 	## Build transition matrix for rotational component	
 	T[t,1,1] <- cos(theta)
 	T[t,1,2] <- -sin(theta)
@@ -53,15 +47,12 @@ for(t in 2:(RegN-1)){
 	}
 
 ##	Measurement equation
-for(t in 2:RegN){				
-	for(i in idx[t-1]:(idx[t]-1)){		
-		for(k in 1:2){
-			
-			zhat[i,k] <- (1-j[i]) * x[t-1,k] + j[i] * x[t,k]
-			y[i,k] ~ dt(zhat[i,k], itau2[i,k] * psi, nu[i,k])	
-			}
-		}
-	}	
+for(i in 1:(Ny-1)) {	
+  for(j in 1:2) {
+    yhat[i,j] <- w[i] * x[idx[i],j] + (1 - w[i]) * x[idx[i+1],j]
+       y[i,j] ~  dt(yhat[i,j], itau2[i,j] * psi, nu[i,j])
+    }
+  }	
 }
 
 

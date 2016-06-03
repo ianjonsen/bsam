@@ -53,14 +53,14 @@
 #' @examples
 #' # Fit DCRW model for state filtering and regularization
 #' data(lbt)
-#' #fit = fitSSM(lbt, model="DCRW", tstep=1, adapt=30000, samples=10000, thin=10, chains=2)
+#' #fit <- fitSSM(lbt, model="DCRW", tstep=1, adapt=40000, samples=20000, thin=20, chains=2)
 #' #plotSSM(fit, save.to.pdf=FALSE)
 #' #diagSSM(fit, save.to.pdf=FALSE)
 #' 
 #' # Fit DCRWS model for state filtering, regularization and behavioural state estimation
 #' # Not run
 #' # data(lbt)
-#' # fit = fitSSM(lbt, model="DCRWS", tstep=0.5, adapt=30000, samples=10000, thin=10, chains=2)
+#' # fit <- fitSSM(lbt, model="DCRWS", tstep=0.5, adapt=40000, samples=20000, thin=20, chains=2)
 #' # plotSSM(fit, save.to.pdf=FALSE)
 #' # diagSSM(fit, save.to.pdf=FALSE)
 #' 
@@ -70,48 +70,36 @@
 #' 
 #' # Not run
 #' # data(lbt)
-#' # tmp = lbt; tmp$id = 15395
-#' # lbt2 = rbind(lbt,tmp)
-#' # Note: this will take some time to complete
-#' # fit = fitSSM(lbt2, model="hDCRWS", tstep=0.5, adapt=30000, samples=10000, thin=10, chains=2)
+#' # tmp <- lbt
+#' # tmp$id <- 15395
+#' # lbt2 <- rbind(lbt,tmp)
+#' # This will take some time to complete
+#' # fit <- fitSSM(lbt2, model="hDCRWS", tstep=0.5, adapt=40000, samples=20000, thin=20, chains=2)
 #' # plotSSM(fit, save.to.pdf=FALSE)
 #' # diagSSM(fit, save.to.pdf=FALSE)
 #' 
 #'
 #' @export 
 `fitSSM` <-
-function (indata, model="DCRW", tstep=1, adapt=40000, samples=20000, thin=20, chains=2)
+function (d, model="DCRW", tstep=1, adapt=40000, samples=20000, thin=20, chains=2, span=0.2)
 {
-	if(!model %in% c('DCRW', 'DCRWS', 'DCRW3S', 'hDCRW', 'hDCRWS')) stop("Model not implemented")
-  sf <- system.file(package = "bsam")
-  model.file <- file.path(sf, "jags", paste(model, ".txt", sep=""))
+	if(!model %in% c('DCRW', 'DCRWS', 'hDCRW', 'hDCRWS')) stop("Model not implemented")
+  model.file <- file.path(system.file(package = "bsam"), "jags", paste(model, ".txt", sep=""))
     
 	options(warn=-1)	    	
-    seed <- sample(1:1e+05, 1)
-    st <- proc.time()
+  seed <- sample(1:1e+05, 1)
+  st <- proc.time()
       
-	data <- dat4jags(indata, tstep=tstep)	
-	switch(model, 
-		DCRW = {
-			fit <- ssm(data, model = model, model.file = model.file, adapt = adapt, 
-			           samples = samples, thin = thin, chains = chains)
-		},
-		DCRWS = {
-			fit <- ssm(data, model = model, model.file = model.file, adapt = adapt, 
-			           samples = samples, thin = thin, chains = chains)
-		},
-		DCRW3S = {
-			fit <- ssm(data, model = model, model.file = model.file, adapt = adapt, 
-			           samples = samples, thin = thin, chains = chains)
-		},	
-		hDCRW = {	
-			fit <- hssm(data, model = model, model.file = model.file, adapt = adapt, 
-			            samples = samples, thin = thin, chains = chains)
-		},
-		hDCRWS = {	
-			fit  <-  hssm(data, model = model, model.file = model.file, adapt = adapt, 
-			              samples = samples, thin = thin, chains = chains)
-		})		
+	dd <- dat4jags(d, tstep = tstep, tpar=tpar())	
+	if(model %in% c("DCRW","DCRWS")) {
+	  fit <- ssm(dd, model = model, adapt = adapt, samples = samples, thin = thin, 
+	             chains = chains, span = span)
+	}
+	else {
+	  fit <- hssm(dd, model = model, adapt = adapt, samples = samples, thin = thin, 
+	              chains = chains, span = span)
+	}
+	
 	cat("Elapsed time: ", round((proc.time() - st)[3]/60,2), "min \n")	
 	options(warn=0)
 	

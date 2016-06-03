@@ -2,27 +2,59 @@
 % Please edit documentation in R/dat4jags.R
 \name{dat4jags}
 \alias{dat4jags}
-\title{Prepares and writes input data for DCRW/DCRWS/hDCRWS models}
+\title{Correlated Random Walk Filter}
 \usage{
-dat4jags(indata, tstep = 1, ...)
+dat4jags(d, tstep = 1, tpar = tpar())
 }
 \arguments{
-\item{indata}{An R data.frame of Argos tracking data. See fitSSM (indata)
-for details on structure.}
+\item{d}{a data frame of observations (see details)}
 
-\item{tstep}{The time step to be assumed for the state-space model,
-specified in days.}
+\item{tstep}{the time step to predict to (in days)}
 
-\item{\dots}{Other arguments may be passed.}
+\item{extrap}{if TRUE, the final predicted state occurs
+immediately before the last observation, otherwise the final
+predicted state occurs immediately after the last observation.}
+
+\item{amf}{Argos error scale mmultiplication factors}
 }
 \value{
-Returns a list to be used by ssm/hssm.
+A list with components
+\item{\code{y}}{a 2 column matrix of the lon,lat observations}
+\item{\code{K}}{a 2 column matrix of the ARGOS scale factors}
+\item{\code{idx}}{a vector of interpolation indices}
+\item{\code{ws}}{a vector of interpolation weights}
+\item{\code{ts}}{the times at which states are predicted (POSIXct,GMT)}
+\item{\code{dt}}{the time step at which states are predicted (secs)}
 }
 \description{
-Takes an R data.frame of Argos tracking data restructures it for the models.
-Intended for internal use, called by fitSSM.
+Format track data for filtering
 }
-\seealso{
-Function to be called by \code{\link{fitSSM}}.
+\details{
+This is an internal function used by \code{fitSSM} to format track
+data for JAGS.
+
+The input track is given as a dataframe where each row is an
+observed location and columns
+\describe{
+\item{'id'}{individual animal identifier,}
+\item{'date'}{observation time (POSIXct,GMT),}
+\item{'lc'}{ARGOS location class,}
+\item{'lon'}{observed longitude,}
+\item{'lat'}{observed latitude.}
+}
+Location classes can include Z, F, and G; where the latter two 
+are used to designate fixed (known) locations (e.g. GPS locations)
+and "generic" locations (e.g. geolocation data) where the user 
+supplies the error standard deviations, either via the 
+\link{\code{tpar}} function or as two extra columns in the input data.
+
+From this \code{dat4jags} calculates interpolation indices \code{idx} and
+weights \code{ws} such that if \code{x} is the matrix of predicted
+states, the fitted locations are \code{ws*x[idx+1,] +
+(1-ws)*x[idx+2,]}.
+
+By default the function uses the same Argos multiplication factors
+to scale location accuracy by location class as used in
+the crawl R-package.
 }
 

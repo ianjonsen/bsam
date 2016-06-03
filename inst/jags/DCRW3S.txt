@@ -12,22 +12,13 @@ data {
 model
 {
 
-#  "DCRW3S" model adapted from Ian D Jonsen, Joanna Mills Flemming and Ransom A Myers
-#    Robust state-space modeling of animal movement data
-#    ijonsen@dal.ca
-#    Created by Ian Jonsen, 10/29/2004, last modified, 01/08/2013
-
 ## priors on process uncertainty
 iSigma[1:2,1:2] ~ dwish(Omega[,], 2)	
 Sigma[1:2,1:2] <- inverse(iSigma[,])
 
 tmp[1] ~ dbeta(20, 20)
-
 tmp[2] ~ dbeta(1, 1)
-
-
 tmp[3] ~ dbeta(1, 1)
-
 
 theta[1] <- (2 * tmp[1] - 1) * pi
 theta[2] <- tmp[2] * pi * 2
@@ -56,7 +47,6 @@ b[1] ~ dcat(lambda[]) ## assign b for first obs
 logpsi ~ dunif(-10, 10)		## inflation/deflation factor for estimation error
 psi <- exp(logpsi)
 
-
 ## Priors for first location
 for(k in 1:2){
 	x[1,k] ~ dt(first.loc[k], itau2[1,k] * psi, nu[1,k])
@@ -66,7 +56,7 @@ for(k in 1:2){
 x[2,1:2] ~ dmnorm(x[1,], iSigma[,])
 
 ## Transition equation
-for(t in 2:(RegN-1)){
+for(t in 2:(Nx-1)){
 
 	phi[t,1] <- alpha1[b[t-1]]
 	phi[t,2] <- (1 - alpha1[b[t-1]]) * alpha2[b[t-1]]
@@ -74,31 +64,25 @@ for(t in 2:(RegN-1)){
 	b[t] ~ dcat(phi[t,])
 	
   Tdx[t,1] <- cos(theta[b[t]]) * (x[t,1] - x[t-1,1]) + sin(theta[b[t]]) * (x[t,2] - x[t-1,2])      
-     
   x.mn[t,1] <- x[t,1] +  Tdx[t,1] * gamma[b[t]]
 
-     
   Tdx[t,2] <- -sin(theta[b[t]]) * (x[t,1] - x[t-1,1]) + cos(theta[b[t]]) * (x[t,2] - x[t-1,2])      
-     
   x.mn[t,2] <- x[t,2] +  Tdx[t,2] * gamma[b[t]]
 
-	
   x[t+1,1:2] ~ dmnorm(x.mn[t,], iSigma[,])	## estimate next location (with error)
 	}
 
 ## estimate final b 
-zeta[1] <- alpha1[b[RegN-1]]
-zeta[2] <- (1 - alpha1[b[RegN-1]]) * alpha2[b[RegN-1]]
-zeta[3] <- (1 - alpha1[b[RegN-1]]) * (1 - alpha2[b[RegN-1]])
-b[RegN] ~ dcat(zeta[])
+zeta[1] <- alpha1[b[Nx-1]]
+zeta[2] <- (1 - alpha1[b[Nx-1]]) * alpha2[b[Nx-1]]
+zeta[3] <- (1 - alpha1[b[Nx-1]]) * (1 - alpha2[b[Nx-1]])
+b[Nx] ~ dcat(zeta[])
 
 ##	Measurement equation
-for(t in 2:RegN){					
-	for(i in idx[t-1]:(idx[t]-1)){			
-		for(k in 1:2){
-			zhat[i,k] <- (1-j[i]) * x[t-1,k] + j[i] * x[t,k]
-			y[i,k] ~ dt(zhat[i,k], itau2[i,k] * psi, nu[i,k])
-			} #k
-		} #i
-	}	#t
+for(i in 1:(Ny-1)) {	
+  for(j in 1:2) {
+    yhat[i,j] <- w[i] * x[idx[i],j] + (1 - w[i]) * x[idx[i+1],j]
+       y[i,j] ~  dt(yhat[i,j], itau2[i,j] * psi, nu[i,j])
+    }
+  }	
 } #end

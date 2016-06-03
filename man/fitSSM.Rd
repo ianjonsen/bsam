@@ -4,18 +4,10 @@
 \alias{fitSSM}
 \title{Fit Bayesian state-space models to animal movement data}
 \usage{
-fitSSM(indata, model = "DCRW", tstep = 1, adapt = 20000,
-  samples = 10000, thin = 10, chains = 2)
+fitSSM(d, model = "DCRW", tstep = 1, adapt = 40000, samples = 20000,
+  thin = 20, chains = 2, span = 0.2)
 }
 \arguments{
-\item{indata}{An R data.frame containing the following columns, "id","date",
-"lc", "lon", "lat". "id" is a unique identifier for the tracking dataset.
-"date" is the GMT date-time of each observation with the following format
-"2001-11-13 07:59:59". "lc" is the Argos location quality class of each
-observation, values in ascending order of quality are "B", "A", "0", "1",
-"2", "3". "lon" is the observed longitude in decimal degrees. "lat" is the
-observed latitude in decimal degress.}
-
 \item{model}{name of state-space model to be fit to data. Currently, this
 can be one of "DCRW", "DCRWS", or "hDCRWS".}
 
@@ -31,6 +23,14 @@ autocorrelation.}
 
 \item{chains}{sets the number of chains over which the sampling is to be
 distributed. The default is 2 chains.}
+
+\item{indata}{An R data.frame containing the following columns, "id","date",
+"lc", "lon", "lat". "id" is a unique identifier for the tracking dataset.
+"date" is the GMT date-time of each observation with the following format
+"2001-11-13 07:59:59". "lc" is the Argos location quality class of each
+observation, values in ascending order of quality are "B", "A", "0", "1",
+"2", "3". "lon" is the observed longitude in decimal degrees. "lat" is the
+observed latitude in decimal degress.}
 }
 \value{
 For DCRW and DCRWS models, a list is returned with each outer list
@@ -59,14 +59,14 @@ results.
 \examples{
 # Fit DCRW model for state filtering and regularization
 data(lbt)
-#fit = fitSSM(lbt, model="DCRW", tstep=1, adapt=30000, samples=10000, thin=10, chains=2)
+#fit <- fitSSM(lbt, model="DCRW", tstep=1, adapt=40000, samples=20000, thin=20, chains=2)
 #plotSSM(fit, save.to.pdf=FALSE)
 #diagSSM(fit, save.to.pdf=FALSE)
 
 # Fit DCRWS model for state filtering, regularization and behavioural state estimation
 # Not run
 # data(lbt)
-# fit = fitSSM(lbt, model="DCRWS", tstep=0.5, adapt=30000, samples=10000, thin=10, chains=2)
+# fit <- fitSSM(lbt, model="DCRWS", tstep=0.5, adapt=40000, samples=20000, thin=20, chains=2)
 # plotSSM(fit, save.to.pdf=FALSE)
 # diagSSM(fit, save.to.pdf=FALSE)
 
@@ -76,10 +76,11 @@ data(lbt)
 
 # Not run
 # data(lbt)
-# tmp = lbt; tmp$id = 15395
-# lbt2 = rbind(lbt,tmp)
-# Note: this will take some time to complete
-# fit = fitSSM(lbt2, model="hDCRWS", tstep=0.5, adapt=30000, samples=10000, thin=10, chains=2)
+# tmp <- lbt
+# tmp$id <- 15395
+# lbt2 <- rbind(lbt,tmp)
+# This will take some time to complete
+# fit <- fitSSM(lbt2, model="hDCRWS", tstep=0.5, adapt=40000, samples=20000, thin=20, chains=2)
 # plotSSM(fit, save.to.pdf=FALSE)
 # diagSSM(fit, save.to.pdf=FALSE)
 

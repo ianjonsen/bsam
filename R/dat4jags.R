@@ -1,92 +1,74 @@
-#' Prepares and writes input data for DCRW/DCRWS/hDCRWS models
-#' 
-#' Takes an R data.frame of Argos tracking data restructures it for the models.
-#' Intended for internal use, called by fitSSM.
-#' 
-#' 
-#' @param indata An R data.frame of Argos tracking data. See fitSSM (indata)
-#' for details on structure.
-#' @param tstep time step in days.
-#' @param \dots Other arguments may be passed.
-#' @return Returns a list to be used by ssm/hssm.
-#' @seealso Function to be called by \code{\link{fitSSM}}.
-#' @export
-`dat4jags` <-
-function (indata, tstep = 1, ...) 
-{
-    tstep.sec <- tstep * 86400
-    datetime <- as.POSIXct(indata[,2], format="%Y-%m-%d %H:%M:%S", tz="GMT")
-	if(ncol(indata) == 5){
-		dat <- data.frame(id=indata[,1], time=datetime, lc=indata[,3], lon=indata[,4],
-			lat=indata[,5])
-		}
-	else if(ncol(indata) ==7){
-		dat <- data.frame(id=indata[,1], time=datetime, lc=indata[,3], lon=indata[,4],
-			 lat=indata[,5], lonerr=indata[,6], laterr=indata[,7])
-		}
-    dat[order(dat[,1], dat[,2]),]  
-    dat$lc <- factor(dat$lc, levels = c("3", "2", "1", 
-        "0", "A", "B", "Z", "F", "G"), ordered=TRUE)
-        
-	# Make Z class = B class
-	# F - fixed positions (GPS) at tag deployment
-	# G - Generic positions (Geolocation or GPS) with error SD's supplied by user
-    sigma.lon <- c(0.289866, 0.3119293, 0.9020423, 2.1625936, 
-        0.507292, 4.2050261, 4.2050261, 0.01)
-    sigma.lat <- c(0.1220553, 0.2605126, 0.4603374, 1.607056, 
-        0.5105468, 3.041276, 3.041276, 0.01)
-    nu.lon <- c(3.070609, 1.220822, 2.298819, 0.9136517, 0.786954, 
-        1.079216, 1.079216, 100000)
-    nu.lat <- c(2.075642, 6.314726, 3.896554, 1.010729, 1.057779, 
-        1.331283, 1.331283, 100000)
-    nu.lon <- nu.lon[as.numeric(dat$lc)]
-    nu.lat <- nu.lat[as.numeric(dat$lc)]
-    sigma.lon <- (sigma.lon/6366.71 * 180)/pi
-    sigma.lat <- (sigma.lat/6366.71 * 180)/pi
-    itau2.lon <- sigma.lon[as.numeric(dat$lc)]^-2
-    itau2.lat <- sigma.lat[as.numeric(dat$lc)]^-2
-    if(ncol(dat) == 7){
-	    itau2.lon[which(dat$lc == "G")] = dat$lonerr[which(dat$lc == "G")]^-2
-		itau2.lat[which(dat$lc == "G")] = dat$laterr[which(dat$lc == "G")]^-2
-		nu.lat[which(dat$lc == "G")] = nu.lon[which(dat$lc == "G")] = 100000
-		}    
-    dat$itau2.lon <- itau2.lon
-    dat$itau2.lat <- itau2.lat
-    dat$nu.lon <- nu.lon
-    dat$nu.lat <- nu.lat
+##' Format track data for filtering
+##'
+##' This is an internal function used by \code{fitSSM} to format track
+##' data for JAGS.
+##'
+##' The input track is given as a dataframe where each row is an
+##' observed location and columns
+##' \describe{
+##' \item{'id'}{individual animal identifier,}
+##' \item{'date'}{observation time (POSIXct,GMT),}
+##' \item{'lc'}{ARGOS location class,}
+##' \item{'lon'}{observed longitude,}
+##' \item{'lat'}{observed latitude.}
+##' }
+##' Location classes can include Z, F, and G; where the latter two 
+##' are used to designate fixed (known) locations (e.g. GPS locations)
+##' and "generic" locations (e.g. geolocation data) where the user 
+##' supplies the error standard deviations, either via the 
+##' \link{\code{tpar}} function or as two extra columns in the input data.
+##' 
+##' From this \code{dat4jags} calculates interpolation indices \code{idx} and
+##' weights \code{ws} such that if \code{x} is the matrix of predicted
+##' states, the fitted locations are \code{ws*x[idx+1,] +
+##' (1-ws)*x[idx+2,]}. 
+##'
+##' By default the function uses the same Argos multiplication factors
+##' to scale location accuracy by location class as used in
+##' the crawl R-package.
+##'
+##' @title Correlated Random Walk Filter
+##' @param d a data frame of observations (see details)
+##' @param tstep the time step to predict to (in days)
+##' @param extrap if TRUE, the final predicted state occurs
+##'   immediately before the last observation, otherwise the final
+##'   predicted state occurs immediately after the last observation.
+##' @param amf Argos error scale mmultiplication factors
+##' @return A list with components
+##' \item{\code{y}}{a 2 column matrix of the lon,lat observations}
+##' \item{\code{K}}{a 2 column matrix of the ARGOS scale factors}
+##' \item{\code{idx}}{a vector of interpolation indices}
+##' \item{\code{ws}}{a vector of interpolation weights}
+##' \item{\code{ts}}{the times at which states are predicted (POSIXct,GMT)}
+##' \item{\code{dt}}{the time step at which states are predicted (secs)}
+##' @export
+dat4jags <- function (d, tstep=1, tpar=tpar()) {
+  
+  ## Check ARGOS location accuracies
+  d$lc <- factor(as.character(d$lc), levels=c("3", "2", "1", "0", "A", "B", 
+                                              "Z"), 
+                 ordered=TRUE)
+  ## Ensure POSIXct dates
+  d$date <- as.POSIXct(d$date, format="%Y-%m-%d %H:%M:%S", tz="GMT")
+    
+  ## Merge ARGOS error (t-distribution) fixed parameters
+  d <- merge(d, tpar, by="lc", all.x=TRUE)
+  d <- d[order(d$date), ]
+  
+  dostuff <- function(dd) {
+    ## Interpolation indices and weights
+    dt <- tstep * 86400
+    tms <- (as.numeric(dd$date) - as.numeric(dd$date[1])) / dt
+    index <- floor(tms) + 1
+    weights <- 1 - (tms - (index - 1))
 
-    dostep <- function(k) {
-        tt <- k$time                  
-        tst.nona <- cut(tt, paste(tstep.sec, "sec"), labels = FALSE, 
-                        incl = TRUE)
-        tst.seq <- seq(1, max(tst.nona))
-        tst.rle <- rle(tst.nona)
-        tst.val <- tst.rle$values
-        tst.isna <- !tst.seq %in% tst.val
-        k.idx <- tst.all <- sort(c(tst.nona, tst.seq[tst.isna]))
-        tstall.rle <- rle(tst.all)      
-        idx <- cumsum(c(1, tstall.rle$lengths))
-        steplims <- seq(tt[1], by = paste(tstep.sec, "sec"), 
-                        length = length(idx))
-        tstall.isna <- tst.all %in% tst.seq[tst.isna]
-        k.idx[tstall.isna] <- NA
-        k.idx[!tstall.isna] <- seq(nrow(k))
-        k.new <- k[k.idx, ]     
-        step.frac <- as.numeric(difftime(k.new$time, steplims[tst.all], 
-                                         units = "sec")) / tstep.sec
-        step.frac[is.na(step.frac)] <- 0.5
-        itau2lon.isna <- is.na(k.new$itau2.lon)
-        itau2lat.isna <- is.na(k.new$itau2.lat)
-        k.new$itau2.lon[itau2lon.isna] <- min(k.new$itau2.lon, na.rm = TRUE)
-        k.new$itau2.lat[itau2lat.isna] <- min(k.new$itau2.lat, na.rm = TRUE)
-        k.new$nu.lon[k.new$nu.lon < 2 | is.na(k.new$nu.lon)] <- 2
-        k.new$nu.lat[k.new$nu.lat < 2 | is.na(k.new$nu.lat)] <- 2       
-
-		list(id = k.new$id[1], y = cbind(k.new$lon, k.new$lat), 
-            itau2 = cbind(k.new$itau2.lon, k.new$itau2.lat), 
-		        nu = cbind(k.new$nu.lon, k.new$nu.lat), idx = idx, 
-		        j = step.frac, RegN = length(idx), first.date = k.new$time[1], 
-		        tstep = tstep)
-    	}
-    by(dat, dat$id, dostep)
+    list(id = dd$id[1], y = cbind(dd$lon, dd$lat),
+       itau2 = cbind(dd$itau2.lon, dd$itau2.lat),
+       nu = cbind(dd$nu.lon, dd$nu.lat),
+       idx = index,
+       ws = weights,
+       ts = seq(dd$date[1], by = dt, length.out = max(index) + 2),
+       dt = dt, obs = dd, tstep = tstep)
+  }
+  by(d, d$id, dostuff)
 }
