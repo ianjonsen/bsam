@@ -1,17 +1,14 @@
 Package: bsam
 Type: Package
 Title: Bayesian state-space models for animal movement
-Version: 0.43.1.9001
+Version: 0.43.1.9002
 Author: as.person(c(
     "Ian Jonsen <ian.jonsen@mq.edu.au> [aut, cre]",
     "Simon Wotherspoon <simon.wotherspoon@utas.edu.au> [ctb]",
-    "Sebastian Luque <luque@cc.umanitoba.ca> [ctb]",
     "Arliss Winship <arliss.winship@noaa.gov> [ctb]",
     "Martin Pedersen <map@aqua.dtu.dk> [ctb]",
     "Michael Sumner <mdsumner@gmail.com> [ctb]"
   ))
-  Ian Jonsen <ian.jonsen@mq.edu.au> with contributions from S. Luque, A.
-    Winship, and M.W. Pedersen
 Maintainer: Ian Jonsen <ian.jonsen@mq.edu.au>
 Depends:
     rjags (>= 4-6),
