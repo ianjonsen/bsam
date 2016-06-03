@@ -2,12 +2,12 @@
 % Please edit documentation in R/ssm.R
 \name{ssm}
 \alias{ssm}
-\title{Fits state-space model to Argos data}
+\title{Fits state-space models to Argos data}
 \usage{
 ssm(d, model = "DCRW", adapt, samples, thin, chains, span)
 }
 \arguments{
-\item{d}{structured data from dat4jags to be passed to JAGS}
+\item{d}{structured data from \code{dat4jags} to be passed to JAGS}
 
 \item{model}{the state-space model to be fit: DCRW or DCRWS}
 
@@ -17,15 +17,16 @@ ssm(d, model = "DCRW", adapt, samples, thin, chains, span)
 
 \item{thin}{thinning factor to reduce posterior sample autocorrelation}
 
-\item{chains}{number of parallel McMC chains to run
-the only model options.}
+\item{chains}{number of parallel McMC chains to run}
+
+\item{span}{span}
 }
 \value{
 Returns a list of McMC samples from marginal posteriors and a
-summary data.frame of mean and median position estimates.
+summary \code{data.frame} of mean and median position estimates.
 }
 \description{
-Takes output from dat4jags, sets up initial values, calls JAGS, and
+Takes output from \code{dat4jags}, sets up initial values, calls JAGS, and
 aggregates results. Intended for internal use, called by \code{fitSSM}.
 }
 \seealso{

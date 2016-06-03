@@ -1,19 +1,21 @@
-#' Fits state-space model to Argos data
+#' Fits state-space models to Argos data
 #' 
-#' Takes output from dat4jags, sets up initial values, calls JAGS, and
+#' Takes output from \code{dat4jags}, sets up initial values, calls JAGS, and
 #' aggregates results. Intended for internal use, called by \code{fitSSM}.
 #' 
-#' @param d structured data from dat4jags to be passed to JAGS
+#' @param d structured data from \code{dat4jags} to be passed to JAGS
 #' @param model the state-space model to be fit: DCRW or DCRWS
 #' @param adapt number of samples in adaptation/burnin phase 
 #' @param samples number of posterior samples
 #' @param thin thinning factor to reduce posterior sample autocorrelation
 #' @param chains number of parallel McMC chains to run
-#' the only model options.
+#' @param span span
 #' @return Returns a list of McMC samples from marginal posteriors and a
-#' summary data.frame of mean and median position estimates.
+#' summary \code{data.frame} of mean and median position estimates.
 #' @seealso Function to be called by \code{\link{fitSSM}}.
 #' @importFrom rjags jags.samples
+#' @importFrom rjags jags.model
+#' @importFrom msm rtnorm
 #' @export
 ssm <- function (d, model = "DCRW", adapt, samples, thin, chains, span)
 {
@@ -33,47 +35,40 @@ ssm <- function (d, model = "DCRW", adapt, samples, thin, chains, span)
       V <- cov(es)
       isigma2 <- diag(V)^-1
       rho <- V[1,2] / prod(sqrt(isigma2))
-      iSigma <- matrix(c(isigma2[1], rho, rho, isigma2[2]), 2, 2)
       
       data <- with(dd, list(y = y, idx = idx, w = ws, itau2 = itau2, nu = nu, 
                             Nx = nrow(xs), Ny=nrow(dd$y)))
+   
       ## inits
-      switch(model,
-        	DCRW = {
-            inits <- list(list(iSigma = iSigma, gamma = 0.5,
-               theta = 0, x = xs, logpsi = runif(1,-1,1)),
-              list(iSigma = iSigma, gamma = 0.4, theta = 0.1, x = xs,
-               	logpsi = runif(1,-1,1)), list(iSigma = iSigma, gamma = 0.45,
-               	theta = -0.1, x = xs, logpsi = runif(1,-1,1)),
-              list(iSigma = iSigma, gamma = 0.3, theta = -0.2, x = xs,
-               	logpsi = runif(1,-1,1))) 
-            params <- c("Sigma", "x", "theta", "gamma", "psi")
-        		},
-        	DCRWS = {
-        	  b <- rep(1, nrow(xs))
-        	  d <- sqrt(ds[,1]^2+ds[,2]^2)
-        	  b[d > median(d)] <- 2
-            inits <- list(list(iSigma = iSigma, gamma = c(0.8, NA), dev = 0.6,
-            	  tmp = c(0.45, 0.55), alpha = c(0.55, 0.45), lambda = c(0.45, NA),
-            	  b = b, x = xs, logpsi = runif(1,-1,1)),
-              list(iSigma = iSigma, gamma = c(0.85, NA), dev = 0.65,
-            	  tmp = c(0.6, 0.4), alpha = c(0.4, 0.6), lambda = c(0.5, NA),
-            	  b = b, x = xs, logpsi = runif(1,-1,1)), 
-            	list(iSigma = iSigma, gamma = c(0.75, NA), dev = 0.7,
-            	  tmp = c(0.5, 0.6), alpha = c(0.5, 0.5), lambda = c(0.55, NA),
-            	  b = b, x = xs, logpsi = runif(1,-1,1)),
-            	list(iSigma = iSigma, gamma = c(0.6, NA), dev = 0.5,
-            	  tmp = c(0.6, 0.5), alpha = c(0.65, 0.45), lambda = c(0.4, NA),
-            	  b = b, x = xs, logpsi = runif(1,-1,1)))
-            params <- c("Sigma", "x", "theta", "gamma", "alpha", "b", "psi")
-        		})
-
-	if(chains==1) inits <- inits[[1]]
-	if(chains==2) inits <- list(inits[[1]],inits[[2]])
-	if(chains==3) inits <- list(inits[[1]],inits[[2]],inits[[3]])
-
+      init.fn <- function() {
+        isigma2 <- rlnorm(2, log(isigma2), 0.1)
+        rho <- msm::rtnorm(1, rho, 0.1, lower = -1, upper = 1)
+        iSigma <- matrix(c(isigma2[1], rho, rho, isigma2[2]), 2, 2)
+        gamma <- c(rbeta(1, 20, 20), NA)
+        dev <- rbeta(1, 1, 1)
+        theta <- (2 * rbeta(1, 100, 100) - 1) * pi
+        tmp <- rbeta(2, 100, 100)
+        alpha <- rbeta(2, 1, 1)
+        lambda <- c(rbeta(1, 1, 1), NA)
+        logpsi <- runif(1, -1, 1)
+        x <- cbind(rnorm(nrow(xs), xs[ ,1], 0.1), rnorm(nrow(xs), xs[ ,2], 0.1))
+        b <- rbinom(nrow(xs), 1, 0.5) + 1
+                
+        if(model=="DCRW") {
+          list(iSigma = iSigma, gamma = gamma[1], theta = theta, logpsi = logpsi, 
+               x = x)
+        }
+        else {
+          list(iSigma = iSigma, gamma = gamma, dev = dev, tmp = tmp, alpha = alpha, 
+               lambda = lambda, logpsi = logpsi, x = x, b = b)
+        }
+      }
+      inits <- lapply(1:chains, function(i) init.fn())
+            
+	    params <- c("Sigma", "x", "theta", "gamma", "psi")
+	    if(model == "DCRWS") params <- c(params, "alpha", "b")
+	
 	model.file <- file.path(system.file("jags", package="bsam"), paste(model, ".txt", sep=""))
-
 	burn <- rjags::jags.model(model.file, data, inits, n.chains=chains, n.adapt=adapt/2)
 	update(burn, n.iter=adapt/2)
 	psamples <- rjags::jags.samples(burn, params, n.iter=samples, thin=thin)

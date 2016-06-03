@@ -102,6 +102,4 @@ ocean. Nature 475:86-90
 Jonsen et al. (2013) State-space models for biologgers: a methodological
 road map. Deep Sea Research II DOI: 10.1016/j.dsr2.2012.07.008
 }
-\keyword{~kwd1}
-\keyword{~kwd2}
 

@@ -1,22 +1,23 @@
-#' hssm
+#' Fits hierarchical state-space models to Argos data
 #' 
-#' @param loc.list loc.list
+#' Takes output from \code{dat4jags}, sets up initial values, calls JAGS, and
+#' aggregates results. Intended for internal use, called by \code{fitSSM}.
 #'
-#' @param model model
-#' @param adapt adapt
-#' @param samples samples
-#' @param thin thin
-#' @param chains chains
-#' @param ... dots
-#'
-#' @export
+#' @param d structured data from \code{dat4jags} to be passed to JAGS
+#' @param model the state-space model to be fit: hDCRW or hDCRWS
+#' @param adapt number of samples in adaptation/burnin phase 
+#' @param samples number of posterior samples
+#' @param thin thinning factor to reduce posterior sample autocorrelation
+#' @param chains number of parallel McMC chains to run
+#' @param span span
+#' @return Returns a list of McMC samples from marginal posteriors and a
+#' summary \code{data.frame} of mean and median position estimates.
+#' @seealso Function to be called by \code{\link{fitSSM}}.
+#' @importFrom rjags jags.samples
 #' @importFrom rjags jags.model
-`hssm` =
-function (loc.list, model = "hDCRWS", adapt, samples, thin, chains, ...)
+#' @export
+hssm  <- function (d, model = "hDCRWS", adapt, samples, thin, chains, span)
 {
-    if (!model %in% c("hDCRW","hDCRWS"))
-        stop("model not implemented.")
-
     nt = length(loc.list)
     y = NULL
     itau2 = NULL
