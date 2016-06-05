@@ -1,56 +1,41 @@
 data {
-	pi <- 3.141592653589
-	pi2 <- 2*pi
-	npi <- pi*-1
-
-	Omega[1,1] <- 1
-	Omega[1,2] <- 0
-	Omega[2,1] <- 0
-	Omega[2,2] <- 1
+	Omega[1, 1] <- 1
+	Omega[1, 2] <- 0
+	Omega[2, 1] <- 0
+	Omega[2, 2] <- 1
 	
-	first.loc[1] <- y[1,1]
-	first.loc[2] <- y[1,2]
+	first.loc[1] <- y[1, 1]
+	first.loc[2] <- y[1, 2]
 	}
 model
 {
 
 ## priors on process uncertainty
-iSigma[1:2,1:2] ~ dwish(Omega[,],2)	
-Sigma[1:2,1:2] <- inverse(iSigma[,])
+iSigma[1:2, 1:2] ~ dwish(Omega[, ], 2)	
+Sigma[1:2, 1:2] <- inverse(iSigma[, ])
 
-## Priors for first location
-for(k in 1:2){
-	x[1,k] ~ dt(first.loc[k], itau2[1,k] * psi, nu[1,k])
-	}
-
-## Assume simple random walk to estimate 2nd regular position
-x[2,1:2] ~ dmnorm(x[1,], iSigma[,])
-
-theta ~ dunif(npi,pi)	
-gamma ~ dbeta(1,1)	
+gamma ~ dbeta(1, 1)	
 logpsi ~ dunif(-10, 10)		
 psi <- exp(logpsi)
 
-## Transition equation
-for(t in 2:(Nx-1)){
-	## Build transition matrix for rotational component	
-	T[t,1,1] <- cos(theta)
-	T[t,1,2] <- -sin(theta)
-	T[t,2,1] <- sin(theta)
-	T[t,2,2] <- cos(theta)
-	for(k in 1:2){
-		Tdx[t,k] <- T[t,k,1] * (x[t,1] - x[t-1,1]) + T[t,k,2] * (x[t,2] - x[t-1,2])	
-		x.mn[t,k] <- x[t,k] + gamma * Tdx[t,k]	
-		}
-			
-	x[t+1,1:2] ~ dmnorm(x.mn[t,], iSigma[,])	
+## Priors for first location
+for(k in 1:2){
+	x[1, k] ~ dt(first.loc[k], itau2[1, k] * psi, nu[1, k])
 	}
 
-##	Measurement equation
+## Process equation
+x[2, 1:2] ~ dmnorm(x[1, ], iSigma[, ])
+
+for(t in 2:(Nx-1)){
+	x.mn[t, 1:2] <- x[t, 1:2] + (x[t, 1:2] - x[t-1, 1:2]) * gamma
+	x[t+1, 1:2] ~ dmnorm(x.mn[t, ], iSigma[, ])	
+	}
+
+## Measurement equation
 for(i in 1:(Ny-1)) {	
   for(j in 1:2) {
-    yhat[i,j] <- w[i] * x[idx[i],j] + (1 - w[i]) * x[idx[i+1],j]
-       y[i,j] ~  dt(yhat[i,j], itau2[i,j] * psi, nu[i,j])
+    yhat[i, j] <- w[i] * x[idx[i], j] + (1 - w[i]) * x[idx[i+1], j]
+       y[i, j] ~  dt(yhat[i, j], itau2[i, j] * psi, nu[i, j])
     }
   }	
 }

@@ -44,7 +44,7 @@
 #' @examples
 #' 
 #' #data(lbt)
-#' #fit = fitSSM(lbt, model="DCRW", tstep=1, adapt=60000, samples=30000, thin=30, chains=2)
+#' #fit = fitSSM(lbt, model="DCRW", tstep=1, adapt=20000, samples=10000, thin=10, chains=2)
 #' @importFrom grDevices colorRampPalette dev.off extendrange grey pdf rgb
 #' @rawNamespace 
 #' if(.Platform$OS.type == "windows") {

@@ -4,8 +4,8 @@
 \alias{fitSSM}
 \title{Fit Bayesian state-space models to animal movement data}
 \usage{
-fitSSM(d, model = "DCRW", tstep = 1, adapt = 40000, samples = 20000,
-  thin = 20, chains = 2, span = 0.2)
+fitSSM(d, model = "DCRW", tstep = 1, adapt = 20000, samples = 10000,
+  thin = 10, span = 0.2)
 }
 \arguments{
 \item{model}{name of state-space model to be fit to data. Currently, this
@@ -20,9 +20,6 @@ phase, adaptation and updates are fixed at adapt/2}
 
 \item{thin}{amount of thining of to be applied to minimize sample
 autocorrelation.}
-
-\item{chains}{sets the number of chains over which the sampling is to be
-distributed. The default is 2 chains.}
 
 \item{indata}{An R data.frame containing the following columns, "id","date",
 "lc", "lon", "lat". "id" is a unique identifier for the tracking dataset.
@@ -59,14 +56,15 @@ results.
 \examples{
 # Fit DCRW model for state filtering and regularization
 data(lbt)
-#fit <- fitSSM(lbt, model="DCRW", tstep=1, adapt=40000, samples=20000, thin=20, chains=2)
+#fit <- fitSSM(lbt, model="DCRW", tstep=1, adapt=40000, samples=20000, thin=20, span=0.2)
 #plotSSM(fit, save.to.pdf=FALSE)
 #diagSSM(fit, save.to.pdf=FALSE)
 
 # Fit DCRWS model for state filtering, regularization and behavioural state estimation
 # Not run
 # data(lbt)
-# fit <- fitSSM(lbt, model="DCRWS", tstep=0.5, adapt=40000, samples=20000, thin=20, chains=2)
+# This will take some time to complete
+# fit <- fitSSM(lbt, model="DCRWS", tstep=0.25, adapt=40000, samples=20000, thin=20, span=0.2)
 # plotSSM(fit, save.to.pdf=FALSE)
 # diagSSM(fit, save.to.pdf=FALSE)
 
@@ -80,10 +78,9 @@ data(lbt)
 # tmp$id <- 15395
 # lbt2 <- rbind(lbt,tmp)
 # This will take some time to complete
-# fit <- fitSSM(lbt2, model="hDCRWS", tstep=0.5, adapt=40000, samples=20000, thin=20, chains=2)
+# fit <- fitSSM(lbt2, model="hDCRWS", tstep=0.25, adapt=40000, samples=20000, thin=20, span=0.2)
 # plotSSM(fit, save.to.pdf=FALSE)
 # diagSSM(fit, save.to.pdf=FALSE)
-
 
 }
 \author{

@@ -1,18 +1,18 @@
 data {
-	Omega[1, 1] <- 1
-	Omega[1, 2] <- 0
-	Omega[2, 1] <- 0
-	Omega[2, 2] <- 1
+	Omega[1,1] <- 1
+	Omega[1,2] <- 0
+	Omega[2,1] <- 0
+	Omega[2,2] <- 1
 	
-	first.loc[1] <- y[1, 1]
-	first.loc[2] <- y[1, 2]
+	first.loc[1] <- y[1,1]
+	first.loc[2] <- y[1,2]
 	}
 model
 {
 
 ## priors on process uncertainty
-iSigma[1:2, 1:2] ~ dwish(Omega[, ], 2)	
-Sigma[1:2, 1:2] <- inverse(iSigma[, ])
+iSigma[1:2,1:2] ~ dwish(Omega[,], 2)	
+Sigma[1:2,1:2] <- inverse(iSigma[,])
 
 gamma[1] ~ dbeta(2, 1.5) 	## prior for gamma in b=1
 dev ~ dbeta(1, 1)			## rnd deviate to ensure gamma[2] > gamma[1]
@@ -21,32 +21,33 @@ gamma[2] <- gamma[1] * dev
 alpha[1] ~ dbeta(1, 1)		## prob of being in b 1 at t, given in b 1 at t-1
 alpha[2] ~ dbeta(1, 1)		## prob of being in b 1 at t, given in b 2 at t-1
 
-## estiamte first behavioural state
 lambda[1] ~ dunif(0, 1)
 lambda[2] <- 1 - lambda[1]
-b[1] ~ dcat(lambda[])
+b[1] ~ dcat(lambda[]) 		## assign b for first obs
 
 logpsi ~ dunif(-10, 10)		## inflation/deflation factor for estimation error
 psi <- exp(logpsi)
 
 ## Priors for first location
 for(k in 1:2){
-	x[1, k] ~ dt(first.loc[k], itau2[1, k] * psi, nu[1, k])
+	x[1,k] ~ dt(first.loc[k], itau2[1,k] * psi, nu[1,k])
 	}
 
-## Process equation
-x[2, 1:2] ~ dmnorm(x[1, ], iSigma[, ])
+## Assume simple random walk to estimate 2nd regular position
+x[2,1:2] ~ dmnorm(x[1,], iSigma[,])
 
+## Transition equation
 for(t in 2:(Nx-1)){
+
 	phi[t,1] <- alpha[b[t-1]]
 	phi[t,2] <- 1 - alpha[b[t-1]]
 	b[t] ~ dcat(phi[t,])
 	
-  x.mn[t, 1:2] <- x[t, 1:2] +  (x[t, 1:2] - x[t-1, 1:2]) * gamma[b[t]]
-  x[t+1, 1:2] ~ dmnorm(x.mn[t, ], iSigma[, ])	
+  x.mn[t,1:2] <- x[t,1:2] +  (x[t,1:2] - x[t-1,1:2]) * gamma[b[t]]
+  x[t+1,1:2] ~ dmnorm(x.mn[t,], iSigma[,])	
 	}
 
-## estimate final behavioural state
+## estimate final b state
 zeta[1] <- alpha[b[Nx-1]]
 zeta[2] <- 1 - zeta[1]
 b[Nx] ~ dcat(zeta[])
@@ -54,8 +55,8 @@ b[Nx] ~ dcat(zeta[])
 ##	Measurement equation
 for(i in 1:(Ny-1)) {	
   for(j in 1:2) {
-    yhat[i, j] <- w[i] * x[idx[i], j] + (1 - w[i]) * x[idx[i+1], j]
-       y[i, j] ~  dt(yhat[i, j], itau2[i, j] * psi, nu[i, j])
+    yhat[i,j] <- w[i] * x[idx[i],j] + (1 - w[i]) * x[idx[i+1],j]
+       y[i,j] ~  dt(yhat[i,j], itau2[i,j] * psi, nu[i,j])
     }
   }	
-}
+} #end

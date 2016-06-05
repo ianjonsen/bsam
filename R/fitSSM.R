@@ -51,14 +51,15 @@
 #' @examples
 #' # Fit DCRW model for state filtering and regularization
 #' data(lbt)
-#' #fit <- fitSSM(lbt, model="DCRW", tstep=1, adapt=40000, samples=20000, thin=20)
+#' #fit <- fitSSM(lbt, model="DCRW", tstep=1, adapt=40000, samples=20000, thin=20, span=0.2)
 #' #plotSSM(fit, save.to.pdf=FALSE)
 #' #diagSSM(fit, save.to.pdf=FALSE)
 #' 
 #' # Fit DCRWS model for state filtering, regularization and behavioural state estimation
 #' # Not run
 #' # data(lbt)
-#' # fit <- fitSSM(lbt, model="DCRWS", tstep=0.5, adapt=40000, samples=20000, thin=20)
+#' # This will take some time to complete
+#' # fit <- fitSSM(lbt, model="DCRWS", tstep=0.25, adapt=40000, samples=20000, thin=20, span=0.2)
 #' # plotSSM(fit, save.to.pdf=FALSE)
 #' # diagSSM(fit, save.to.pdf=FALSE)
 #' 
@@ -72,13 +73,13 @@
 #' # tmp$id <- 15395
 #' # lbt2 <- rbind(lbt,tmp)
 #' # This will take some time to complete
-#' # fit <- fitSSM(lbt2, model="hDCRWS", tstep=0.5, adapt=40000, samples=20000, thin=20)
+#' # fit <- fitSSM(lbt2, model="hDCRWS", tstep=0.25, adapt=40000, samples=20000, thin=20, span=0.2)
 #' # plotSSM(fit, save.to.pdf=FALSE)
 #' # diagSSM(fit, save.to.pdf=FALSE)
 #' 
 #' @export 
 `fitSSM` <-
-function (d, model="DCRW", tstep=1, adapt=40000, samples=20000, thin=20, span=0.2)
+function (d, model="DCRW", tstep=1, adapt=20000, samples=10000, thin=10, span=0.2)
 {
 	if(!model %in% c('DCRW', 'DCRWS', 'hDCRW', 'hDCRWS')) stop("Model not implemented")
   model.file <- file.path(system.file(package = "bsam"), "jags", paste(model, ".txt", sep=""))
@@ -88,7 +89,7 @@ function (d, model="DCRW", tstep=1, adapt=40000, samples=20000, thin=20, span=0.
   st <- proc.time()
       
 	dd <- dat4jags(d, tstep = tstep, tpar=tpar())	
-	if(model %in% c("DCRW","DCRWS")) {
+	if(model %in% c("DCRW", "DCRWS")) {
 	  fit <- ssm(dd, model = model, adapt = adapt, samples = samples, thin = thin, 
 	             chains = 2, span = span)
 	}
