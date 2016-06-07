@@ -65,7 +65,7 @@ dat4jags <- function (d, tstep=1, tpar=tpar()) {
        nu = cbind(dd$nu.lon, dd$nu.lat),
        idx = index,
        ws = weights,
-       ts = seq(dd$date[1], by = dt, length.out = max(index) + 2),
+       ts = seq(dd$date[1], by = dt, length.out = max(index)),
        dt = dt, obs = dd, tstep = tstep)
   }
   by(d, d$id, dostuff)

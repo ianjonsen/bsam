@@ -7,7 +7,7 @@
 dplot(fit)
 }
 \arguments{
-\item{fit}{fit}
+\item{fit}{an output object from \code{fitSSM}}
 }
 \description{
 dplot
