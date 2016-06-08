@@ -2,14 +2,36 @@
 % Please edit documentation in R/dplot.R
 \name{dplot}
 \alias{dplot}
-\title{dplot}
+\title{Plot standard McMC convergence diagnostics to help determine lack of model convergence.}
 \usage{
 dplot(fit)
 }
 \arguments{
-\item{fit}{fit}
+\item{fit}{an output object from \code{fitSSM}}
+}
+\value{
+The traceplot shows the time series for both McMC chains;
+the density plot shows the density estimate for each parameter;
+the autocorrelation plots show the within-chain sample autocorrelation for each parameter;
+the G-B-R shrink factor plot shows the evolution of Gelman and Rubin's shrink factor for 
+increasing number of iterations. See the \code{coda} package for further details.
 }
 \description{
-dplot
+Takes a fitted \code{fitSSM} object and for each of the parameters plots:
+}
+\examples{
+data(d)
+fit <- fitSSM(d, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
+              thin = 2, span = 0.1)
+dplot(fit)
+
+# increase burnin, posterior sample numbers, and thinning factor
+fit2 <- fitSSM(d, model = "DCRWS", tstep = 1, adapt = 5000, samples = 5000, 
+              thin = 5, span = 0.1)
+dplot(fit2)             
+}
+\references{
+Brooks SP, Gelman A (1998) General methods for monitoring convergence of iterative 
+simulations. Journal of Computational and Graphical Statistics 7:434-455
 }
 

@@ -4,18 +4,36 @@
 \alias{tplot}
 \title{Plot estimated track, behavioural states and observations on a map.}
 \usage{
-tplot(fit, single = TRUE)
+tplot(fit, onemap = TRUE)
 }
 \arguments{
 \item{fit}{an output object from \code{fitSSM}}
 
-\item{single}{logical (default is TRUE) indicating if individual tracks
-are plotted on a single map (TRUE) or on separate maps (FALSE)}
+\item{onemap}{If FALSE (default) then each estimated track is plotted on a separate 
+map, if TRUE then tracks are combined on a single map.}
+}
+\value{
+Observed locations are plotted as '+' symbols and estimated locations as filled
+circles. Individual track id's (for DCRW and DCRWS models) are displayed at the top of 
+each plot, but only when \code{onemap = FALSE}. The model specified in \code{fitSMM} is
+also displayed at the top. Takes advantage of \code{ggplot2} plotting functions.
+
+Currently, results from the hierarchical models (hDCRW, hDCRWS) can only be plotted on 
+a combined map.
 }
 \description{
-Estimated location states are shaded by estimated behavioural state 
-(for DCRWS, hDCRWS output). Observations are added as '+' symbols. 
-For multi-individual output objects there is an option to include all
-on a single map or to plot each individually.
+Takes a fitted \code{fitSSM} object and plots the observed (data) and estimated 
+locations on a map. For the behavioural models (DCRWS, hDCRWS), the estimated
+locations are coloured according to the posterior mean behavioural state estimates.
+}
+\examples{
+data(d)
+fit <- fitSSM(d, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
+              thin = 2, span = 0.1)
+tplot(fit, onemap = TRUE)
+
+fit.h <- fitSSM(d, model = "hDCRWS", tstep = 1, adapt = 2000, samples = 1000, 
+                thin = 2, span = 0.1)
+tplot(fit.h)
 }
 
