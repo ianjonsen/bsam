@@ -5,9 +5,9 @@
 #' For multi-individual output objects there is an option to include all
 #' on a single map or to plot each individually.
 #' 
-#' @param fit an output object from \code{fitSSM}
-#' @param onemap  logical (default is FALSE) indicating if individual tracks
-#' are combined on a single map (TRUE) or on separate maps (FALSE)
+#' @param fit  an output object from \code{fitSSM}
+#' @param single  logical (default is TRUE) indicating if individual tracks
+#' are plotted on a single map (TRUE) or on separate maps (FALSE)
 #'
 #' @importFrom ggplot2 ggplot
 #' @importFrom ggplot2 fortify
@@ -15,7 +15,7 @@
 #' @importFrom ggplot2 coord_cartesian
 #' @export 
 
-tplot <- function(fit, onemap = TRUE) 
+tplot <- function(fit, single = TRUE) 
 {
   data(countriesHigh, package="rworldxtra")
   wm <- fortify(countriesHigh)
@@ -27,10 +27,10 @@ tplot <- function(fit, onemap = TRUE)
     p <- ggplot() + geom_polygon(data = wm, aes(x = long, y = lat, group = group), 
                                  fill = grey(0.3)) + 
       coord_cartesian(xlim = xl, ylim = yl) 
-    if(!onemap) {
+    if(single) {
       p <- p + ggtitle(paste(unique(as.character(m$summary$id)), "; ", m$model, sep = ""))
     }
-    else if(onemap) {
+    else if(!single) {
       p <- p + ggtitle(m$model)
     }
     
@@ -51,7 +51,7 @@ tplot <- function(fit, onemap = TRUE)
   }  
 if(length(fit) == 1) plt(fit[[1]])
   
-else if(onemap && length(fit) > 1) {
+else if(!single && length(fit) > 1) {
   s <- do.call(rbind, lapply(fit, function(x) x$summary))
   d <- do.call(rbind, lapply(fit, function(x) x$data))
   m <- sapply(fit, function(x) x$model)[1]
@@ -59,7 +59,7 @@ else if(onemap && length(fit) > 1) {
   plt(fit)
 }  
   
-else if(!onemap) {
+else if(single) {
   lapply(fit, plt)
 }
   

@@ -81,13 +81,13 @@ ssm <- function (d, model = "DCRW", adapt, samples, thin, chains, span)
 	data <- dd$obs
 
 	if(model == "DCRWS") {
-	  b <- apply(psamples$b, 1, mean)
-	  b.5 <- apply(psamples$b, 1, median)
+	  b = apply(psamples$b, 1, mean)
+	  b.5 = apply(psamples$b, 1, median)
 	  summary <- data.frame(summary, b=b, b.5=b.5)
 	}
 
-	out <- list(summary = summary, mcmc = psamples, model = model, mcmc.settings = mcmc.settings,
-		timestep = dd$tstep, Nx = nrow(xs), data = data)
+	out <- list(summary=summary, mcmc=psamples, model=model, mcmc.settings=mcmc.settings,
+		timestep=dd$tstep, Nx=nrow(xs), data=data)
 	out
     }
     lapply(d, ssm1)

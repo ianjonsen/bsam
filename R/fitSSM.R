@@ -50,41 +50,37 @@
 #' 
 #' @examples
 #' # Fit DCRW model for state filtering and regularization
-#' data(lbt)
-#' #fit <- fitSSM(lbt, model="DCRW", tstep=1, adapt=40000, samples=20000, thin=20, span=0.2)
-#' #plotSSM(fit, save.to.pdf=FALSE)
-#' #diagSSM(fit, save.to.pdf=FALSE)
+#' data(d)
+#' fit <- fitSSM(d, model = "DCRW", tstep = 1, adapt = 5000, samples = 5000, 
+#'               thin = 5, span=0.2)
+#' dplot(fit)
+#' tplot(fit)
 #' 
 #' # Fit DCRWS model for state filtering, regularization and behavioural state estimation
-#' # Not run
-#' # data(lbt)
-#' # This will take some time to complete
-#' # fit <- fitSSM(lbt, model="DCRWS", tstep=0.25, adapt=40000, samples=20000, thin=20, span=0.2)
-#' # plotSSM(fit, save.to.pdf=FALSE)
-#' # diagSSM(fit, save.to.pdf=FALSE)
+#'  data(d)
+#'  fit <- fitSSM(d, model = "DCRWS", tstep = 0.5, adapt = 5000, samples = 5000, 
+#'                 thin = 5, span = 0.2)
+#'  dplot(fit)
+#'  tplot(fit)
 #' 
-#' # fit hDCRWS model to >1 tracks simultaneously
-#' # this can provide better parameter and behavioural state estimation 
+#' # fit hDCRWS model to > 1 tracks simultaneously
+#' # this may provide better parameter and behavioural state estimation 
 #' # by borrowing strength across multiple track datasets
 #' 
-#' # Not run
-#' # data(lbt)
-#' # tmp <- lbt
-#' # tmp$id <- 15395
-#' # lbt2 <- rbind(lbt,tmp)
-#' # This will take some time to complete
-#' # fit <- fitSSM(lbt2, model="hDCRWS", tstep=0.25, adapt=40000, samples=20000, thin=20, span=0.2)
-#' # plotSSM(fit, save.to.pdf=FALSE)
-#' # diagSSM(fit, save.to.pdf=FALSE)
+#'  data(d)
+#'  fit <- fitSSM(d, model = "hDCRWS", tstep = 0.5, adapt = 5000, samples = 5000, 
+#'                 thin = 5, span = 0.2)
+#'  dplot(fit)
+#'  tplot(fit)
 #' 
 #' @export 
-`fitSSM` <-
-function (d, model="DCRW", tstep=1, adapt=20000, samples=10000, thin=10, span=0.2)
+fitSSM <- function (d, model = "DCRW", tstep = 1, adapt = 10000, samples = 5000, 
+                    thin = 5, span = 0.2)
 {
 	if(!model %in% c('DCRW', 'DCRWS', 'hDCRW', 'hDCRWS')) stop("Model not implemented")
-  model.file <- file.path(system.file(package = "bsam"), "jags", paste(model, ".txt", sep=""))
+  model.file <- file.path(system.file(package = "bsam"), "jags", paste(model, ".txt", sep = ""))
     
-	options(warn=-1)	    	
+	options(warn = -1)	    	
   seed <- sample(1:1e+05, 1)
   st <- proc.time()
       
@@ -99,7 +95,7 @@ function (d, model="DCRW", tstep=1, adapt=20000, samples=10000, thin=10, span=0.
 	}
 	
 	cat("Elapsed time: ", round((proc.time() - st)[3]/60,2), "min \n")	
-	options(warn=0)
+	options(warn = 0)
 	
 	fit
 }

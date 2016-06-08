@@ -21,7 +21,7 @@ gamma[2] <- gamma[1] * dev
 alpha[1] ~ dbeta(1, 1)		## prob of being in b 1 at t, given in b 1 at t-1
 alpha[2] ~ dbeta(1, 1)		## prob of being in b 1 at t, given in b 2 at t-1
 
-## estiamte first behavioural state
+## estimate first behavioural state
 lambda[1] ~ dunif(0, 1)
 lambda[2] <- 1 - lambda[1]
 b[1] ~ dcat(lambda[])
@@ -51,7 +51,7 @@ zeta[1] <- alpha[b[Nx-1]]
 zeta[2] <- 1 - zeta[1]
 b[Nx] ~ dcat(zeta[])
 
-##	Measurement equation
+## Measurement equation
 for(i in 1:(Ny-1)) {	
   for(j in 1:2) {
     yhat[i, j] <- w[i] * x[idx[i], j] + (1 - w[i]) * x[idx[i+1], j]

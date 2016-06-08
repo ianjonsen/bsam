@@ -31,8 +31,12 @@ state estimates compared to fitting DCRW/DCRWS to individual datasets.
 }
 \examples{
 
-#data(lbt)
-#fit = fitSSM(lbt, model="DCRW", tstep=1, adapt=20000, samples=10000, thin=10, chains=2)
+# Fit DCRW model for state filtering and regularization
+data(d)
+fit <- fitSSM(d, model = "DCRW", tstep = 1, adapt = 5000, samples = 5000, 
+              thin = 5, span=0.2)
+dplot(fit)
+tplot(fit)
 }
 \author{
 Ian Jonsen

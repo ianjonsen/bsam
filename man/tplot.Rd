@@ -4,13 +4,13 @@
 \alias{tplot}
 \title{Plot estimated track, behavioural states and observations on a map.}
 \usage{
-tplot(fit, onemap = TRUE)
+tplot(fit, single = TRUE)
 }
 \arguments{
 \item{fit}{an output object from \code{fitSSM}}
 
-\item{onemap}{logical (default is FALSE) indicating if individual tracks
-are combined on a single map (TRUE) or on separate maps (FALSE)}
+\item{single}{logical (default is TRUE) indicating if individual tracks
+are plotted on a single map (TRUE) or on separate maps (FALSE)}
 }
 \description{
 Estimated location states are shaded by estimated behavioural state 

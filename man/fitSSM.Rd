@@ -4,8 +4,8 @@
 \alias{fitSSM}
 \title{Fit Bayesian state-space models to animal movement data}
 \usage{
-fitSSM(d, model = "DCRW", tstep = 1, adapt = 20000, samples = 10000,
-  thin = 10, span = 0.2)
+fitSSM(d, model = "DCRW", tstep = 1, adapt = 10000, samples = 5000,
+  thin = 5, span = 0.2)
 }
 \arguments{
 \item{model}{name of state-space model to be fit to data. Currently, this
@@ -55,32 +55,28 @@ results.
 }
 \examples{
 # Fit DCRW model for state filtering and regularization
-data(lbt)
-#fit <- fitSSM(lbt, model="DCRW", tstep=1, adapt=40000, samples=20000, thin=20, span=0.2)
-#plotSSM(fit, save.to.pdf=FALSE)
-#diagSSM(fit, save.to.pdf=FALSE)
+data(d)
+fit <- fitSSM(d, model = "DCRW", tstep = 1, adapt = 5000, samples = 5000, 
+              thin = 5, span=0.2)
+dplot(fit)
+tplot(fit)
 
 # Fit DCRWS model for state filtering, regularization and behavioural state estimation
-# Not run
-# data(lbt)
-# This will take some time to complete
-# fit <- fitSSM(lbt, model="DCRWS", tstep=0.25, adapt=40000, samples=20000, thin=20, span=0.2)
-# plotSSM(fit, save.to.pdf=FALSE)
-# diagSSM(fit, save.to.pdf=FALSE)
+ data(d)
+ fit <- fitSSM(d, model = "DCRWS", tstep = 0.5, adapt = 5000, samples = 5000, 
+                thin = 5, span = 0.2)
+ dplot(fit)
+ tplot(fit)
 
-# fit hDCRWS model to >1 tracks simultaneously
-# this can provide better parameter and behavioural state estimation 
+# fit hDCRWS model to > 1 tracks simultaneously
+# this may provide better parameter and behavioural state estimation 
 # by borrowing strength across multiple track datasets
 
-# Not run
-# data(lbt)
-# tmp <- lbt
-# tmp$id <- 15395
-# lbt2 <- rbind(lbt,tmp)
-# This will take some time to complete
-# fit <- fitSSM(lbt2, model="hDCRWS", tstep=0.25, adapt=40000, samples=20000, thin=20, span=0.2)
-# plotSSM(fit, save.to.pdf=FALSE)
-# diagSSM(fit, save.to.pdf=FALSE)
+ data(d)
+ fit <- fitSSM(d, model = "hDCRWS", tstep = 0.5, adapt = 5000, samples = 5000, 
+                thin = 5, span = 0.2)
+ dplot(fit)
+ tplot(fit)
 
 }
 \author{

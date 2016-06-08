@@ -29,7 +29,7 @@
 #' @docType package
 #' @author Ian Jonsen
 #' 
-#' Maintainer: Ian Jonsen <ian.jonsen@@mq.edu.au>
+#' Maintainer: Ian Jonsen <ian.jonsen@mq.edu.au>
 #' @seealso fitSSM
 #' @references Jonsen ID, Myers RA, Mills Flemming J (2003) Meta-analysis of
 #' animal movement using state-space models. Ecology 84:3055-3063
@@ -43,16 +43,12 @@
 #' @keywords bsam
 #' @examples
 #' 
-#' #data(lbt)
-#' #fit = fitSSM(lbt, model="DCRW", tstep=1, adapt=20000, samples=10000, thin=10, chains=2)
-#' @importFrom grDevices colorRampPalette dev.off extendrange grey pdf rgb
-#' @rawNamespace 
-#' if(.Platform$OS.type == "windows") {
-#' importFrom(grDevices, windows)
-#' }
-#' if(.Platform$OS.type == "unix") {
-#' importFrom(grDevices, quartz)
-#' }
+#' # Fit DCRW model for state filtering and regularization
+#' data(d)
+#' fit <- fitSSM(d, model = "DCRW", tstep = 1, adapt = 5000, samples = 5000, 
+#'               thin = 5, span=0.2)
+#' dplot(fit)
+#' tplot(fit)
 #' @importFrom graphics axis layout lines matpoints mtext par plot points rug
 #' @importFrom stats IQR approx density median quantile rbinom rt runif sd update
 #' @importFrom utils data
@@ -60,12 +56,15 @@ NULL
 
 
 
-##' @name lbt
+##' @name d
 ##' @docType data
-##' @title lbt
-##' @format csv
+##' @title d
+##' @format .RData
 ##' @keywords data
-##' @description lbt data
+##' @description example elephant seal Argos tracking data. Data were sourced from 
+##' the Integrated Marine Observing System (IMOS) - IMOS is supported by the 
+##' Australian Government through the National Collaborative Research Infrastructure 
+##' Strategy and the Super Science Initiative.
 NULL
 
 

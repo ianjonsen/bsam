@@ -18,8 +18,7 @@ Imports:
     coda (>= 0.18-1),
     msm (>= 1.6.1),
     rgdal (>= 1.1-10),
-    sp (>= 1.2-3),
-    rworldxtra (>= 1.01)
+    sp (>= 1.2-3)
 Description: Fit Bayesian state-space models to Argos satellite tracking
     data. Currently, models provided are DCRW (for location filtering), DCRWS (for
     location filtering and behavioural state estimation), and hierarchical models,
