@@ -25,7 +25,7 @@
 #'                 thin = 2, span = 0.1)
 #' tplot(fit.h)
 #' }
-#' @importFrom ggplot2 ggplot
+#' @importFrom ggplot2 ggplot aes ggtitle geom_point scale_color_gradient2
 #' @importFrom ggplot2 fortify
 #' @importFrom ggplot2 geom_polygon
 #' @importFrom ggplot2 coord_cartesian
@@ -40,7 +40,7 @@ tplot <- function(fit, onemap = TRUE)
 }  
 
 tplot.d <- function(fit, onemap) {
-  
+  countriesHigh <- NULL
   data(countriesHigh, package = "rworldxtra", envir = environment())
   wm <- fortify(countriesHigh)
   

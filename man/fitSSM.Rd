@@ -8,6 +8,8 @@ fitSSM(d, model = "DCRW", tstep = 1, adapt = 10000, samples = 5000,
   thin = 5, span = 0.2)
 }
 \arguments{
+\item{d}{d}
+
 \item{model}{name of state-space model to be fit to data. Currently, this
 can be one of "DCRW", "DCRWS", or "hDCRWS".}
 
@@ -21,21 +23,7 @@ phase, adaptation and updates are fixed at adapt/2}
 \item{thin}{amount of thining of to be applied to minimize sample
 autocorrelation.}
 
-\item{indata}{An R data.frame containing the following columns, "id","date",
-"lc", "lon", "lat". "id" is a unique identifier for the tracking dataset.
-"date" is the GMT date-time of each observation with the following format
-"2001-11-13 07:59:59". "lc" is the Argos location quality class of each
-observation, values in ascending order of quality are "B", "A", "0", "1",
-"2", "3". "lon" is the observed longitude in decimal degrees. "lat" is the
-observed latitude in decimal degress. 
-
-Optionally, the input data.frame can specify the error standard deviations 
-for longitude and latitude (in units of degrees) in the last 2 columns, 
-named "lonerr" and "laterr", respectively. These errors are assumed to be
-normally distributed. When specifying errors in the input data, all "lc" 
-values must be equal to "G". This approach allows the models to be fit to 
-data types other than Argos satellite data, e.g. geolocation data. WARNING:
-there is no guarantee that this will yield sensible results!}
+\item{span}{span}
 }
 \value{
 For DCRW and DCRWS models, a list is returned with each outer list
@@ -62,6 +50,7 @@ which fits the specified state-space model to the data, returning a list of
 results.
 }
 \examples{
+\dontrun{
 # Fit DCRW model for state filtering and regularization
 data(ellie)
 fit <- fitSSM(ellie, model = "DCRW", tstep = 1, adapt = 5000, samples = 5000, 
@@ -82,7 +71,7 @@ tplot(fit)
                 thin = 5, span = 0.2)
  dplot(fit)
  tplot(fit)
-
+}
 }
 \author{
 Ian Jonsen

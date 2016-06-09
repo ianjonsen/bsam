@@ -22,7 +22,7 @@
 #'               thin = 5, span = 0.1)
 #' dplot(fit2)
 #' }             
-#' @importFrom coda autocorr.plot traceplot gelman.plot as.mcmc.list
+#' @importFrom coda autocorr.plot traceplot gelman.plot as.mcmc.list nvar varnames<-
 #' @export 
 #' 
 dplot = function(fit)

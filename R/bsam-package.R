@@ -52,6 +52,8 @@
 #' @importFrom graphics axis layout lines matpoints mtext par plot points rug
 #' @importFrom stats IQR approx density median quantile rbinom rt runif sd update
 #' @importFrom utils data
+#' @importFrom grDevices extendrange grey
+#' @importFrom stats cov loess loess.control predict rbeta rlnorm rnorm
 NULL
 
 

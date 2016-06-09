@@ -9,13 +9,11 @@ dat4jags(d, tstep = 1, tpar = tpar())
 \arguments{
 \item{d}{a data frame of observations (see details)}
 
-\item{tstep}{the time step to predict to (in days)}
-
-\item{tpar}{generalised t-distribution parameters for ARGOS location classes}
-
-\item{extrap}{if TRUE, the final predicted state occurs
+\item{tstep}{the time step to predict to (in days)
 immediately before the last observation, otherwise the final
 predicted state occurs immediately after the last observation.}
+
+\item{tpar}{generalised t-distribution parameters for ARGOS location classes}
 }
 \value{
 A list with components
