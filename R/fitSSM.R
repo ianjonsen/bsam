@@ -58,6 +58,7 @@
 #' road map. Deep Sea Research II DOI: 10.1016/j.dsr2.2012.07.008
 #' 
 #' @examples
+#' \dontrun{
 #' # Fit DCRW model for state filtering and regularization
 #' data(ellie)
 #' fit <- fitSSM(ellie, model = "DCRW", tstep = 1, adapt = 5000, samples = 5000, 
@@ -78,7 +79,7 @@
 #'                 thin = 5, span = 0.2)
 #'  dplot(fit)
 #'  tplot(fit)
-#' 
+#' }
 #' @export 
 fitSSM <- function (d, model = "DCRW", tstep = 1, adapt = 10000, samples = 5000, 
                     thin = 5, span = 0.2)

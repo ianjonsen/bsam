@@ -41,13 +41,14 @@
 #' state inference from animal movement data. Scientific Reports 6:20625
 #' @keywords bsam
 #' @examples
-#' 
+#' \dontrun{
 #' # Fit DCRW model for state filtering and regularization
 #' data(ellie)
 #' fit <- fitSSM(ellie, model = "DCRW", tstep = 1, adapt = 5000, samples = 5000, 
 #'               thin = 5, span=0.2)
 #' dplot(fit)
 #' tplot(fit)
+#' }
 #' @importFrom graphics axis layout lines matpoints mtext par plot points rug
 #' @importFrom stats IQR approx density median quantile rbinom rt runif sd update
 #' @importFrom utils data

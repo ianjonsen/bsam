@@ -15,6 +15,7 @@
 #' Currently, results from the hierarchical models (hDCRW, hDCRWS) can only be plotted on 
 #' a combined map.
 #' @examples
+#' \dontrun{
 #' data(ellie)
 #' fit <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
 #'               thin = 2, span = 0.1)
@@ -23,6 +24,7 @@
 #' fit.h <- fitSSM(ellie, model = "hDCRWS", tstep = 1, adapt = 2000, samples = 1000, 
 #'                 thin = 2, span = 0.1)
 #' tplot(fit.h)
+#' }
 #' @importFrom ggplot2 ggplot
 #' @importFrom ggplot2 fortify
 #' @importFrom ggplot2 geom_polygon
