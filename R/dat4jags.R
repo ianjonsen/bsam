@@ -42,16 +42,29 @@
 ##' @export
 dat4jags <- function (d, tstep=1, tpar=tpar()) {
   
+  ## Check input data columns; return error if unexpected number
+  if(ncol(d) != 5 && ncol(d) != 7) {
+    stop("Input data should have 5 or 7 columns, fitSSM help for details")
+  }
+  if(ncol(d) == 7 && (names(d)[6] != "lonerr" || names(d)[7] != "laterr")) {
+    stop("Iput data columns 6 and 7 must be labelled `lonerr` and `laterr`, respectively")
+  }
+  
   ## Check ARGOS location accuracies
   d$lc <- factor(as.character(d$lc), levels=c("3", "2", "1", "0", "A", "B", 
-                                              "Z"), 
+                                              "Z", "G"), 
                  ordered=TRUE)
   ## Ensure POSIXct dates
   d$date <- as.POSIXct(d$date, format="%Y-%m-%d %H:%M:%S", tz="GMT")
     
   ## Merge ARGOS error (t-distribution) fixed parameters
-  d <- merge(d, tpar, by="lc", all.x=TRUE)
-  d <- d[order(d$date), ]
+  dnew <- merge(d, tpar, by="lc", all.x=TRUE)
+  if(ncol(d) == 7) {
+    dnew$itau2.lon <- d$lonerr
+    dnew$itau2.lat <- d$laterr
+    dnew <- dnew[, -c(6,7)]
+  }
+  dnew <- dnew[order(dnew$date), ]
   
   dostuff <- function(dd) {
     ## Interpolation indices and weights
@@ -68,5 +81,5 @@ dat4jags <- function (d, tstep=1, tpar=tpar()) {
        ts = seq(dd$date[1], by = dt, length.out = max(index)),
        dt = dt, obs = dd, tstep = tstep)
   }
-  by(d, d$id, dostuff)
+  by(dnew, dnew$id, dostuff)
 }

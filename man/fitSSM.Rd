@@ -27,7 +27,15 @@ autocorrelation.}
 "2001-11-13 07:59:59". "lc" is the Argos location quality class of each
 observation, values in ascending order of quality are "B", "A", "0", "1",
 "2", "3". "lon" is the observed longitude in decimal degrees. "lat" is the
-observed latitude in decimal degress.}
+observed latitude in decimal degress. 
+
+Optionally, the input data.frame can specify the error standard deviations 
+for longitude and latitude (in units of degrees) in the last 2 columns, 
+named "lonerr" and "laterr", respectively. These errors are assumed to be
+normally distributed. When specifying errors in the input data, all "lc" 
+values must be equal to "G". This approach allows the models to be fit to 
+data types other than Argos satellite data, e.g. geolocation data. WARNING:
+there is no guarantee that this will yield sensible results!}
 }
 \value{
 For DCRW and DCRWS models, a list is returned with each outer list
@@ -55,15 +63,14 @@ results.
 }
 \examples{
 # Fit DCRW model for state filtering and regularization
-data(d)
-fit <- fitSSM(d, model = "DCRW", tstep = 1, adapt = 5000, samples = 5000, 
+data(ellie)
+fit <- fitSSM(ellie, model = "DCRW", tstep = 1, adapt = 5000, samples = 5000, 
               thin = 5, span=0.2)
 dplot(fit)
 tplot(fit)
 
 # Fit DCRWS model for state filtering, regularization and behavioural state estimation
- data(d)
- fit <- fitSSM(d, model = "DCRWS", tstep = 0.5, adapt = 5000, samples = 5000, 
+ fit <- fitSSM(ellie, model = "DCRWS", tstep = 0.5, adapt = 5000, samples = 5000, 
                 thin = 5, span = 0.2)
  dplot(fit)
  tplot(fit)
@@ -71,9 +78,7 @@ tplot(fit)
 # fit hDCRWS model to > 1 tracks simultaneously
 # this may provide better parameter and behavioural state estimation 
 # by borrowing strength across multiple track datasets
-
- data(d)
- fit <- fitSSM(d, model = "hDCRWS", tstep = 0.5, adapt = 5000, samples = 5000, 
+ fit <- fitSSM(ellie, model = "hDCRWS", tstep = 0.5, adapt = 5000, samples = 5000, 
                 thin = 5, span = 0.2)
  dplot(fit)
  tplot(fit)

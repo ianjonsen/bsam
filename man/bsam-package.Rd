@@ -6,34 +6,30 @@
 \alias{bsam-package}
 \title{Fit Bayesian state-space models to Argos satellite tracking data}
 \description{
-Currently models provided are DCRW (for location filtering), DCRWS (for
-location filtering and behavioural state estimation), and hDCRWS (a
-hierarchical model for location filtering and behavioural state estimation
-across multiple animals). The models are fit in JAGS using Markov chain
+Models provided are DCRW (for location filtering), DCRWS (for
+location filtering and behavioural state estimation), and their hierarchical 
+versions (hDCRW, hDCRWS) to estimate parameters jointly across multiple 
+individual tracking datasets. The models are fit in JAGS using Markov chain
 Monte Carlo simulation methods.
 }
 \details{
 \tabular{ll}{ Package: \tab bsam\cr Type: \tab Package\cr Version: \tab
-0.43-1\cr Date: \tab 2014-10-07\cr License: \tab GPL-2\cr LazyLoad: \tab
+0.50.0\cr Date: \tab 2016-06-09\cr License: \tab GPL-2\cr LazyLoad: \tab
 yes\cr } Fit Bayesian state-space models to Argos satellite tracking data.
 Models provided are DCRW - for location filtering; DCRWS - for location
-filtering and behavioural state estimation with 2 behavioural states; DCRW3S
-- same as DCRWS but with 3 behavioural states; hDCRW and hDCRWS -
-hierarchical models for location filtering only, and location filtering with
-behavioural state estimation, respectively, across multiple animals.
+filtering and behavioural state estimation with 2 behavioural states; hDCRW \
+and hDCRWS - hierarchical models for location filtering only, and location 
+filtering with behavioural state estimation, respectively, across multiple 
+animals.
 
-Note that convergence with the DCRW3S is tricky and will generally only
-converge when there is very clear evidence of more than two movement states
-in the observed data.
-
-The hierarchical models often provide improved location and/or behavioural
+The hierarchical models can provide improved location and/or behavioural
 state estimates compared to fitting DCRW/DCRWS to individual datasets.
 }
 \examples{
 
 # Fit DCRW model for state filtering and regularization
-data(d)
-fit <- fitSSM(d, model = "DCRW", tstep = 1, adapt = 5000, samples = 5000, 
+data(ellie)
+fit <- fitSSM(ellie, model = "DCRW", tstep = 1, adapt = 5000, samples = 5000, 
               thin = 5, span=0.2)
 dplot(fit)
 tplot(fit)
@@ -53,6 +49,9 @@ animal movement data. Ecology 86:2874-2880
 Jonsen ID, Myers RA, James MC (2007) Identifying leatherback turtle foraging
 behaviour from satellite telemetry using a switching state-space model.
 Marine Ecology Progress Series 337:255-263
+
+Jonsen ID (2016) Joint estimation over multiple individuals improves behavioural 
+state inference from animal movement data. Scientific Reports 6:20625
 }
 \seealso{
 fitSSM

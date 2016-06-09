@@ -15,12 +15,12 @@
 #' Currently, results from the hierarchical models (hDCRW, hDCRWS) can only be plotted on 
 #' a combined map.
 #' @examples
-#' data(d)
-#' fit <- fitSSM(d, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
+#' data(ellie)
+#' fit <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
 #'               thin = 2, span = 0.1)
 #' tplot(fit, onemap = TRUE)
 #' 
-#' fit.h <- fitSSM(d, model = "hDCRWS", tstep = 1, adapt = 2000, samples = 1000, 
+#' fit.h <- fitSSM(ellie, model = "hDCRWS", tstep = 1, adapt = 2000, samples = 1000, 
 #'                 thin = 2, span = 0.1)
 #' tplot(fit.h)
 #' @importFrom ggplot2 ggplot
@@ -39,7 +39,7 @@ tplot <- function(fit, onemap = TRUE)
 
 tplot.d <- function(fit, onemap) {
   
-  data(countriesHigh, package="rworldxtra")
+  data(countriesHigh, package = "rworldxtra", envir = environment())
   wm <- fortify(countriesHigh)
   
   plt <- function(m) {
@@ -88,7 +88,7 @@ tplot.d <- function(fit, onemap) {
 
 tplot.h <- function(fit, onemap) {
   
-  data(countriesHigh, package="rworldxtra")
+  data(countriesHigh, package = "rworldxtra", envir = environment())
   wm <- fortify(countriesHigh)
   
   xl <- extendrange(fit$data$lon, f = 0.2)
