@@ -1,9 +1,9 @@
 #' Fit Bayesian state-space models to animal movement data
 #' 
 #' Fits state-space models to Argos satellite tracking data. User can choose
-#' between a first difference correlated random walk (DCRW) model, a switching
-#' model (DCRWS), and a hierarchical swtiching model (hDCRWS) for estimating
-#' behavioural states.
+#' between a first difference correlated random walk (DCRW) model, a switching 
+#' model (DCRWS) for estimating location and behavioural states, and thier 
+#' hierarchical versions (hDCRW, hDCRWS).
 #' 
 #' The models are fit using JAGS 3.1.0 (Just Another Gibbs Sampler, created and
 #' maintained by Martyn Plummer; http://martynplummer.wordpress.com/;
@@ -12,7 +12,7 @@
 #' which fits the specified state-space model to the data, returning a list of
 #' results.
 #' 
-#' @param indata An R data.frame containing the following columns, "id","date",
+#' @param data A data frame containing the following columns, "id","date",
 #' "lc", "lon", "lat". "id" is a unique identifier for the tracking dataset.
 #' "date" is the GMT date-time of each observation with the following format
 #' "2001-11-13 07:59:59". "lc" is the Argos location quality class of each
@@ -27,23 +27,25 @@
 #' values must be equal to "G". This approach allows the models to be fit to 
 #' data types other than Argos satellite data, e.g. geolocation data. WARNING:
 #' there is no guarantee that this will yield sensible results!
-#' 
-#' @param model name of state-space model to be fit to data. Currently, this
-#' can be one of "DCRW", "DCRWS", or "hDCRWS".
+#' @param model name of state-space model to be fit to data. This can be one of 
+#' "DCRW", "DCRWS", "hDCRW", or "hDCRWS"
 #' @param tstep time step as fraction of a day, default is 1 (24 hours).
 #' @param adapt number of samples during the adaptation and update (burn-in)
 #' phase, adaptation and updates are fixed at adapt/2
-#' @param samples number of samples to generate after convergence is assumed
-#' @param thin amount of thining of to be applied to minimize sample
-#' autocorrelation.
+#' @param samples number of posterior samples to generate after burn-in
+#' @param thin amount of thining of to be applied to the posterior samples to 
+#' minimize within-chain sample autocorrelation
+#' @param span parameter that controls the degree of smoothing by \code{stats::loess},
+#' used to obtain initial values for the location states. Smaller values = less
+#' smoothing. Values > 0.2 may be required for sparse datasets
 #' @return For DCRW and DCRWS models, a list is returned with each outer list
-#' elements corresponding to each unique individual id in the input data.
+#' elements corresponding to each unique individual id in the input data
 #' Within these outer elements are a "summary" data.frame of posterior mean and
 #' median state estimates (locations or locations and behavioural states), the
 #' name of the "model" fit, the "timestep" used, the input location "data", the
 #' number of location state estimates ("N"), and the full set of "mcmc"
 #' samples. For the hDCRWS model, a list is returned where results, etc are
-#' combined amongst the individuals.
+#' combined amongst the individuals
 #' @author Ian Jonsen
 #' @references Jonsen ID, Myers RA, Mills Flemming J (2003) Meta-analysis of
 #' animal movement using state-space models. Ecology 84:3055-3063
@@ -60,13 +62,13 @@
 #' @examples
 #' # Fit DCRW model for state filtering and regularization
 #' data(ellie)
-#' fit <- fitSSM(ellie, model = "DCRW", tstep = 1, adapt = 5000, samples = 5000, 
+#' fit <- fitSSM(ellie, model = "DCRW", tstep = 2, adapt = 5000, samples = 5000, 
 #'               thin = 5, span=0.2)
 #' dplot(fit)
 #' tplot(fit)
 #' 
 #' # Fit DCRWS model for state filtering, regularization and behavioural state estimation
-#'  fit <- fitSSM(ellie, model = "DCRWS", tstep = 0.5, adapt = 5000, samples = 5000, 
+#'  fit <- fitSSM(ellie, model = "DCRWS", tstep = 2, adapt = 5000, samples = 5000, 
 #'                 thin = 5, span = 0.2)
 #'  dplot(fit)
 #'  tplot(fit)
@@ -74,13 +76,13 @@
 #' # fit hDCRWS model to > 1 tracks simultaneously
 #' # this may provide better parameter and behavioural state estimation 
 #' # by borrowing strength across multiple track datasets
-#'  fit <- fitSSM(ellie, model = "hDCRWS", tstep = 0.5, adapt = 5000, samples = 5000, 
+#'  fit <- fitSSM(ellie, model = "hDCRWS", tstep = 2, adapt = 5000, samples = 5000, 
 #'                 thin = 5, span = 0.2)
 #'  dplot(fit)
 #'  tplot(fit)
 #' 
 #' @export 
-fitSSM <- function (d, model = "DCRW", tstep = 1, adapt = 10000, samples = 5000, 
+fitSSM <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5000, 
                     thin = 5, span = 0.2)
 {
 	if(!model %in% c('DCRW', 'DCRWS', 'hDCRW', 'hDCRWS')) stop("Model not implemented")
@@ -90,13 +92,13 @@ fitSSM <- function (d, model = "DCRW", tstep = 1, adapt = 10000, samples = 5000,
   seed <- sample(1:1e+05, 1)
   st <- proc.time()
       
-	dd <- dat4jags(d, tstep = tstep, tpar=tpar())	
+	d <- dat4jags(data, tstep = tstep, tpar=tpar())	
 	if(model %in% c("DCRW", "DCRWS")) {
-	  fit <- ssm(dd, model = model, adapt = adapt, samples = samples, thin = thin, 
+	  fit <- ssm(d, model = model, adapt = adapt, samples = samples, thin = thin, 
 	             chains = 2, span = span)
 	}
 	else {
-	  fit <- hssm(dd, model = model, adapt = adapt, samples = samples, thin = thin, 
+	  fit <- hssm(d, model = model, adapt = adapt, samples = samples, thin = thin, 
 	              chains = 2, span = span)
 	}
 	

@@ -26,9 +26,6 @@
 ##' @title Correlated Random Walk Filter
 ##' @param d a data frame of observations (see details)
 ##' @param tstep the time step to predict to (in days)
-##' @param extrap if TRUE, the final predicted state occurs
-##'   immediately before the last observation, otherwise the final
-##'   predicted state occurs immediately after the last observation.
 ##' @param tpar generalised t-distribution parameters for ARGOS location classes
 ##' @return A list with components
 ##' \item{\code{y}}{a 2 column matrix of the lon,lat observations}
