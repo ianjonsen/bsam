@@ -11,6 +11,7 @@
 #' @references Brooks SP, Gelman A (1998) General methods for monitoring convergence of iterative 
 #' simulations. Journal of Computational and Graphical Statistics 7:434-455
 #' @examples
+#' \dontrun{
 #' data(ellie)
 #' fit <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
 #'               thin = 2, span = 0.1)
@@ -19,8 +20,9 @@
 #' # increase burnin, posterior sample numbers, and thinning factor
 #' fit2 <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 5000, samples = 5000, 
 #'               thin = 5, span = 0.1)
-#' dplot(fit2)             
-#' @importFrom coda autocorr.plot traceplot gelman.plot as.mcmc.list
+#' dplot(fit2)
+#' }             
+#' @importFrom coda autocorr.plot traceplot gelman.plot as.mcmc.list nvar varnames<-
 #' @export 
 #' 
 dplot = function(fit)

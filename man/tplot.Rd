@@ -27,6 +27,7 @@ locations on a map. For the behavioural models (DCRWS, hDCRWS), the estimated
 locations are coloured according to the posterior mean behavioural state estimates.
 }
 \examples{
+\dontrun{
 data(ellie)
 fit <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
               thin = 2, span = 0.1)
@@ -35,5 +36,6 @@ tplot(fit, onemap = TRUE)
 fit.h <- fitSSM(ellie, model = "hDCRWS", tstep = 1, adapt = 2000, samples = 1000, 
                 thin = 2, span = 0.1)
 tplot(fit.h)
+}
 }
 

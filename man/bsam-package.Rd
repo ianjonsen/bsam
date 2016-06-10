@@ -26,13 +26,14 @@ The hierarchical models can provide improved location and/or behavioural
 state estimates compared to fitting DCRW/DCRWS to individual datasets.
 }
 \examples{
-
+\dontrun{
 # Fit DCRW model for state filtering and regularization
 data(ellie)
 fit <- fitSSM(ellie, model = "DCRW", tstep = 1, adapt = 5000, samples = 5000, 
               thin = 5, span=0.2)
 dplot(fit)
 tplot(fit)
+}
 }
 \author{
 Ian Jonsen

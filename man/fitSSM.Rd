@@ -58,14 +58,15 @@ model (DCRWS) for estimating location and behavioural states, and thier
 hierarchical versions (hDCRW, hDCRWS).
 }
 \details{
-The models are fit using JAGS 3.1.0 (Just Another Gibbs Sampler, created and
+The models are fit using JAGS 4.2.0 (Just Another Gibbs Sampler, created and
 maintained by Martyn Plummer; http://martynplummer.wordpress.com/;
-http://mcmc-jags.sourceforge.net). fitSSM is a wrapper function that first
-calls dat4jags(), which prepares the input data, then calls ssm()/hssm(),
+http://mcmc-jags.sourceforge.net). \code{fitSSM} is a wrapper function that first
+calls \code{dat4jags}, which prepares the input data, then calls \code{ssm} / \code{hssm},
 which fits the specified state-space model to the data, returning a list of
 results.
 }
 \examples{
+\dontrun{
 # Fit DCRW model for state filtering and regularization
 data(ellie)
 fit <- fitSSM(ellie, model = "DCRW", tstep = 2, adapt = 5000, samples = 5000, 
@@ -86,7 +87,7 @@ tplot(fit)
                 thin = 5, span = 0.2)
  dplot(fit)
  tplot(fit)
-
+}
 }
 \author{
 Ian Jonsen

@@ -15,6 +15,7 @@
 #' Currently, results from the hierarchical models (hDCRW, hDCRWS) can only be plotted on 
 #' a combined map.
 #' @examples
+#' \dontrun{
 #' data(ellie)
 #' fit <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
 #'               thin = 2, span = 0.1)
@@ -23,7 +24,8 @@
 #' fit.h <- fitSSM(ellie, model = "hDCRWS", tstep = 1, adapt = 2000, samples = 1000, 
 #'                 thin = 2, span = 0.1)
 #' tplot(fit.h)
-#' @importFrom ggplot2 ggplot
+#' }
+#' @importFrom ggplot2 ggplot aes ggtitle geom_point scale_color_gradient2 xlab ylab aes_string
 #' @importFrom ggplot2 fortify
 #' @importFrom ggplot2 geom_polygon
 #' @importFrom ggplot2 coord_cartesian
@@ -38,7 +40,7 @@ tplot <- function(fit, onemap = TRUE)
 }  
 
 tplot.d <- function(fit, onemap) {
-  
+  countriesHigh <- NULL
   data(countriesHigh, package = "rworldxtra", envir = environment())
   wm <- fortify(countriesHigh)
   
@@ -46,7 +48,7 @@ tplot.d <- function(fit, onemap) {
     xl <- extendrange(m$data$lon, f = 0.2)
     yl <- extendrange(m$data$lat, f = 0.2)
     
-    p <- ggplot() + geom_polygon(data = wm, aes(x = long, y = lat, group = group), 
+    p <- ggplot() + geom_polygon(data = wm, aes_string(x = "long", y = "lat", group = "group"), 
                                  fill = grey(0.3)) + 
       coord_cartesian(xlim = xl, ylim = yl) + xlab("Longitude") + ylab("Latitude")
     if(!onemap) {
@@ -57,16 +59,16 @@ tplot.d <- function(fit, onemap) {
     }
     
     if(m$model == "DCRWS") {
-      p <- p + geom_point(data = m$data, aes(x = lon, y = lat, group = NULL), 
+      p <- p + geom_point(data = m$data, aes_string(x = "lon", y = "lat", group = NULL), 
                           colour = "goldenrod", pch = "+", size = 4) +
-        geom_point(data = m$summary, aes(x = lon, y = lat, group = NULL, colour = b), size = 1.25) +
+        geom_point(data = m$summary, aes_string(x = "lon", y = "lat", group = NULL, colour = "b"), size = 1.25) +
         scale_color_gradient2(midpoint = 1.5, low = "blue", mid = "white", high = "red")
     }
     
     else {
-      p <- p + geom_point(data = m$data, aes(x = lon, y = lat, group = NULL), 
+      p <- p + geom_point(data = m$data, aes_string(x = "lon", y = "lat", group = NULL), 
                           colour = "goldenrod", pch = "+", size = 4) +
-        geom_point(data = m$summary, aes(x = lon, y = lat, group = NULL), colour = 'dodgerblue', 
+        geom_point(data = m$summary, aes_string(x = "lon", y = "lat", group = NULL), colour = 'dodgerblue', 
                    size = 1.25)
     }
     p
@@ -87,14 +89,14 @@ tplot.d <- function(fit, onemap) {
 }
 
 tplot.h <- function(fit, onemap) {
-  
+  countriesHigh <- NULL
   data(countriesHigh, package = "rworldxtra", envir = environment())
   wm <- fortify(countriesHigh)
   
   xl <- extendrange(fit$data$lon, f = 0.2)
   yl <- extendrange(fit$data$lat, f = 0.2)
   
-  p <- ggplot() + geom_polygon(data = wm, aes(x = long, y = lat, group = group), 
+  p <- ggplot() + geom_polygon(data = wm, aes_string(x = "long", y = "lat", group = "group"), 
                                fill = grey(0.3)) + 
     coord_cartesian(xlim = xl, ylim = yl) + xlab("Longitude") + ylab("Latitude")
   if(!onemap) {
@@ -105,16 +107,16 @@ tplot.h <- function(fit, onemap) {
   }
  
   if(fit$model == "hDCRWS") {
-    p <- p + geom_point(data = fit$data, aes(x = lon, y = lat, group = NULL), 
+    p <- p + geom_point(data = fit$data, aes_string(x = "lon", y = "lat", group = NULL), 
                         colour = "goldenrod", pch = "+", size = 4) +
-      geom_point(data = fit$summary, aes(x = lon, y = lat, group = NULL, colour = b), size = 1.25) +
+      geom_point(data = fit$summary, aes_string(x = "lon", y = "lat", group = NULL, colour = "b"), size = 1.25) +
       scale_color_gradient2(midpoint = 1.5, low = "blue", mid = "white", high = "red")
   }
   
   else {
-    p <- p + geom_point(data = fit$data, aes(x = lon, y = lat, group = NULL), 
+    p <- p + geom_point(data = fit$data, aes_string(x = "lon", y = "lat", group = NULL), 
                         colour = "goldenrod", pch = "+", size = 4) +
-      geom_point(data = fit$summary, aes(x = lon, y = lat, group = NULL), colour = 'dodgerblue', 
+      geom_point(data = fit$summary, aes_string(x = "lon", y = "lat", group = NULL), colour = 'dodgerblue', 
                  size = 1.25)
   }
   p
