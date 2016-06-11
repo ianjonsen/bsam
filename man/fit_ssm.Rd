@@ -96,9 +96,6 @@ map_ssm(fit)
 Ian Jonsen
 }
 \references{
-Jonsen ID, Myers RA, Mills Flemming J (2003) Meta-analysis of
-animal movement using state-space models. Ecology 84:3055-3063
-
 Jonsen ID, Mills Flemming J, Myers RA (2005) Robust state-space modeling of
 animal movement data. Ecology 86:2874-2880
 
@@ -107,5 +104,8 @@ ocean. Nature 475:86-90
 
 Jonsen et al. (2013) State-space models for biologgers: a methodological
 road map. Deep Sea Research II DOI: 10.1016/j.dsr2.2012.07.008
+
+Jonsen (2016) Joint estimation over multiple individuals improves behavioural state 
+inference from animal movement data. Scientific Reports 6:20625
 }
 
