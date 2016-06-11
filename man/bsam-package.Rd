@@ -33,8 +33,8 @@ state estimates compared to fitting DCRW/DCRWS to individual datasets.
 data(ellie)
 fit <- fitSSM(ellie, model = "DCRW", tstep = 1, adapt = 5000, samples = 5000, 
               thin = 5, span=0.2)
-dplot(fit)
-tplot(fit)
+diag_ssm(fit)
+map_ssm(fit)
 }
 }
 \author{

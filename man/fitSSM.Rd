@@ -74,22 +74,22 @@ results.
 data(ellie)
 fit <- fitSSM(ellie, model = "DCRW", tstep = 2, adapt = 5000, samples = 5000, 
               thin = 5, span=0.2)
-dplot(fit)
-tplot(fit)
+diag_ssm(fit)
+map_ssm(fit)
 
 # Fit DCRWS model for state filtering, regularization and behavioural state estimation
  fit <- fitSSM(ellie, model = "DCRWS", tstep = 2, adapt = 5000, samples = 5000, 
                 thin = 5, span = 0.2)
- dplot(fit)
- tplot(fit)
+ diag_ssm(fit)
+ map_ssm(fit)
 
 # fit hDCRWS model to > 1 tracks simultaneously
 # this may provide better parameter and behavioural state estimation 
 # by borrowing strength across multiple track datasets
  fit <- fitSSM(ellie, model = "hDCRWS", tstep = 2, adapt = 5000, samples = 5000, 
                 thin = 5, span = 0.2)
- dplot(fit)
- tplot(fit)
+ diag_ssm(fit)
+ map_ssm(fit)
 }
 }
 \author{
