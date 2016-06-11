@@ -10,14 +10,16 @@ diag_ssm(fit)
 \item{fit}{an output object from \code{fit_ssm}}
 }
 \value{
-The traceplot shows the time series for both McMC chains;
-the density plot shows the density estimate for each parameter;
+Uses plotting functions from Martyn Plummer's \code{coda} package to help
+diagnose lack of convergence for the core model parameters. The traceplot shows the time 
+series for both McMC chains; the density plot shows the density estimate for each parameter;
 the autocorrelation plots show the within-chain sample autocorrelation for each parameter;
 the G-B-R shrink factor plot shows the evolution of Gelman and Rubin's shrink factor for 
 increasing number of iterations. See the \code{coda} package for further details.
 }
 \description{
-Takes a fitted \code{fit_ssm} object and for each of the parameters plots:
+Takes a fitted \code{fit_ssm} object and uses standard McMC convergence diagnostic plots to
+aid assessment of lack of convergence.
 }
 \examples{
 \dontrun{
@@ -33,7 +35,7 @@ diag_ssm(fit2)
 }             
 }
 \references{
-Brooks SP, Gelman A (1998) General methods for monitoring convergence of iterative 
-simulations. Journal of Computational and Graphical Statistics 7:434-455
+Brooks SP, Gelman A (1998) General methods for monitoring convergence of 
+iterative simulations. Journal of Computational and Graphical Statistics 7:434-455
 }
 
