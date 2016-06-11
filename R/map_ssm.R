@@ -19,11 +19,11 @@
 #' data(ellie)
 #' fit <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
 #'               thin = 2, span = 0.1)
-#' tplot(fit, onemap = TRUE)
+#' map_ssm(fit, onemap = TRUE)
 #' 
 #' fit.h <- fitSSM(ellie, model = "hDCRWS", tstep = 1, adapt = 2000, samples = 1000, 
 #'                 thin = 2, span = 0.1)
-#' tplot(fit.h)
+#' map_ssm(fit.h)
 #' }
 #' @importFrom ggplot2 ggplot aes ggtitle geom_point scale_color_gradient2 xlab ylab aes_string
 #' @importFrom ggplot2 fortify
@@ -31,15 +31,15 @@
 #' @importFrom ggplot2 coord_cartesian
 #' @export 
 
-tplot <- function(fit, onemap = TRUE) 
+map_ssm <- function(fit, onemap = TRUE) 
 {
-  if(!is.null(fit$model)) tplot.h(fit, onemap)
+  if(!is.null(fit$model)) map_ssm.h(fit, onemap)
   else {
-    tplot.d(fit, onemap)
+    map_ssm.d(fit, onemap)
   }
 }  
 
-tplot.d <- function(fit, onemap) {
+map_ssm.d <- function(fit, onemap) {
   countriesHigh <- NULL
   data(countriesHigh, package = "rworldxtra", envir = environment())
   wm <- fortify(countriesHigh)
@@ -88,7 +88,7 @@ tplot.d <- function(fit, onemap) {
   }
 }
 
-tplot.h <- function(fit, onemap) {
+map_ssm.h <- function(fit, onemap) {
   countriesHigh <- NULL
   data(countriesHigh, package = "rworldxtra", envir = environment())
   wm <- fortify(countriesHigh)
