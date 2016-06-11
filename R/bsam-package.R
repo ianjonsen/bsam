@@ -1,18 +1,18 @@
-
-
-#' Fit Bayesian state-space models to Argos satellite tracking data
+#' Fit Bayesian state-space models to animal tracking data
 #' 
 #' Models provided are DCRW (for location filtering), DCRWS (for
 #' location filtering and behavioural state estimation), and their hierarchical 
 #' versions (hDCRW, hDCRWS) to estimate parameters jointly across multiple 
 #' individual tracking datasets. The models are fit in JAGS using Markov chain
-#' Monte Carlo simulation methods.
+#' Monte Carlo simulation methods. The models are intended to be fit to Argos
+#' satellite tracking data but options exist to allow fits to other tracking
+#' data types (type '?fitSSM' for details).
 #' 
 #' \tabular{ll}{ Package: \tab bsam\cr Type: \tab Package\cr Version: \tab
 #' 0.50.0\cr Date: \tab 2016-06-09\cr License: \tab GPL-2\cr LazyLoad: \tab
 #' yes\cr } Fit Bayesian state-space models to Argos satellite tracking data.
 #' Models provided are DCRW - for location filtering; DCRWS - for location
-#' filtering and behavioural state estimation with 2 behavioural states; hDCRW \
+#' filtering and behavioural state estimation with 2 behavioural states; hDCRW 
 #' and hDCRWS - hierarchical models for location filtering only, and location 
 #' filtering with behavioural state estimation, respectively, across multiple 
 #' animals.
