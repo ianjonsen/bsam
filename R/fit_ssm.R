@@ -10,24 +10,25 @@
 #' maintained by Martyn Plummer; http://martynplummer.wordpress.com/;
 #' http://mcmc-jags.sourceforge.net). \code{fit_ssm} is a wrapper that first
 #' calls \code{dat4jags}, which prepares the input data, then calls \code{ssm}
-#' of \code{hssm}, which fits the specified state-space model to the data, 
+#' or \code{hssm}, which fit the specified state-space model to the data, 
 #' returning a list of results.
 #' 
 #' @param data A data frame containing the following columns, "id","date",
 #' "lc", "lon", "lat". "id" is a unique identifier for the tracking dataset.
 #' "date" is the GMT date-time of each observation with the following format
 #' "2001-11-13 07:59:59". "lc" is the Argos location quality class of each
-#' observation, values in ascending order of quality are "B", "A", "0", "1",
+#' observation, values in ascending order of quality are "Z", "B", "A", "0", "1",
 #' "2", "3". "lon" is the observed longitude in decimal degrees. "lat" is the
-#' observed latitude in decimal degress. 
+#' observed latitude in decimal degress. The Z-class locations are assumed to 
+#' have the same error distributions as B-class locations.
 #' 
 #' Optionally, the input data.frame can specify the error standard deviations 
 #' for longitude and latitude (in units of degrees) in the last 2 columns, 
 #' named "lonerr" and "laterr", respectively. These errors are assumed to be
 #' normally distributed. When specifying errors in the input data, all "lc" 
 #' values must be equal to "G". This approach allows the models to be fit to 
-#' data types other than Argos satellite data, e.g. geolocation data. Type 
-#' \code{?dat4jags} for other options for specifying error parameters.
+#' data types other than Argos satellite data, e.g. geolocation data. See 
+#' \code{\link{dat4jags}} for other options for specifying error parameters.
 #' 
 #' WARNING: there is no guarantee that invoking these options will yield sensible results!
 #' 
