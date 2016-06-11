@@ -4,12 +4,12 @@
 ##'   error parameters.
 ##' 
 ##' These are the fixed parameters (t-distribution scale & df) for ARGOS
-##' error classes, from Jonsen et al (2005) Ecology 86:2874-2880
+##' error classes, from Jonsen et al (2005) Ecology 86:2874-2880. 
 ##' @title ARGOS Error Fixed Parameters
 ##' @return A dataframe with columns
-##' \item{\code{lc}}{ARGOS location class}
-##' \item{\code{itau2.lon}}{precision parameters for longitude}
-##' \item{\code{itau2.lat}}{precision parameters for latitude}
+##' \item{\code{lc}}{ARGOS location class as an ordered factor}
+##' \item{\code{itau2.lon}}{precision parameters for longitude in degrees}
+##' \item{\code{itau2.lat}}{precision parameters for latitude in degrees}
 ##' \item{\code{nu.lon}}{df parameters for longitude}
 ##' \item{\code{nu.lat}}{df parameters for latitude}
 ##' @export
