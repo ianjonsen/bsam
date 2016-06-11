@@ -46,7 +46,7 @@
 #' data(ellie)
 #' fit <- fitSSM(ellie, model = "DCRW", tstep = 1, adapt = 5000, samples = 5000, 
 #'               thin = 5, span=0.2)
-#' dplot(fit)
+#' diag_ssm(fit)
 #' map_ssm(fit)
 #' }
 #' @importFrom graphics axis layout lines matpoints mtext par plot points rug

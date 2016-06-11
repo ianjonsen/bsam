@@ -15,25 +15,25 @@
 #' data(ellie)
 #' fit <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
 #'               thin = 2, span = 0.1)
-#' dplot(fit)
+#' diag_ssm(fit)
 #' 
 #' # increase burnin, posterior sample numbers, and thinning factor
 #' fit2 <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 5000, samples = 5000, 
 #'               thin = 5, span = 0.1)
-#' dplot(fit2)
+#' diag_ssm(fit2)
 #' }             
 #' @importFrom coda autocorr.plot traceplot gelman.plot as.mcmc.list nvar varnames<-
 #' @export 
 #' 
-dplot = function(fit)
+diag_ssm = function(fit)
 {
-  if(!is.null(fit$model)) dplot.h(fit)
+  if(!is.null(fit$model)) diag_ssm.h(fit)
   else {
-    dplot.d(fit)
+    diag_ssm.d(fit)
   }
 }  
 
-dplot.d <- function(fit) {
+diag_ssm.d <- function(fit) {
   
   dostuff = function(m){
     md = m$model
@@ -182,7 +182,7 @@ dplot.d <- function(fit) {
   invisible()
 }
 
-dplot.h <- function(fit) {
+diag_ssm.h <- function(fit) {
   md = fit$model
   if(md ==  "hDCRW") layout(matrix(1:15, 3, 5, byrow = TRUE), widths = c(3, 3, 3, 3, 3), heights = rep(1, 4))
   else {
