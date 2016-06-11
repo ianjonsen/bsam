@@ -1,7 +1,7 @@
 #' Fits state-space models to Argos data
 #' 
 #' Takes output from \code{dat4jags}, sets up initial values, calls JAGS, and
-#' aggregates results. Intended for internal use, called by \code{fitSSM}.
+#' aggregates results. Intended for internal use, called by \code{fit_ssm}.
 #' 
 #' @param d structured data from \code{dat4jags} to be passed to JAGS
 #' @param model the state-space model to be fit: DCRW or DCRWS
@@ -12,7 +12,7 @@
 #' @param span span
 #' @return Returns a list of McMC samples from marginal posteriors and a
 #' summary \code{data.frame} of mean and median position estimates.
-#' @seealso Function to be called by \code{\link{fitSSM}}.
+#' @seealso Function to be called by \code{\link{fit_ssm}}.
 #' @importFrom rjags jags.samples
 #' @importFrom rjags jags.model
 #' @importFrom msm rtnorm
@@ -25,6 +25,7 @@ ssm <- function (d, model = "DCRW", adapt, samples, thin, chains, span)
                        na.action = "na.exclude", control = loess.control(surface = "direct"))
       fit.lat <- loess(lat ~ as.numeric(date), data = dd$obs, span = span,
                        na.action = "na.exclude", control = loess.control(surface = "direct"))
+      
       ## Predict track, increments and stochastic innovations
       xs <- cbind(predict(fit.lon, newdata = data.frame(date = as.numeric(dd$ts))),
                   predict(fit.lat, newdata = data.frame(date = as.numeric(dd$ts))))

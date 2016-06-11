@@ -1,7 +1,7 @@
 #' Fits hierarchical state-space models to Argos data
 #' 
 #' Takes output from \code{dat4jags}, sets up initial values, calls JAGS, and
-#' aggregates results. Intended for internal use, called by \code{fitSSM}.
+#' aggregates results. Intended for internal use, called by \code{fit_ssm}.
 #'
 #' @param d structured data from \code{dat4jags} to be passed to JAGS
 #' @param model the state-space model to be fit: hDCRW or hDCRWS
@@ -12,7 +12,7 @@
 #' @param span span
 #' @return Returns a list of McMC samples from marginal posteriors and a
 #' summary \code{data.frame} of mean and median position estimates.
-#' @seealso Function to be called by \code{\link{fitSSM}}.
+#' @seealso Function to be called by \code{\link{fit_ssm}}.
 #' @importFrom rjags jags.samples
 #' @importFrom rjags jags.model
 #' @export

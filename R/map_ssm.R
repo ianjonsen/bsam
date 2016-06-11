@@ -1,15 +1,15 @@
 #' Plot estimated track, behavioural states and observations on a map. 
 #' 
-#' Takes a fitted \code{fitSSM} object and plots the observed (data) and estimated 
+#' Takes a fitted \code{fit_ssm} object and plots the observed (data) and estimated 
 #' locations on a map. For the behavioural models (DCRWS, hDCRWS), the estimated
 #' locations are coloured according to the posterior mean behavioural state estimates.
 #' 
-#' @param fit an output object from \code{fitSSM}
+#' @param fit an output object from \code{fit_ssm}
 #' @param onemap  If FALSE (default) then each estimated track is plotted on a separate 
 #' map, if TRUE then tracks are combined on a single map.
 #' @return Observed locations are plotted as '+' symbols and estimated locations as filled
 #' circles. Individual track id's (for DCRW and DCRWS models) are displayed at the top of 
-#' each plot, but only when \code{onemap = FALSE}. The model specified in \code{fitSMM} is
+#' each plot, but only when \code{onemap = FALSE}. The model specified in \code{fit_ssm} is
 #' also displayed at the top. Takes advantage of \code{ggplot2} plotting functions.
 #' 
 #' Currently, results from the hierarchical models (hDCRW, hDCRWS) can only be plotted on 
@@ -21,7 +21,7 @@
 #'               thin = 2, span = 0.1)
 #' map_ssm(fit, onemap = TRUE)
 #' 
-#' fit.h <- fitSSM(ellie, model = "hDCRWS", tstep = 1, adapt = 2000, samples = 1000, 
+#' fit.h <- fit_ssm(ellie, model = "hDCRWS", tstep = 1, adapt = 2000, samples = 1000, 
 #'                 thin = 2, span = 0.1)
 #' map_ssm(fit.h)
 #' }

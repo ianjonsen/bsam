@@ -7,7 +7,7 @@
 diag_ssm(fit)
 }
 \arguments{
-\item{fit}{an output object from \code{fitSSM}}
+\item{fit}{an output object from \code{fit_ssm}}
 }
 \value{
 The traceplot shows the time series for both McMC chains;
@@ -17,17 +17,17 @@ the G-B-R shrink factor plot shows the evolution of Gelman and Rubin's shrink fa
 increasing number of iterations. See the \code{coda} package for further details.
 }
 \description{
-Takes a fitted \code{fitSSM} object and for each of the parameters plots:
+Takes a fitted \code{fit_ssm} object and for each of the parameters plots:
 }
 \examples{
 \dontrun{
 data(ellie)
-fit <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
+fit <- fit_ssm(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
               thin = 2, span = 0.1)
 diag_ssm(fit)
 
 # increase burnin, posterior sample numbers, and thinning factor
-fit2 <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 5000, samples = 5000, 
+fit2 <- fit_ssm(ellie, model = "DCRWS", tstep = 1, adapt = 5000, samples = 5000, 
               thin = 5, span = 0.1)
 diag_ssm(fit2)
 }             

@@ -12,7 +12,7 @@ versions (hDCRW, hDCRWS) to estimate parameters jointly across multiple
 individual tracking datasets. The models are fit in JAGS using Markov chain
 Monte Carlo simulation methods. The models are intended to be fit to Argos
 satellite tracking data but options exist to allow fits to other tracking
-data types (type '?fitSSM' for details).
+data types (type \code{?fit_ssm} for details).
 }
 \details{
 \tabular{ll}{ Package: \tab bsam\cr Type: \tab Package\cr Version: \tab
@@ -31,7 +31,7 @@ state estimates compared to fitting DCRW/DCRWS to individual datasets.
 \dontrun{
 # Fit DCRW model for state filtering and regularization
 data(ellie)
-fit <- fitSSM(ellie, model = "DCRW", tstep = 1, adapt = 5000, samples = 5000, 
+fit <- fit_ssm(ellie, model = "DCRW", tstep = 1, adapt = 5000, samples = 5000, 
               thin = 5, span=0.2)
 diag_ssm(fit)
 map_ssm(fit)

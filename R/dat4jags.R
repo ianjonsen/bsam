@@ -1,6 +1,6 @@
 ##' Format track data for filtering
 ##'
-##' This is an internal function used by \code{fitSSM} to format track
+##' This is an internal function used by \code{fit_ssm} to format track
 ##' data for JAGS.
 ##'
 ##' The input track is given as a dataframe where each row is an

@@ -27,9 +27,9 @@ summary \code{data.frame} of mean and median position estimates.
 }
 \description{
 Takes output from \code{dat4jags}, sets up initial values, calls JAGS, and
-aggregates results. Intended for internal use, called by \code{fitSSM}.
+aggregates results. Intended for internal use, called by \code{fit_ssm}.
 }
 \seealso{
-Function to be called by \code{\link{fitSSM}}.
+Function to be called by \code{\link{fit_ssm}}.
 }
 

@@ -1,8 +1,8 @@
 #' Plot standard McMC convergence diagnostics to help determine lack of model convergence.
 #' 
-#' Takes a fitted \code{fitSSM} object and for each of the parameters plots: 
+#' Takes a fitted \code{fit_ssm} object and for each of the parameters plots: 
 #' 
-#' @param fit an output object from \code{fitSSM}
+#' @param fit an output object from \code{fit_ssm}
 #' @return The traceplot shows the time series for both McMC chains;
 #' the density plot shows the density estimate for each parameter;
 #' the autocorrelation plots show the within-chain sample autocorrelation for each parameter;
@@ -13,19 +13,19 @@
 #' @examples
 #' \dontrun{
 #' data(ellie)
-#' fit <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
+#' fit <- fit_ssm(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
 #'               thin = 2, span = 0.1)
 #' diag_ssm(fit)
 #' 
 #' # increase burnin, posterior sample numbers, and thinning factor
-#' fit2 <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 5000, samples = 5000, 
+#' fit2 <- fit_ssm(ellie, model = "DCRWS", tstep = 1, adapt = 5000, samples = 5000, 
 #'               thin = 5, span = 0.1)
 #' diag_ssm(fit2)
 #' }             
 #' @importFrom coda autocorr.plot traceplot gelman.plot as.mcmc.list nvar varnames<-
 #' @export 
 #' 
-diag_ssm = function(fit)
+diag_ssm <- function(fit)
 {
   if(!is.null(fit$model)) diag_ssm.h(fit)
   else {
@@ -35,8 +35,8 @@ diag_ssm = function(fit)
 
 diag_ssm.d <- function(fit) {
   
-  dostuff = function(m){
-    md = m$model
+  dostuff <- function(m){
+    md <- m$model
     if(md ==  "DCRW") layout(matrix(1:20, 4, 5, byrow = TRUE), widths = c(3, 3, 3, 3, 3), heights = rep(1, 5))
     else {
       layout(matrix(1:25, 5, 5, byrow = TRUE), widths = c(3, 3, 3, 3, 3), heights = rep(1, 5))
@@ -45,7 +45,7 @@ diag_ssm.d <- function(fit) {
     par(mar = c(1, 1, 1, 2), oma = c(3, 4, 2, 0))
     
     #gamma; single (if DCRW) or _1 and _2 (if DCRWS)
-    foo = as.mcmc.list(m$mcmc$gamma)
+    foo <- as.mcmc.list(m$mcmc$gamma)
     varnames(foo) <- NULL
     if(nvar(foo) ==  2) {
       tmp <- list(as.mcmc.list(foo[, 1]), as.mcmc.list(foo[, 2]))

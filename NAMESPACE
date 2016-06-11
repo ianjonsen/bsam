@@ -2,7 +2,7 @@
 
 export(dat4jags)
 export(diag_ssm)
-export(fitSSM)
+export(fit_ssm)
 export(hssm)
 export(map_ssm)
 export(simTrack)

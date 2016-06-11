@@ -8,10 +8,10 @@
 #' 
 #' The models are fit using JAGS 4.2.0 (Just Another Gibbs Sampler, created and
 #' maintained by Martyn Plummer; http://martynplummer.wordpress.com/;
-#' http://mcmc-jags.sourceforge.net). \code{fitSSM} is a wrapper function that first
-#' calls \code{dat4jags}, which prepares the input data, then calls \code{ssm} / \code{hssm},
-#' which fits the specified state-space model to the data, returning a list of
-#' results.
+#' http://mcmc-jags.sourceforge.net). \code{fit_ssm} is a wrapper that first
+#' calls \code{dat4jags}, which prepares the input data, then calls \code{ssm}
+#' of \code{hssm}, which fits the specified state-space model to the data, 
+#' returning a list of results.
 #' 
 #' @param data A data frame containing the following columns, "id","date",
 #' "lc", "lon", "lat". "id" is a unique identifier for the tracking dataset.
@@ -26,8 +26,8 @@
 #' named "lonerr" and "laterr", respectively. These errors are assumed to be
 #' normally distributed. When specifying errors in the input data, all "lc" 
 #' values must be equal to "G". This approach allows the models to be fit to 
-#' data types other than Argos satellite data, e.g. geolocation data. Type '?dat4jags'
-#' for other options for specifying error parameters.
+#' data types other than Argos satellite data, e.g. geolocation data. Type 
+#' \code{?dat4jags} for other options for specifying error parameters.
 #' 
 #' WARNING: there is no guarantee that invoking these options will yield sensible results!
 #' 
@@ -67,13 +67,13 @@
 #' \dontrun{
 #' # Fit DCRW model for state filtering and regularization
 #' data(ellie)
-#' fit <- fitSSM(ellie, model = "DCRW", tstep = 2, adapt = 5000, samples = 5000, 
+#' fit <- fit_ssm(ellie, model = "DCRW", tstep = 2, adapt = 5000, samples = 5000, 
 #'               thin = 5, span=0.2)
 #' diag_ssm(fit)
 #' map_ssm(fit)
 #' 
 #' # Fit DCRWS model for state filtering, regularization and behavioural state estimation
-#'  fit <- fitSSM(ellie, model = "DCRWS", tstep = 2, adapt = 5000, samples = 5000, 
+#'  fit <- fit_ssm(ellie, model = "DCRWS", tstep = 2, adapt = 5000, samples = 5000, 
 #'                 thin = 5, span = 0.2)
 #'  diag_ssm(fit)
 #'  map_ssm(fit)
@@ -81,13 +81,13 @@
 #' # fit hDCRWS model to > 1 tracks simultaneously
 #' # this may provide better parameter and behavioural state estimation 
 #' # by borrowing strength across multiple track datasets
-#'  fit <- fitSSM(ellie, model = "hDCRWS", tstep = 2, adapt = 5000, samples = 5000, 
+#'  fit <- fit_ssm(ellie, model = "hDCRWS", tstep = 2, adapt = 5000, samples = 5000, 
 #'                 thin = 5, span = 0.2)
 #'  diag_ssm(fit)
 #'  map_ssm(fit)
 #' }
 #' @export 
-fitSSM <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5000, 
+fit_ssm <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5000, 
                     thin = 5, span = 0.2)
 {
 	if(!model %in% c('DCRW', 'DCRWS', 'hDCRW', 'hDCRWS')) stop("Model not implemented")
