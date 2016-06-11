@@ -21,8 +21,10 @@ for longitude and latitude (in units of degrees) in the last 2 columns,
 named "lonerr" and "laterr", respectively. These errors are assumed to be
 normally distributed. When specifying errors in the input data, all "lc" 
 values must be equal to "G". This approach allows the models to be fit to 
-data types other than Argos satellite data, e.g. geolocation data. WARNING:
-there is no guarantee that this will yield sensible results!}
+data types other than Argos satellite data, e.g. geolocation data. Type '?dat4jags'
+for other options for specifying error parameters.
+
+WARNING: there is no guarantee that invoking these options will yield sensible results!}
 
 \item{model}{name of state-space model to be fit to data. This can be one of 
 "DCRW", "DCRWS", "hDCRW", or "hDCRWS"}
@@ -52,10 +54,11 @@ samples. For the hDCRWS model, a list is returned where results, etc are
 combined amongst the individuals
 }
 \description{
-Fits state-space models to Argos satellite tracking data. User can choose
+Fits state-space models to animal tracking data. User can choose
 between a first difference correlated random walk (DCRW) model, a switching 
 model (DCRWS) for estimating location and behavioural states, and thier 
-hierarchical versions (hDCRW, hDCRWS).
+hierarchical versions (hDCRW, hDCRWS). The models are structured for Argos
+satellite data but options exist for fitting to other tracking data types.
 }
 \details{
 The models are fit using JAGS 4.2.0 (Just Another Gibbs Sampler, created and

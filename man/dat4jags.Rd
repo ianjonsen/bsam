@@ -11,16 +11,21 @@ dat4jags(d, tstep = 1, tpar = tpar())
 
 \item{tstep}{the time step to predict to (in days)}
 
-\item{tpar}{generalised t-distribution parameters for ARGOS location classes}
+\item{tpar}{generalised t-distribution parameters for ARGOS location classes. By 
+default dat4jags uses the parameters estimated in Jonsen et al (2005) Ecology 86:2874-2880
+but users may specify other ARGOS error parameter values via the \code{tpar} function.}
 }
 \value{
 A list with components
+\item{\code{id}}{the unique identifier for each dataset}
 \item{\code{y}}{a 2 column matrix of the lon,lat observations}
-\item{\code{K}}{a 2 column matrix of the ARGOS scale factors}
+\item{\code{itau2}}{a 2 column matrix of the ARGOS precision (1/scale) parameters}
+\item{\code{nu}}{a 2 column matrix of the ARGOS df parameters}
 \item{\code{idx}}{a vector of interpolation indices}
 \item{\code{ws}}{a vector of interpolation weights}
 \item{\code{ts}}{the times at which states are predicted (POSIXct,GMT)}
-\item{\code{dt}}{the time step at which states are predicted (secs)}
+\item{\code{obs}}{the input observed data frame}
+\item{\code{tstep}}{the time step specified in the \code{fitSSM} call}
 }
 \description{
 Format track data for filtering
