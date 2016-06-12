@@ -20,9 +20,9 @@
 #' diag_ssm(fit)
 #' 
 #' # increase burnin, posterior sample numbers, and thinning factor
-#' fit2 <- fit_ssm(ellie, model = "DCRWS", tstep = 1, adapt = 5000, samples = 5000, 
+#' fit.s <- fit_ssm(ellie, model = "DCRWS", tstep = 1, adapt = 5000, samples = 5000, 
 #'               thin = 5, span = 0.1)
-#' diag_ssm(fit2)
+#' diag_ssm(fit.s)
 #' }             
 #' @importFrom coda autocorr.plot traceplot gelman.plot as.mcmc.list nvar varnames<-
 #' @export 

@@ -72,20 +72,23 @@
 #'               thin = 5, span=0.2)
 #' diag_ssm(fit)
 #' map_ssm(fit)
+#' plot_fit(fit)
 #' 
 #' # Fit DCRWS model for state filtering, regularization and behavioural state estimation
-#'  fit <- fit_ssm(ellie, model = "DCRWS", tstep = 2, adapt = 5000, samples = 5000, 
+#'  fit.s <- fit_ssm(ellie, model = "DCRWS", tstep = 2, adapt = 5000, samples = 5000, 
 #'                 thin = 5, span = 0.2)
-#'  diag_ssm(fit)
-#'  map_ssm(fit)
+#'  diag_ssm(fit.s)
+#'  map_ssm(fit.s)
+#'  plot_fit(fit.s)
 #' 
 #' # fit hDCRWS model to > 1 tracks simultaneously
 #' # this may provide better parameter and behavioural state estimation 
 #' # by borrowing strength across multiple track datasets
-#'  fit <- fit_ssm(ellie, model = "hDCRWS", tstep = 2, adapt = 5000, samples = 5000, 
+#'  fit.hs <- fit_ssm(ellie, model = "hDCRWS", tstep = 2, adapt = 5000, samples = 5000, 
 #'                 thin = 5, span = 0.2)
-#'  diag_ssm(fit)
-#'  map_ssm(fit)
+#'  diag_ssm(fit.hs)
+#'  map_ssm(fit.hs)
+#'  plot_fit(fit.hs)
 #' }
 #' @export 
 fit_ssm <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5000, 
