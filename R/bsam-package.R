@@ -48,6 +48,7 @@
 #'               thin = 5, span=0.2)
 #' diag_ssm(fit)
 #' map_ssm(fit)
+#' plot_fit(fit)
 #' }
 #' @importFrom graphics axis layout lines matpoints mtext par plot points rug
 #' @importFrom stats IQR approx density median quantile rbinom rt runif sd update
