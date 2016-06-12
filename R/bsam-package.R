@@ -54,6 +54,7 @@
 #' @importFrom utils data
 #' @importFrom grDevices extendrange grey
 #' @importFrom stats cov loess loess.control predict rbeta rlnorm rnorm
+#' @importFrom gridExtra grid.arrange
 NULL
 
 

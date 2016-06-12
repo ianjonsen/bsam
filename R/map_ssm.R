@@ -45,8 +45,8 @@ map_ssm.d <- function(fit, onemap) {
   wm <- fortify(countriesHigh)
   
   plt <- function(m) {
-    xl <- extendrange(m$data$lon, f = 0.2)
-    yl <- extendrange(m$data$lat, f = 0.2)
+    xl <- extendrange(m$data$lon, f = 0.1)
+    yl <- extendrange(m$data$lat, f = 0.1)
     
     p <- ggplot() + geom_polygon(data = wm, aes_string(x = "long", y = "lat", group = "group"), 
                                  fill = grey(0.3)) + 

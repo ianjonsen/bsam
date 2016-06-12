@@ -13,8 +13,7 @@
 #' @return Returns a list of McMC samples from marginal posteriors and a
 #' summary \code{data.frame} of mean and median position estimates.
 #' @seealso Function to be called by \code{\link{fit_ssm}}.
-#' @importFrom rjags jags.samples
-#' @importFrom rjags jags.model
+#' @importFrom rjags jags.samples jags.model
 #' @importFrom msm rtnorm
 #' @export
 ssm <- function (d, model = "DCRW", adapt, samples, thin, chains, span)
