@@ -84,11 +84,11 @@
 #' # fit hDCRWS model to > 1 tracks simultaneously
 #' # this may provide better parameter and behavioural state estimation 
 #' # by borrowing strength across multiple track datasets
-#'  fit.hs <- fit_ssm(ellie, model = "hDCRWS", tstep = 2, adapt = 5000, samples = 5000, 
+#'  hfit.s <- fit_ssm(ellie, model = "hDCRWS", tstep = 2, adapt = 5000, samples = 5000, 
 #'                 thin = 5, span = 0.2)
-#'  diag_ssm(fit.hs)
-#'  map_ssm(fit.hs)
-#'  plot_fit(fit.hs)
+#'  diag_ssm(hfit.s)
+#'  map_ssm(hfit.s)
+#'  plot_fit(hfit.s)
 #' }
 #' @export 
 fit_ssm <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5000, 

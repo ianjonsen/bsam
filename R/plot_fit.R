@@ -11,13 +11,13 @@
 #' @examples
 #' \dontrun{
 #' data(ellie)
-#' fit <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
+#' fit.s <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
 #'               thin = 2, span = 0.1)
-#' plot_fit(fit)
+#' plot_fit(fit.s)
 #' 
-#' fit.h <- fit_ssm(ellie, model = "hDCRWS", tstep = 1, adapt = 2000, samples = 1000, 
+#' hfit.s <- fit_ssm(ellie, model = "hDCRWS", tstep = 1, adapt = 2000, samples = 1000, 
 #'                 thin = 2, span = 0.1)
-#' plot_fit(fit.h)
+#' plot_fit(hfit.s)
 #' }
 #' @importFrom ggplot2 ggplot aes ggtitle geom_point scale_color_gradient2 xlab ylab aes_string 
 #' @importFrom ggplot2 ylim geom_line geom_ribbon

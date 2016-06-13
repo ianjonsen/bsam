@@ -15,14 +15,14 @@
 #' @examples
 #' \dontrun{
 #' data(ellie)
-#' fit <- fit_ssm(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
+#' fit.s <- fit_ssm(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
 #'               thin = 2, span = 0.1)
-#' diag_ssm(fit)
+#' diag_ssm(fit.s)
 #' 
 #' # increase burnin, posterior sample numbers, and thinning factor
-#' fit.s <- fit_ssm(ellie, model = "DCRWS", tstep = 1, adapt = 5000, samples = 5000, 
+#' fit.s2 <- fit_ssm(ellie, model = "DCRWS", tstep = 1, adapt = 5000, samples = 5000, 
 #'               thin = 5, span = 0.1)
-#' diag_ssm(fit.s)
+#' diag_ssm(fit.s2)
 #' }             
 #' @importFrom coda autocorr.plot traceplot gelman.plot as.mcmc.list nvar varnames<-
 #' @export 

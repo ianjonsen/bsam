@@ -17,13 +17,13 @@
 #' @examples
 #' \dontrun{
 #' data(ellie)
-#' fit <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
+#' fit.s <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
 #'               thin = 2, span = 0.1)
-#' map_ssm(fit, onemap = TRUE)
+#' map_ssm(fit.s, onemap = TRUE)
 #' 
-#' fit.h <- fit_ssm(ellie, model = "hDCRWS", tstep = 1, adapt = 2000, samples = 1000, 
+#' hfit.s <- fit_ssm(ellie, model = "hDCRWS", tstep = 1, adapt = 2000, samples = 1000, 
 #'                 thin = 2, span = 0.1)
-#' map_ssm(fit.hs)
+#' map_ssm(hfit.s)
 #' }
 #' @importFrom ggplot2 ggplot aes ggtitle geom_point scale_color_gradient2 xlab ylab aes_string
 #' @importFrom ggplot2 fortify

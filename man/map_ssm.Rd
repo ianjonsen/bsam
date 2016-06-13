@@ -29,13 +29,13 @@ locations are coloured according to the posterior mean behavioural state estimat
 \examples{
 \dontrun{
 data(ellie)
-fit <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
+fit.s <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
               thin = 2, span = 0.1)
-map_ssm(fit, onemap = TRUE)
+map_ssm(fit.s, onemap = TRUE)
 
-fit.h <- fit_ssm(ellie, model = "hDCRWS", tstep = 1, adapt = 2000, samples = 1000, 
+hfit.s <- fit_ssm(ellie, model = "hDCRWS", tstep = 1, adapt = 2000, samples = 1000, 
                 thin = 2, span = 0.1)
-map_ssm(fit.hs)
+map_ssm(hfit.s)
 }
 }
 
