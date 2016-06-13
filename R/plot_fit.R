@@ -19,7 +19,8 @@
 #'                 thin = 2, span = 0.1)
 #' plot_fit(fit.h)
 #' }
-#' @importFrom ggplot2 ggplot aes ggtitle geom_point scale_color_gradient2 xlab ylab aes_string
+#' @importFrom ggplot2 ggplot aes ggtitle geom_point scale_color_gradient2 xlab ylab aes_string 
+#' @importFrom ggplot2 ylim geom_line geom_ribbon
 #' @importFrom gridExtra grid.arrange
 #' @export 
 
@@ -36,20 +37,21 @@ if(!is.null(fit$model)) {
 
   plt <- function(d) {
     #longitude
-    yl <- range(c(d$data$lon, d$summary$lon.025, d$summary$lon.975))
+    yl <- range(c(d$data$lon, d$summary$lon.025, d$summary$lon.975), na.rm = TRUE)
     p1 <- ggplot() + geom_point(data = d$data, aes_string(x = "date", y = "lon", group = NULL), 
                                  colour = "firebrick", size = 0.75) + 
-      ylab("Longitude") + xlab("") + ylim(yl) + 
+      ylab("Longitude") + xlab("") + ylim(yl[1], yl[2]) + 
       geom_line(data = d$summary, aes_string(x = "date", y = "lon", group = NULL), 
                           colour = "dodgerblue") + 
       geom_ribbon(data = d$summary, aes_string(x = "date", ymin = "lon.025", ymax = "lon.975"), 
-                  fill = "dodgerblue", alpha = 0.5) 
+                  fill = "dodgerblue", alpha = 0.5) + 
+      ggtitle(paste(unique(as.character(d$summary$id)), "; ", d$model, sep = ""))
     
     #latitude
-    yl <- range(c(d$data$lat, d$summary$lat.025, d$summary$lat.975))
+    yl <- range(c(d$data$lat, d$summary$lat.025, d$summary$lat.975), na.rm = TRUE)
     p2 <- ggplot() + geom_point(data = d$data, aes_string(x = "date", y = "lat", group = NULL), 
                                 colour = "firebrick", size = 0.75) + 
-      ylab("Latitude") + xlab("") + ylim(yl) +
+      ylab("Latitude") + xlab("") + ylim(yl[1], yl[2]) +
       geom_line(data = d$summary, aes_string(x = "date", y = "lat", group = NULL), 
                             colour = "dodgerblue") + 
       geom_ribbon(data = d$summary, aes_string(x = "date", ymin = "lat.025", ymax = "lat.975"), 
@@ -62,10 +64,10 @@ if(!is.null(fit$model)) {
         ylab("Behavioural state") + xlab("")
     }
   if(d$model == "DCRW" || d$model == "hDCRW") {  
-    gridExtra::grid.arrange(p1, p2, heights = c(2, 2))
+    grid.arrange(p1, p2, heights = c(2, 2))
   }
     else {
-      gridExtra::grid.arrange(p1, p2, p3, heights = c(2, 2, 2))
+      grid.arrange(p1, p2, p3, heights = c(2, 2, 2))
     }
   }  
   

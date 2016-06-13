@@ -35,7 +35,7 @@ map_ssm(fit, onemap = TRUE)
 
 fit.h <- fit_ssm(ellie, model = "hDCRWS", tstep = 1, adapt = 2000, samples = 1000, 
                 thin = 2, span = 0.1)
-map_ssm(fit.h)
+map_ssm(fit.hs)
 }
 }
 

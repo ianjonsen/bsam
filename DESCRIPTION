@@ -15,7 +15,8 @@ Imports:
     coda (>= 0.18-1),
     msm (>= 1.6.1),
     ggplot2 (>= 2.1.0),
-    gridExtra (>= 2.2.1)
+    gridExtra (>= 2.2.1),
+    sp (>= 1.2-3)
 SystemRequirements: JAGS (>= 4.2.0)    
 Description: Fit Bayesian state-space models to animal tracking
     data. Models provided are DCRW (for location filtering), DCRWS (for
