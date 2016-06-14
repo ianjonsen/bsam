@@ -49,7 +49,7 @@
 #' median state estimates (locations or locations and behavioural states), the
 #' name of the "model" fit, the "timestep" used, the input location "data", the
 #' number of location state estimates ("N"), and the full set of "mcmc"
-#' samples. For the hDCRWS model, a list is returned where results, etc are
+#' samples. For the hDCRW and hDCRWS models, a list is returned where results, etc are
 #' combined amongst the individuals
 #' @author Ian Jonsen
 #' @references Jonsen ID, Mills Flemming J, Myers RA (2005) Robust state-space modeling of

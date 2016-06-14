@@ -51,7 +51,7 @@ Within these outer elements are a "summary" data.frame of posterior mean and
 median state estimates (locations or locations and behavioural states), the
 name of the "model" fit, the "timestep" used, the input location "data", the
 number of location state estimates ("N"), and the full set of "mcmc"
-samples. For the hDCRWS model, a list is returned where results, etc are
+samples. For the hDCRW and hDCRWS models, a list is returned where results, etc are
 combined amongst the individuals
 }
 \description{
