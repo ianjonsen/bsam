@@ -26,9 +26,8 @@
 #' map_ssm(hfit.s)
 #' }
 #' @importFrom ggplot2 ggplot aes ggtitle geom_point scale_color_gradient2 xlab ylab aes_string
-#' @importFrom ggplot2 fortify
+#' @importFrom ggplot2 fortify geom_polygon coord_cartesian
 #' @importFrom ggplot2 geom_polygon
-#' @importFrom ggplot2 coord_cartesian
 #' @export 
 
 map_ssm <- function(fit, onemap = TRUE) 
@@ -42,7 +41,7 @@ map_ssm <- function(fit, onemap = TRUE)
 map_ssm.d <- function(fit, onemap) {
   countriesHigh <- NULL
   data(countriesHigh, package = "rworldxtra", envir = environment())
-  wm <- fortify(countriesHigh)
+  wm <- suppressMessages(fortify(countriesHigh))
   
   plt <- function(m) {
     xl <- extendrange(m$data$lon, f = 0.1)
@@ -91,7 +90,7 @@ map_ssm.d <- function(fit, onemap) {
 map_ssm.h <- function(fit, onemap) {
   countriesHigh <- NULL
   data(countriesHigh, package = "rworldxtra", envir = environment())
-  wm <- fortify(countriesHigh)
+  wm <- suppressMessages(fortify(countriesHigh))
   
   xl <- extendrange(fit$data$lon, f = 0.2)
   yl <- extendrange(fit$data$lat, f = 0.2)
