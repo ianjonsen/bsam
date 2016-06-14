@@ -9,7 +9,7 @@
 #' data types (type \code{?fit_ssm} for details).
 #' 
 #' \tabular{ll}{ Package: \tab bsam\cr Type: \tab Package\cr Version: \tab
-#' 0.50.0\cr Date: \tab 2016-06-09\cr License: \tab GPL-2\cr LazyLoad: \tab
+#' 1.0.0\cr Date: \tab 2016-06-14\cr License: \tab GPL-2\cr LazyLoad: \tab
 #' yes\cr } Fit Bayesian state-space models to Argos satellite tracking data.
 #' Models provided are DCRW - for location filtering; DCRWS - for location
 #' filtering and behavioural state estimation with 2 behavioural states; hDCRW 
@@ -17,7 +17,7 @@
 #' filtering with behavioural state estimation, respectively, across multiple 
 #' animals.
 #' 
-#' The hierarchical models can provide improved location and/or behavioural
+#' The hierarchical models may provide improved location and/or behavioural
 #' state estimates compared to fitting DCRW/DCRWS to individual datasets.
 #' 
 #' @name bsam-package
@@ -26,16 +26,9 @@
 #' @author Ian Jonsen
 #' 
 #' Maintainer: Ian Jonsen <ian.jonsen@mq.edu.au>
-#' @seealso fitSSM
-#' @references Jonsen ID, Myers RA, Mills Flemming J (2003) Meta-analysis of
-#' animal movement using state-space models. Ecology 84:3055-3063
-#' 
-#' Jonsen ID, Mills Flemming J, Myers RA (2005) Robust state-space modeling of
+#' @seealso fit_ssm
+#' @references Jonsen ID, Mills Flemming J, Myers RA (2005) Robust state-space modeling of
 #' animal movement data. Ecology 86:2874-2880
-#' 
-#' Jonsen ID, Myers RA, James MC (2007) Identifying leatherback turtle foraging
-#' behaviour from satellite telemetry using a switching state-space model.
-#' Marine Ecology Progress Series 337:255-263
 #' 
 #' Jonsen ID (2016) Joint estimation over multiple individuals improves behavioural 
 #' state inference from animal movement data. Scientific Reports 6:20625
@@ -44,7 +37,7 @@
 #' \dontrun{
 #' # Fit DCRW model for state filtering and regularization
 #' data(ellie)
-#' fit <- fit_ssm(ellie, model = "DCRW", tstep = 1, adapt = 5000, samples = 5000, 
+#' fit <- fit_ssm(ellie, model = "DCRW", tstep = 1, adapt = 4000, samples = 2000, 
 #'               thin = 5, span=0.2)
 #' diag_ssm(fit)
 #' map_ssm(fit)
