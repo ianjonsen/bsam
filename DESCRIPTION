@@ -1,7 +1,7 @@
 Package: bsam
 Type: Package
 Title: Bayesian State-space models for Animal Movement
-Version: 0.43.1.9011
+Version: 1.0.0
 Author: as.person(c(
     "Ian Jonsen <ian.jonsen@mq.edu.au> [aut, cre]",
     "Simon Wotherspoon <simon.wotherspoon@utas.edu.au> [ctb]",
@@ -11,7 +11,6 @@ Maintainer: Ian Jonsen <ian.jonsen@mq.edu.au>
 Depends:
     rjags (>= 4-6)
 Imports:
-    MASS (>= 7.3.0), 
     coda (>= 0.18-1),
     msm (>= 1.6.1),
     ggplot2 (>= 2.1.0),
