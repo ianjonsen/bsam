@@ -31,6 +31,7 @@
 #' \code{\link{dat4jags}} for other options for specifying error parameters.
 #' 
 #' WARNING: there is no guarantee that invoking these options will yield sensible results!
+#' For GPS data, similar models can be fit via the \code{moveHMM} package.
 #' 
 #' @param model name of state-space model to be fit to data. This can be one of 
 #' "DCRW", "DCRWS", "hDCRW", or "hDCRWS"

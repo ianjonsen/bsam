@@ -25,7 +25,8 @@ values must be equal to "G". This approach allows the models to be fit to
 data types other than Argos satellite data, e.g. geolocation data. See 
 \code{\link{dat4jags}} for other options for specifying error parameters.
 
-WARNING: there is no guarantee that invoking these options will yield sensible results!}
+WARNING: there is no guarantee that invoking these options will yield sensible results!
+For GPS data, similar models can be fit via the \code{moveHMM} package.}
 
 \item{model}{name of state-space model to be fit to data. This can be one of 
 "DCRW", "DCRWS", "hDCRW", or "hDCRWS"}
