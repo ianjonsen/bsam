@@ -26,8 +26,6 @@ devtools::install_github("ianjonsen/bsam")
 Install JAGS: http://mcmc-jags.sourceforge.net/
 
 ## Development
-[![Travis-CI Build Status](https://travis-ci.org/NA/NA.svg?branch=master)](https://travis-ci.org/NA/NA)
-
 Please read [R Packages](http://r-pkgs.had.co.nz/) for more on this process, especially the Git/Github chapter. 
 
 For developers of `bsam`, simply clone or fork this repository with Git and then create an RStudio project for the package. 
