@@ -23,9 +23,9 @@ Description: Fit Bayesian state-space models to animal tracking
     data. Models provided are DCRW (for location filtering), DCRWS (for
     location filtering and behavioural state estimation), and their hierarchical versions. 
     The models are primarily intended for fitting to ARGOS satellite tracking data but
-    options exist to fit to other tracking data types such as GPS and geolocation data. Simplified
-    McMC convergence diagnostic plotting is provided but users are encouraged to explore tools
-    available in packages such as coda and boa.
+    options exist to fit to other tracking data types. For GPS data, consider the moveHMM package.
+    Simplified McMC convergence diagnostic plotting is provided but users are encouraged to explore 
+    tools available in packages such as coda and boa.
 License: GPL-2
 URL: http://www.r-project.org
 LazyLoad: yes
