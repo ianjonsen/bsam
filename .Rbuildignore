@@ -5,3 +5,4 @@
 ^lbt\.csv$
 ^cran-badges\.md$
 ^DCRW3S\.txt$
+^\.travis\.yml$
