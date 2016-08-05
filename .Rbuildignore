@@ -1,3 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^cran-comments\.md$
+^data/lbt\.csv$
+^lbt\.csv$
+^cran-badges\.md$

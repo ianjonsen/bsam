@@ -1,6 +1,6 @@
 Package: bsam
 Type: Package
-Title: Bayesian State-space models for Animal Movement
+Title: Bayesian State-Space Models for Animal Movement
 Version: 1.0.0
 Author: as.person(c(
     "Ian Jonsen <ian.jonsen@mq.edu.au> [aut, cre]",
