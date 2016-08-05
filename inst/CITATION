@@ -10,7 +10,7 @@ citEntry(entry = "Article",
          volume       = "86",
          number       = "11",
          pages        = "2874--2880",
-         url          = "http://www.jstatsoft.org/v40/i03/",
+         url          = "http://onlinelibrary.wiley.com/doi/10.1890/04-1852/epdf",
          
          textVersion  =
            paste("Jonsen ID, Mills Flemming J, Myers RA (2005)",
@@ -27,7 +27,7 @@ state inference from animal movement data",
          volume       = "6",
          number       = "",
          pages        = "20625",
-         url          = "http://www.jstatsoft.org/v40/i03/",
+         url          = "http://www.nature.com/articles/srep20625",
          
          textVersion  =
            paste("Jonsen I (2016)",

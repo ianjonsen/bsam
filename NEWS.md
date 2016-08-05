@@ -1,6 +1,6 @@
 # dev
 
-# bsam 0.43.1
+# bsam 0.43.1 (pre-CRAN release)
 
 * ported from source 2016-05-27 mdsumner@gmail.com
 
@@ -15,7 +15,9 @@ system(sprintf("tar zxvf %s", basename(f)))
 Rd2roxygen::Rd2roxygen("bsam")
 ```
 
-**Changes from pre-CRAN release version 0.43.1**
+# 1.0.0 
+
+* 
 
 
 
