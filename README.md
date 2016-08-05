@@ -8,7 +8,7 @@ Originally sourced from http://web.science.mq.edu.au/~ijonsen/code.html
 
 ## Installation
 
-First ensure that you have a working copy of JAGS (>= 4.2.0) for the [rjags](https://cran.r-project.org/web/packages/rjags/index.html) package, 
+First ensure that you have a working copy of JAGS (>= 4.2.0) for the [rjags](https://cran.r-project.org/package=rjags) package, 
 see instructions below. 
 
 ```R

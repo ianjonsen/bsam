@@ -66,11 +66,11 @@
 #' inference from animal movement data. Scientific Reports 6:20625
 #' 
 #' @examples
-#' #\dontrun{
+#' \dontrun{
 #' # Fit DCRW model for state filtering and regularization
 #' data(ellie)
 #' fit <- fit_ssm(ellie, model = "DCRW", tstep = 2, adapt = 5000, samples = 5000, 
-#'               thin = 5, span=0.2)
+#'               thin = 5, span = 0.2)
 #' diag_ssm(fit)
 #' map_ssm(fit)
 #' plot_fit(fit)
@@ -90,7 +90,7 @@
 #'  diag_ssm(hfit.s)
 #'  map_ssm(hfit.s)
 #'  plot_fit(hfit.s)
-#' #}
+#' }
 #' @export 
 fit_ssm <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5000, 
                     thin = 5, span = 0.2)
