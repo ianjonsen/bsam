@@ -5,4 +5,4 @@ sudo: required
 cache: packages
 
 apt_packages:
-- r-cran-rjags
+  - r-cran-rjags
