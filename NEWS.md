@@ -1,5 +1,16 @@
 # dev
 
+# bsam 1.0.0 
+
+* Simplified movement models by removing the mean turn angle parameter. This tends to improve convergence for the behavioural
+switching models. 
+
+* Simplified the regularisation / interpolation in the observation models
+
+* Simplified data preparation code
+
+* 
+
 # bsam 0.43.1 (pre-CRAN release)
 
 * ported from source 2016-05-27 mdsumner@gmail.com
@@ -15,9 +26,7 @@ system(sprintf("tar zxvf %s", basename(f)))
 Rd2roxygen::Rd2roxygen("bsam")
 ```
 
-# 1.0.0 
 
-* 
 
 
 
