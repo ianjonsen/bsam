@@ -2,7 +2,7 @@
 
 **bsam** - **B**ayesian **S**tate-space models for **A**nimal **M**ovement. 
 
-bsam is an R package that fits Bayesian state-space models via JAGS to Argos satellite tracking data. The models filter error-prone Argos locations and estimate behavioural states associated with two fundamentally different movement patterns (directed, fast movements and relatively undirected, slow movements). The models can be fit to individual animal tracks or simultaneously to a group of individuals.
+bsam is an R package that fits Bayesian state-space models via JAGS to Argos satellite tracking data. The models filter error-prone Argos locations and estimate behavioural states associated with two fundamentally different movement patterns (directed, fast movements and relatively undirected, slow movements). The models can be fit to individual animal tracks or simultaneously to a group of individuals. Plotting functions are provided to help assess lack of MCMC convergence, map estimated tracks and visualise fit to the observations.
 
 Read `?bsam` for more details on functionality and `?fit_ssm` for details and examples of how to use the package. 
 
