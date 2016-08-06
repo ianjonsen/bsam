@@ -2,13 +2,12 @@ Package: bsam
 Type: Package
 Title: Bayesian State-Space Models for Animal Movement
 Version: 1.0.0
-Author: as.person(c(
+Authors@R: as.person(c(
     "Ian Jonsen <ian.jonsen@mq.edu.au> [aut, cre]",
     "Sophie Bestley <sophie.bestley@aad.gov.au> [ctb]",
     "Simon Wotherspoon <simon.wotherspoon@utas.edu.au> [ctb]",
     "Michael Sumner <mdsumner@gmail.com> [ctb]"
   ))
-Maintainer: Ian Jonsen <ian.jonsen@mq.edu.au>
 Depends:
     R (>= 3.3.0),
     rjags (>= 4-6)
