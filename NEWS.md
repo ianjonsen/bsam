@@ -1,3 +1,6 @@
+# bsam 1.0.1
+
+
 # bsam 1.0.0 
 
 * Simplified movement models by removing the mean turn angle parameter. This tends to improve convergence for the behavioural
