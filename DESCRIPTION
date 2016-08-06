@@ -20,9 +20,9 @@ Imports:
     sp (>= 1.2-3),
     rworldxtra (>= 1.01)
 SystemRequirements: JAGS (>= 4.2.0)    
-Description: Fit Bayesian state-space models to animal tracking data. Models are provided for location 
+Description: Tools to fit Bayesian state-space models to animal tracking data. Models are provided for location 
     filtering, location filtering and behavioural state estimation, and their hierarchical versions. 
-    The models are primarily intended for fitting to ARGOS satellite tracking data but options exist to fit 
+    The models are primarily intended for fitting to 'ARGOS' satellite tracking data but options exist to fit 
     to other tracking data types. For Global Positioning System data, consider the 'moveHMM' package. 
     Simplified Markov Chain Monte Carlo convergence diagnostic plotting is provided but users are encouraged 
     to explore tools available in packages such as 'coda' and 'boa'.
