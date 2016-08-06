@@ -4,7 +4,7 @@ Title: Bayesian State-Space Models for Animal Movement
 Version: 1.0.0
 Authors@R: c(
     person("Ian", "Jonsen", email = "ian.jonsen@mq.edu.au", 
-    role = "cre"),
+    role = c("aut", "cre")),
     person("Sophie", "Bestley", email = "sophie.bestley@aad.gov.au",
     role = "ctb"),
     person("Simon", "Wotherspoon",  email = "simon.wotherspoon@utas.edu.au",
