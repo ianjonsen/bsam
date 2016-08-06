@@ -28,6 +28,5 @@ Description: Tools to fit Bayesian state-space models to animal tracking data. M
     to explore tools available in packages such as 'coda' and 'boa'.
 License: GPL-2
 URL: https://www.r-project.org, https://github.com/ianjonsen/bsam
-LazyLoad: yes
 LazyData: yes
 RoxygenNote: 5.0.1
