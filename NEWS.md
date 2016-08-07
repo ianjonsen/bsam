@@ -1,5 +1,5 @@
 # bsam 1.0.1
-
+* removed sp and rworldxtra from Imports
 
 # bsam 1.0.0 
 
@@ -10,7 +10,7 @@ switching models.
 
 * Simplified data preparation code.
 
-* Diagnostic plots (renamed from `diagSSM` to `diag_ssm`) now include the Brooks-Gelman-Rubin shrink factor plots for each parameter.
+* Diagnostic plots (renamed from `diagSSM` to `diag_ssm`) now include the Gelman-Rubin-Brooks shrink factor plots for each parameter.
 
 * New mapping function (`map_ssm`) uses coastline data from `rworldxtra` and `ggplot2` for core plotting functions.
 
