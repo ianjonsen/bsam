@@ -17,7 +17,9 @@ Imports:
     coda (>= 0.18-1),
     msm (>= 1.6.1),
     ggplot2 (>= 2.1.0),
-    gridExtra (>= 2.2.1)
+    gridExtra (>= 2.2.1),
+    sp (>= 1.2-3),
+    rworldxtra(>= 1.01)
 SystemRequirements: JAGS (>= 4.2.0)    
 Description: Tools to fit Bayesian state-space models to animal tracking data. Models are provided for location 
     filtering, location filtering and behavioural state estimation, and their hierarchical versions. 
