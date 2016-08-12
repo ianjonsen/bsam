@@ -1,4 +1,7 @@
-# bsam 1.0.1
+# bsam 1.0.1.9001
+* added sp and rworldxtra back to Imports list in DESCRIPTION. Ensures all required packages are installed, otherwise `map_ssm` will return an error when attempting to load `countriesHigh` data if `sp` and/or `rworldxtra` are not installed
+
+# bsam 1.0.1.9000
 * removed sp and rworldxtra from Imports
 
 * added BugReports URL to DESCRIPTION
