@@ -19,17 +19,14 @@ see instructions below.
 library(rjags)
 ```
 
-<!---
+
 Get the released version of bsam from CRAN:
 
 ```R
 install.packages("bsam")
 ```
 
-Or the development version from GitHub:
---->
-
-Download the current version from GitHub:
+Or download the current development version from GitHub:
 ```R
 # install.packages("devtools")  
 devtools::install_github("ianjonsen/bsam")
