@@ -21,7 +21,7 @@ individual dataset is plotted separately.
 \examples{
 \dontrun{
 data(ellie)
-fit.s <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
+fit.s <- fit_ssm(ellie, model = "DCRWS", tstep = 1, adapt = 2000, samples = 1000, 
               thin = 2, span = 0.1)
 plot_fit(fit.s)
 
