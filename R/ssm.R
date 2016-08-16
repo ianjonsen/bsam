@@ -15,6 +15,7 @@
 #' @seealso Function to be called by \code{\link{fit_ssm}}.
 #' @importFrom rjags jags.samples jags.model
 #' @importFrom msm rtnorm
+#' @importFrom tibble data_frame
 #' @export
 ssm <- function (d, model = "DCRW", adapt, samples, thin, chains, span)
 {
@@ -73,7 +74,7 @@ ssm <- function (d, model = "DCRW", adapt, samples, thin, chains, span)
 	lon.q <- apply(psamples$x[, 1, , ], 1, quantile, c(0.025, 0.5, 0.975))
 	lat.q <- apply(psamples$x[, 2, , ], 1, quantile, c(0.025, 0.5, 0.975))
 
-	summary <- data.frame(id = dd$id, date = dd$ts, lon, lat, 
+	summary <- data_frame(id = dd$id, date = dd$ts, lon, lat, 
 	                     lon.025 = lon.q[1,], lon.5 = lon.q[2,], lon.975 = lon.q[3,],
 	                     lat.025 = lat.q[1,], lat.5 = lat.q[2,], lat.975 = lat.q[3,])
 	model <- model
@@ -88,7 +89,12 @@ ssm <- function (d, model = "DCRW", adapt, samples, thin, chains, span)
 
 	out <- list(summary = summary, mcmc = psamples, model = model, mcmc.settings = mcmc.settings,
 		timestep = dd$tstep, Nx = nrow(xs), data = data)
+	
 	out
     }
-    lapply(d, ssm1)
+    
+  output <- lapply(d, ssm1)
+  class(output) <- "ssm"
+  
+  output
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_summary.R
 \name{get_summary}
 \alias{get_summary}
-\title{Extract summary output as a \code{dplyr::data_frame} and optionally export as a .csv file.}
+\title{Extract summary output and optionally export as a .csv file.}
 \usage{
 get_summary(x, file = " ")
 }

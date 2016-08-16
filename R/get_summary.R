@@ -1,4 +1,4 @@
-#' Extract summary output as a \code{dplyr::data_frame} and optionally export as a .csv file.
+#' Extract summary output and optionally export as a .csv file.
 #' 
 #' Takes a fitted \code{fit_ssm} object and extracts the summary data.frame, which includes
 #' the animal ids, POSIXct date/time (at increments specified by \code{tstep} in the \code{fit_ssm} call), 
@@ -23,12 +23,20 @@
 #' ## export to .csv file
 #' get_summary(fit, file = "dcrw.csv")
 #' }
-#' @importFrom dplyr as_data_frame
+#' @importFrom utils write.csv
 #' @export 
 
 get_summary <- function(x, file = " ") 
 {
-  summ <- dplyr::as_data_frame(do.call(rbind, lapply(x, function(z) z$summary)))
+  if(class(x) != "ssm" && class(x) != "hssm") stop("Input is not a fit_ssm object")
+
+  else if(class(x) == "ssm") {
+    summ <- do.call(rbind, lapply(x, function(z) z$summary))
+  }
+  
+  else if(class(x) == "hssm") {
+    summ <- x$summary
+  }
 
   if(file == " ") return(summ)
   

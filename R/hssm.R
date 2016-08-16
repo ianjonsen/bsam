@@ -15,6 +15,7 @@
 #' @seealso Function to be called by \code{\link{fit_ssm}}.
 #' @importFrom rjags jags.samples jags.model
 #' @importFrom msm rtnorm 
+#' @importFrom tibble data_frame as_data_frame
 #' @export
 hssm  <- function (d, model = "hDCRWS", adapt, samples, thin, chains, span)
 {
@@ -98,7 +99,7 @@ hssm  <- function (d, model = "hDCRWS", adapt, samples, thin, chains, span)
   
   dts <- as.POSIXct(unlist(sapply(prep, function(x) x$ts)), origin = "1970-01-01", tz = "GMT")
   id  <- rep(as.character(sapply(prep, function(x) x$id)), Nx)
-  summary <- data.frame(id = id, date = dts, lon, lat, 
+  summary <- data_frame(id = id, date = dts, lon, lat, 
                         lon.025 = lon.q[1,], lon.5 = lon.q[2,], lon.975 = lon.q[3,],
                         lat.025 = lat.q[1,], lat.5 = lat.q[2,], lat.975 = lat.q[3,])
   model <- model
@@ -107,9 +108,11 @@ hssm  <- function (d, model = "hDCRWS", adapt, samples, thin, chains, span)
   if(model == "hDCRWS"){
     b <- apply(psamples$b, 1, mean)
     b.5 <- apply(psamples$b, 1, median)
-    summary <- data.frame(summary, b = b, b.5 = b.5)
+    summary <- as_data_frame(cbind(summary, b = b, b.5 = b.5))
   }
   out <- list(summary = summary, mcmc = psamples, model = model, mcmc.settings = mcmc.settings,
               timestep = d$tstep, N = N, Nx = Nx, data = data)
+  class(out) <- "hssm"
+  
   out
 }
