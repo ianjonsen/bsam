@@ -1,3 +1,6 @@
+# bsam 1.0.1.9002
+* added `get_summary` function to extract summary `data_frame` from `fit_ssm` output objects. The `data_frame` can optionally be written to a .csv file
+
 # bsam 1.0.1.9001
 * added `sp` and `rworldxtra` back to Imports list in DESCRIPTION. Ensures all required packages are installed, otherwise `map_ssm` will return an error when attempting to load `countriesHigh` data if `sp` and/or `rworldxtra` are not installed
 
