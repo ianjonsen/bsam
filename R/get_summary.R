@@ -25,7 +25,7 @@
 #' }
 #' @importFrom dplyr as_data_frame
 #' @export 
-#' 
+
 get_summary <- function(x, file = " ") 
 {
   summ <- dplyr::as_data_frame(do.call(rbind, lapply(x, function(z) z$summary)))
