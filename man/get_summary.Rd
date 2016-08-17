@@ -32,7 +32,15 @@ fit <- fit_ssm(ellie, model = "DCRW", tstep = 1, adapt = 2000, samples = 1000,
 get_summary(fit)
 
 ## export to .csv file
-get_summary(fit, file = "dcrw.csv")
+get_summary(fit, file = "ellie_dcrw.csv")
+
+## plot track of second animal (posterior mean longitude and latitude)
+p <- ggplot(data = subset(get_summary(fit), id == unique(id)[2])) + 
+       geom_point(aes(lat, lon), col = "firebrick", size = 2)
+p
+
+## overlay posterior median longitude and latitude
+p + geom_point(aes(lat.5, lon.5), col = "dodgerblue", size = 1)
 }
 }
 

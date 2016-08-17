@@ -24,7 +24,8 @@
 #' get_summary(fit, file = "ellie_dcrw.csv")
 #' 
 #' ## plot track of second animal (posterior mean longitude and latitude)
-#' p <- ggplot(data = subset(get_summary(fit), id == unique(id)[2])) + geom_point(aes(lat, lon), col = "firebrick", size = 2)
+#' p <- ggplot(data = subset(get_summary(fit), id == unique(id)[2])) + 
+#'        geom_point(aes(lat, lon), col = "firebrick", size = 2)
 #' p
 #' 
 #' ## overlay posterior median longitude and latitude
