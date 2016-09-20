@@ -25,7 +25,7 @@
 #'                 thin = 2, span = 0.1)
 #' map_ssm(hfit.s)
 #' }
-#' @importFrom ggplot2 ggplot aes ggtitle geom_point scale_color_gradient2 xlab ylab aes_string
+#' @importFrom ggplot2 ggplot aes ggtitle geom_point scale_colour_gradient2 xlab ylab aes_string
 #' @importFrom ggplot2 fortify geom_polygon coord_cartesian
 #' @importFrom ggplot2 geom_polygon
 #' @export 
@@ -59,14 +59,14 @@ map_ssm.d <- function(fit, onemap) {
     
     if(m$model == "DCRWS") {
       p <- p + geom_point(data = m$data, aes_string(x = "lon", y = "lat", group = NULL), 
-                          colour = "goldenrod", pch = "+", size = 4) +
+                          colour = grey(0.7), pch = "+", size = 4) +
         geom_point(data = m$summary, aes_string(x = "lon", y = "lat", group = NULL, colour = "b"), size = 1.25) +
-        scale_color_gradient2(midpoint = 1.5, low = "blue", mid = "white", high = "red")
+        scale_colour_gradient2(midpoint = 1.5, low = "blue", mid = "white", high = "red")
     }
     
     else {
       p <- p + geom_point(data = m$data, aes_string(x = "lon", y = "lat", group = NULL), 
-                          colour = "goldenrod", pch = "+", size = 4) +
+                          colour = grey(0.7), pch = "+", size = 4) +
         geom_point(data = m$summary, aes_string(x = "lon", y = "lat", group = NULL), colour = 'dodgerblue', 
                    size = 1.25)
     }
@@ -107,14 +107,14 @@ map_ssm.h <- function(fit, onemap) {
  
   if(fit$model == "hDCRWS") {
     p <- p + geom_point(data = fit$data, aes_string(x = "lon", y = "lat", group = NULL), 
-                        colour = "goldenrod", pch = "+", size = 4) +
+                        colour = grey(0.7), pch = "+", size = 4) +
       geom_point(data = fit$summary, aes_string(x = "lon", y = "lat", group = NULL, colour = "b"), size = 1.25) +
-      scale_color_gradient2(midpoint = 1.5, low = "blue", mid = "white", high = "red")
+      scale_colour_gradient2(midpoint = 1.5, low = "blue", mid = "white", high = "red")
   }
   
   else {
     p <- p + geom_point(data = fit$data, aes_string(x = "lon", y = "lat", group = NULL), 
-                        colour = "goldenrod", pch = "+", size = 4) +
+                        colour = grey(0.7), pch = "+", size = 4) +
       geom_point(data = fit$summary, aes_string(x = "lon", y = "lat", group = NULL), colour = 'dodgerblue', 
                  size = 1.25)
   }
