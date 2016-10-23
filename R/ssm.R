@@ -5,7 +5,6 @@
 #' 
 #' @param d structured data from \code{dat4jags} to be passed to JAGS
 #' @param model the state-space model to be fit: DCRW or DCRWS
-#' @param theta logical indicating if a mean turn angle parameter is to be estimated
 #' @param adapt number of samples in adaptation/burnin phase 
 #' @param samples number of posterior samples
 #' @param thin thinning factor to reduce posterior sample autocorrelation
@@ -18,7 +17,7 @@
 #' @importFrom msm rtnorm
 #' @importFrom tibble data_frame
 #' @export
-ssm <- function (d, model = "DCRW", theta, adapt, samples, thin, chains, span)
+ssm <- function (d, model = "DCRW", adapt, samples, thin, chains, span)
 {
     ssm1 <- function(dd) {
       gamma <- 0.5
@@ -38,16 +37,14 @@ ssm <- function (d, model = "DCRW", theta, adapt, samples, thin, chains, span)
       isigma2 <- diag(V) ^ -1
       rho <- V[1, 2] / prod(sqrt(isigma2))
       
-      data <- with(dd, list(y = y, idx = idx, w = ws, theta.log = theta, itau2 = itau2, 
-                            nu = nu, Nx = nrow(xs), Ny = nrow(dd$y)))
+      data <- with(dd, list(y = y, idx = idx, w = ws, itau2 = itau2, nu = nu, 
+                            Nx = nrow(xs), Ny = nrow(dd$y)))
    
       ## inits
       init.fn <- function() {
         isigma2 <- rlnorm(2, log(isigma2), 0.1)
         rho <- msm::rtnorm(1, rho, 0.1, lower = -1, upper = 1)
         iSigma <- matrix(c(isigma2[1], rho, rho, isigma2[2]), 2, 2)
-        theta1 <- c((rbeta(1, 20, 20) - 0.5) * 2 * pi, 
-                    rbeta(1, 20, 20) * 2 * pi)
         gamma <- c(rbeta(1, 20, 20), NA)
         dev <- rbeta(1, 1, 1)
         alpha <- rbeta(2, 1, 1)
@@ -56,24 +53,21 @@ ssm <- function (d, model = "DCRW", theta, adapt, samples, thin, chains, span)
         x <- cbind(rnorm(nrow(xs), xs[, 1], 0.1), rnorm(nrow(xs), xs[, 2], 0.1))
         b <- rbinom(nrow(xs), 1, 0.5) + 1
              
-        init <- list(iSigma = iSigma, gamma = gamma[1], theta = theta1[1], logpsi = logpsi, x = x)
+        init <- list(iSigma = iSigma, gamma = gamma[1], logpsi = logpsi, x = x)
         if(model == "DCRWS") {
-          init <- list(iSigma = iSigma, gamma = gamma, theta = theta1, dev = dev, alpha = alpha, 
+          init <- list(iSigma = iSigma, gamma = gamma, dev = dev, alpha = alpha, 
                lambda = lambda, logpsi = logpsi, x = x, b = b)
         }
         init
       }  
       inits <- lapply(1:chains, function(i) init.fn())
-      if(theta) params <- c("Sigma", "x", "gamma", "theta", "psi")
-      else {
-        params <- c("Sigma", "x", "gamma", "psi")
-      }
+	    params <- c("Sigma", "x", "gamma", "psi")
 	    if(model == "DCRWS") params <- c(params, "alpha", "b")
 
 	model.file <- file.path(system.file("jags", package = "bsam"), paste(model, ".txt", sep = ""))
-	burn <- jags.model(model.file, data, inits, n.chains = chains, n.adapt = adapt/2)
+	burn <- rjags::jags.model(model.file, data, inits, n.chains = chains, n.adapt = adapt/2)
 	update(burn, n.iter = adapt/2)
-	psamples <- jags.samples(burn, params, n.iter = samples, thin = thin)
+	psamples <- rjags::jags.samples(burn, params, n.iter = samples, thin = thin)
 
 	lon <- apply(psamples$x[, 1, , ], 1, mean)
 	lat <- apply(psamples$x[, 2, , ], 1, mean)
@@ -94,7 +88,7 @@ ssm <- function (d, model = "DCRW", theta, adapt, samples, thin, chains, span)
 	}
 
 	out <- list(summary = summary, mcmc = psamples, model = model, mcmc.settings = mcmc.settings,
-		timestep = dd$tstep, Nx = nrow(xs), theta = theta, data = data)
+		timestep = dd$tstep, Nx = nrow(xs), data = data)
 	
 	out
     }
