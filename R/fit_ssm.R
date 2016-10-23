@@ -36,7 +36,7 @@
 #' @param model name of state-space model to be fit to data. This can be one of 
 #' "DCRW", "DCRWS", "hDCRW", or "hDCRWS"
 #' @param tstep time step as fraction of a day, default is 1 (24 hours)
-#' @param theta logical indicating whether a mean turn angle parameter is to be estimated
+#' @param theta logical indicating if a mean turn angle parameter is to be estimated
 #' @param adapt number of samples during the adaptation and update (burn-in)
 #' phase, adaptation and updates are fixed at adapt/2
 #' @param samples number of posterior samples to generate after burn-in
