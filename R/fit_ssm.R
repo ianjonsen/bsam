@@ -35,7 +35,8 @@
 #' 
 #' @param model name of state-space model to be fit to data. This can be one of 
 #' "DCRW", "DCRWS", "hDCRW", or "hDCRWS"
-#' @param tstep time step as fraction of a day, default is 1 (24 hours).
+#' @param tstep time step as fraction of a day, default is 1 (24 hours)
+#' @param theta logical indicating whether a mean turn angle parameter is to be estimated
 #' @param adapt number of samples during the adaptation and update (burn-in)
 #' phase, adaptation and updates are fixed at adapt/2
 #' @param samples number of posterior samples to generate after burn-in
@@ -92,8 +93,8 @@
 #'  plot_fit(hfit.s)
 #' }
 #' @export 
-fit_ssm <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5000, 
-                    thin = 5, span = 0.2)
+fit_ssm <- function (data, model = "DCRW", tstep = 1, theta = TRUE, adapt = 40000, samples = 20000, 
+                    thin = 20, span = 0.2)
 {
 	if(!model %in% c('DCRW', 'DCRWS', 'hDCRW', 'hDCRWS')) stop("Model not implemented")
   model.file <- file.path(system.file(package = "bsam"), "jags", paste(model, ".txt", sep = ""))
@@ -104,11 +105,11 @@ fit_ssm <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5
       
 	d <- dat4jags(data, tstep = tstep, tpar=tpar())	
 	if(model %in% c("DCRW", "DCRWS")) {
-	  fit <- ssm(d, model = model, adapt = adapt, samples = samples, thin = thin, 
+	  fit <- ssm(d, model = model, theta = theta, adapt = adapt, samples = samples, thin = thin, 
 	             chains = 2, span = span)
 	}
 	else {
-	  fit <- hssm(d, model = model, adapt = adapt, samples = samples, thin = thin, 
+	  fit <- hssm(d, model = model, theta = theta, adapt = adapt, samples = samples, thin = thin, 
 	              chains = 2, span = span)
 	}
 	
