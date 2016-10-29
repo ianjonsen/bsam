@@ -88,7 +88,7 @@ ssm <- function (d, model = "DCRW", adapt, samples, thin, chains, span)
 	}
 
 	out <- list(summary = summary, mcmc = psamples, model = model, mcmc.settings = mcmc.settings,
-		timestep = dd$tstep, Nx = nrow(xs), data = data)
+		timestep = dd$tstep, Nx = nrow(xs), data = data, inits = inits)
 	
 	out
     }
