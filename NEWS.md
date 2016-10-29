@@ -1,3 +1,7 @@
+# bsam 1.0.1.9003
+* added list of initial values to the output list object. Making these available can aid diagnosing lack of
+convergence and inform choice of span argument value for generating location state initial values
+
 # bsam 1.0.1.9002
 * added `get_summary` function to extract summary `data_frame` from `fit_ssm` output objects. The `data_frame` can optionally be written to a .csv file
 
