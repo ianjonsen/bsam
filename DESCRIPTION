@@ -19,6 +19,7 @@ Imports:
     ggplot2 (>= 2.1.0),
     gridExtra (>= 2.2.1),
     msm (>= 1.6.1),
+    mvtnorm (>= 1.0-5),
     rworldxtra(>= 1.01),
     sp (>= 1.2-3),
     tibble(>= 1.1)
