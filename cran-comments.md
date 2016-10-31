@@ -4,11 +4,6 @@
 * win-builder (devel and release)
 
 ## R CMD check results
-There were no ERRORs or WARNINGs.
+There were no ERRORs, WARNING or NOTEs.
 
-There was 1 NOTE:
 
-* checking CRAN incoming feasibility ... NOTE
-  Maintainer: ‘Ian Jonsen <ian.jonsen@mq.edu.au>’
-
-  This is a new submission
