@@ -1,3 +1,8 @@
+# bsam 1.0.1.9004
+* major bug fix - data indexing when fitting hierarchical models was causing improper fits to multi-individual datasets with > 2 individuals. Indexing now works as intended 
+* Added simulate function 
+* Prevented individual animal tracks from being re-ordered by split function so output track order now matches input track order
+
 # bsam 1.0.1.9003
 * added list of initial values to the output list object. Making these available can aid diagnosing lack of convergence and inform choice of span argument value for generating location state initial values
 
