@@ -7,7 +7,3 @@
 ^DCRW3S\.txt$
 ^\.travis\.yml$
 ^inst/jags/DCRW3S\.txt$
-^R/sim\.r$
-^sim\.r$
-^man/sim\.Rd$
-^sim\.Rd$
