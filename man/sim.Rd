@@ -13,6 +13,9 @@ sim(Nt = 100, gamma = 0.8, Sigma = matrix(c(0.01, 0, 0, 0.01), 2, 2),
 \item{gamma}{move persistence parameter}
 
 \item{Sigma}{variance-covariance matrix for movement process}
+
+\item{amf}{Argos error data, defined by default via the \code{tpar} function which
+uses the t-distribution scale and df estimates from Jonsen et al (2005)}
 }
 \value{
 a data_frame of true locations and locations with Argos error

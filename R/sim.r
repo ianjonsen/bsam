@@ -5,6 +5,8 @@
 #' @param Nt number of time steps to simulate
 #' @param gamma move persistence parameter
 #' @param Sigma variance-covariance matrix for movement process
+#' @param amf Argos error data, defined by default via the \code{tpar} function which
+#' uses the t-distribution scale and df estimates from Jonsen et al (2005)
 #' @return a data_frame of true locations and locations with Argos error
 #' @importFrom mvtnorm rmvnorm
 #' @importFrom tibble data_frame
