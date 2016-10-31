@@ -1,4 +1,4 @@
-# bsam 1.1.0.9004
+# bsam 1.1.0
 * major bug fix - data indexing when fitting hierarchical models was causing improper fits to multi-individual datasets with > 2 individuals. Indexing now works as intended 
 * Added simulate function 
 * Prevented individual animal tracks from being re-ordered by split function so output track order now matches input track order
