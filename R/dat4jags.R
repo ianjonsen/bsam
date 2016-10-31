@@ -40,7 +40,8 @@
 ##' \item{\code{obs}}{the input observed data frame}
 ##' \item{\code{tstep}}{the time step specified in the \code{fitSSM} call}
 ##' @references Jonsen ID, Mills Flemming J, Myers RA (2005) Robust state-space modeling of
-#' animal movement data. Ecology 86:2874-2880 (Appendix A)
+##' animal movement data. Ecology 86:2874-2880 (Appendix A)
+##' @importFrom dplyr left_join
 ##' @export
 dat4jags <- function (d, tstep=1, tpar=tpar()) {
   
@@ -60,28 +61,33 @@ dat4jags <- function (d, tstep=1, tpar=tpar()) {
   d$date <- as.POSIXct(d$date, format="%Y-%m-%d %H:%M:%S", tz="GMT")
     
   ## Merge ARGOS error (t-distribution) fixed parameters
-  dnew <- merge(d, tpar, by="lc", all.x=TRUE)
+  dnew <- left_join(d, tpar, by = "lc")
   if(ncol(d) == 7) {
     dnew$itau2.lon <- d$lonerr
     dnew$itau2.lat <- d$laterr
     dnew <- dnew[, -c(6,7)]
   }
-  dnew <- dnew[order(dnew$date), ]
   
-  dostuff <- function(dd) {
+  dostuff <- function(x) {
     ## Interpolation indices and weights
     dt <- tstep * 86400
-    tms <- (as.numeric(dd$date) - as.numeric(dd$date[1])) / dt
+    tms <- (as.numeric(x$date) - as.numeric(x$date[1])) / dt
     index <- floor(tms) + 1
     weights <- 1 - (tms - (index - 1))
-
-    list(id = dd$id[1], y = cbind(dd$lon, dd$lat),
-       itau2 = cbind(dd$itau2.lon, dd$itau2.lat),
-       nu = cbind(dd$nu.lon, dd$nu.lat),
-       idx = index,
-       ws = weights,
-       ts = seq(dd$date[1], by = dt, length.out = max(index)),
-       obs = dd, tstep = tstep)
+  
+    list(
+      id = x$id[1],
+      y = cbind(x$lon, x$lat),
+      itau2 = cbind(x$itau2.lon, x$itau2.lat),
+      nu = cbind(x$nu.lon, x$nu.lat),
+      idx = index,
+      ws = weights,
+      ts = seq(x$date[1], by = dt, length.out = max(index)),
+      obs = x,
+      tstep = tstep
+    )
   }
-  by(dnew, dnew$id, dostuff)
+  
+  lapply(split(dnew, dnew$id), dostuff)
+  
 }

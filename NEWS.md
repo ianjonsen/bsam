@@ -1,6 +1,5 @@
 # bsam 1.0.1.9003
-* added list of initial values to the output list object. Making these available can aid diagnosing lack of
-convergence and inform choice of span argument value for generating location state initial values
+* added list of initial values to the output list object. Making these available can aid diagnosing lack of convergence and inform choice of span argument value for generating location state initial values
 
 # bsam 1.0.1.9002
 * added `get_summary` function to extract summary `data_frame` from `fit_ssm` output objects. The `data_frame` can optionally be written to a .csv file
@@ -15,24 +14,23 @@ convergence and inform choice of span argument value for generating location sta
 
 # bsam 1.0.0 
 
-* Simplified movement models by removing the mean turn angle parameter. This tends to improve convergence for the behavioural
-switching models.
+* Simplified movement models by removing the mean turn angle parameter. This tends to improve convergence for the behavioural switching models
 
-* Simplified the regularisation / interpolation in the observation models.
+* Simplified the regularisation / interpolation in the observation models
 
-* Simplified data preparation code.
+* Simplified data preparation code
 
-* Diagnostic plots (renamed from `diagSSM` to `diag_ssm`) now include the Gelman-Rubin-Brooks shrink factor plots for each parameter.
+* Diagnostic plots (renamed from `diagSSM` to `diag_ssm`) now include the Gelman-Rubin-Brooks shrink factor plots for each parameter
 
-* New mapping function (`map_ssm`) uses coastline data from `rworldxtra` and `ggplot2` for core plotting functions.
+* New mapping function (`map_ssm`) uses coastline data from `rworldxtra` and `ggplot2` for core plotting functions
 
-* New plot function (`plot_fit`) to inspect fit to location data.
+* New plot function (`plot_fit`) to inspect fit to location data
 
-* Renamed core function `fitSSM` to `fit_ssm`.
+* Renamed core function `fitSSM` to `fit_ssm`
 
-* Improved selection of random initial values for MCMC sampling.
+* Improved selection of random initial values for MCMC sampling
 
-* Initial values for location states are now based on a loess smooth through the observed locations. Users can control the degree of smoothing via the `span` argument to `fit_ssm`.
+* Initial values for location states are now based on a loess smooth through the observed locations. Users can control the degree of smoothing via the `span` argument to `fit_ssm`
 
 
 # bsam 0.43.1 (pre-CRAN release)

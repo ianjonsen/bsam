@@ -91,6 +91,7 @@
 #'  map_ssm(hfit.s)
 #'  plot_fit(hfit.s)
 #' }
+#' @importFrom tibble as_data_frame
 #' @export 
 fit_ssm <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5000, 
                     thin = 5, span = 0.2)
@@ -101,19 +102,35 @@ fit_ssm <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5
 	options(warn = -1)	    	
   seed <- sample(1:1e+05, 1)
   st <- proc.time()
-      
+  
+  ## assign temporary ordered id's so animal id order is preserved in all cases
+  tmp.id <- as.numeric(factor(data$id, levels=unique(data$id)))
+  id <- data$id
+  data$id <- tmp.id
+  
+  data <- as_data_frame(data)
 	d <- dat4jags(data, tstep = tstep, tpar=tpar())	
 	if(model %in% c("DCRW", "DCRWS")) {
 	  fit <- ssm(d, model = model, adapt = adapt, samples = samples, thin = thin, 
 	             chains = 2, span = span)
+	  
+	  ## reassign original animal id's
+	  fit <- lapply(1:length(fit), function(i) {
+	    fit[[i]]$summary$id <- unique(id)[i]
+	    fit[[i]]
+	  })
+	  names(fit) <- unique(id)
 	}
 	else {
 	  fit <- hssm(d, model = model, adapt = adapt, samples = samples, thin = thin, 
 	              chains = 2, span = span)
+	  
+	  ## reassign original animal id's
+	  fit$summary$id <- factor(fit$summary$id, labels = unique(id))
 	}
 	
 	cat("Elapsed time: ", round((proc.time() - st)[3]/60,2), "min \n")	
 	options(warn = 0)
-	
+
 	fit
 }

@@ -15,11 +15,12 @@ Depends:
     rjags (>= 4-6)
 Imports:
     coda (>= 0.18-1),
-    msm (>= 1.6.1),
+    dplyr (>= 0.5.0),
     ggplot2 (>= 2.1.0),
     gridExtra (>= 2.2.1),
-    sp (>= 1.2-3),
+    msm (>= 1.6.1),
     rworldxtra(>= 1.01),
+    sp (>= 1.2-3),
     tibble(>= 1.1)
 SystemRequirements: JAGS (>= 4.2.0)    
 Description: Tools to fit Bayesian state-space models to animal tracking data. Models are provided for location 
