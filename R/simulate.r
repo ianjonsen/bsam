@@ -11,7 +11,7 @@
 #' @importFrom mvtnorm rmvnorm
 #' @importFrom tibble data_frame
 #' @export
-sim <- function(Nt = 100,
+simulate <- function(Nt = 100,
                 gamma = 0.8,
                 Sigma = matrix(c(0.01, 0, 0, 0.01), 2, 2),
                 amf = tpar()) {
