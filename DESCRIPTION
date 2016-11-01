@@ -31,7 +31,7 @@ Description: Tools to fit Bayesian state-space models to animal tracking data. M
     Simplified Markov Chain Monte Carlo convergence diagnostic plotting is provided but users are encouraged 
     to explore tools available in packages such as 'coda' and 'boa'.
 License: GPL-2
-URL: https://www.r-project.org, https://github.com/ianjonsen/bsam
+URL: https://github.com/ianjonsen/bsam
 BugReports: https://github.com/ianjonsen/bsam/issues
 LazyData: yes
 RoxygenNote: 5.0.1
