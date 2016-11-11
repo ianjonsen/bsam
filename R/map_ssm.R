@@ -5,8 +5,8 @@
 #' locations are coloured according to the posterior mean behavioural state estimates.
 #' 
 #' @param fit an output object from \code{fit_ssm}
-#' @param onemap  If FALSE (default) then each estimated track is plotted on a separate 
-#' map, if TRUE then tracks are combined on a single map.
+#' @param onemap  If TRUE (default) then all estimated tracks are plotted on a single, combined 
+#' map, if FALSE then tracks are plotted on separate maps.
 #' @return Observed locations are plotted as '+' symbols and estimated locations as filled
 #' circles. Individual track id's (for DCRW and DCRWS models) are displayed at the top of 
 #' each plot, but only when \code{onemap = FALSE}. The model specified in \code{fit_ssm} is
