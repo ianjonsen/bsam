@@ -116,6 +116,7 @@ fit_ssm <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5
 	  ## reassign original animal id's
 	  fit <- lapply(1:length(fit), function(i) {
 	    fit[[i]]$summary$id <- unique(id)[i]
+	    fit[[i]]$data$id <- unique(id)[i]
 	    fit[[i]]
 	  })
 	  names(fit) <- unique(id)
@@ -126,6 +127,7 @@ fit_ssm <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5
 	  
 	  ## reassign original animal id's
 	  fit$summary$id <- factor(fit$summary$id, labels = unique(id))
+	  fit$data$id <- factor(fit$data$id, labels = unique(id))
 	}
 	
 	cat("Elapsed time: ", round((proc.time() - st)[3] / 60, 2), "min \n")	
