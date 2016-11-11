@@ -26,6 +26,7 @@
 
 plot_fit <- function(fit) 
 {
+  browser()
 if(!is.null(fit$model)) {
   N <- fit$N
   s <- with(fit, split(summary, summary$id))
