@@ -9,8 +9,8 @@ map_ssm(fit, onemap = TRUE)
 \arguments{
 \item{fit}{an output object from \code{fit_ssm}}
 
-\item{onemap}{If FALSE (default) then each estimated track is plotted on a separate 
-map, if TRUE then tracks are combined on a single map.}
+\item{onemap}{If TRUE (default) then all estimated tracks are plotted on a single, combined 
+map, if FALSE then tracks are plotted on separate maps.}
 }
 \value{
 Observed locations are plotted as '+' symbols and estimated locations as filled
