@@ -100,7 +100,6 @@ fit_ssm <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5
   model.file <- file.path(system.file(package = "bsam"), "jags", paste(model, ".txt", sep = ""))
     
 	options(warn = -1)	    	
-  seed <- sample(1:1e+05, 1)
   st <- proc.time()
   
   ## assign temporary ordered id's so animal id order is preserved in all cases
@@ -129,7 +128,7 @@ fit_ssm <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5
 	  fit$summary$id <- factor(fit$summary$id, labels = unique(id))
 	}
 	
-	cat("Elapsed time: ", round((proc.time() - st)[3]/60,2), "min \n")	
+	cat("Elapsed time: ", round((proc.time() - st)[3] / 60, 2), "min \n")	
 	options(warn = 0)
 
 	fit

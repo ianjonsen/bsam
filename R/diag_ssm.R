@@ -309,7 +309,9 @@ diag_ssm.h <- function(fit) {
     tmp <- list(foo)
   }
   ids <- as.character(unique(fit$summary$id))
-  layout(matrix(1:(N * 5), N, 5, byrow = TRUE), widths = c(3, 3, 3, 3, 3), heights = rep(1, N + 1))
+  rows <- 5
+  layout(matrix(1:(rows * 5), rows, 5, byrow = TRUE), widths = c(3, 3, 3, 3, 3), 
+         heights = rep(1, rows + 1))
   sapply(1:N, function(i) {
     
     # sample trace
