@@ -26,15 +26,6 @@
 
 plot_fit <- function(fit) 
 {
-  browser()
-if(!is.null(fit$model)) {
-  N <- fit$N
-  s <- with(fit, split(summary, summary$id))
-  d <- with(fit, split(data, data$id))
-  fit <- lapply(1:N, function(i) {
-    list(summary = s[[i]], data = d[[i]], model = fit$model)
-  })
-}
 
   plt <- function(d) {
     #longitude
@@ -64,6 +55,7 @@ if(!is.null(fit$model)) {
                                                  colour = "dodgerblue", size = 1) +
         ylab("Behavioural state") + xlab("")
     }
+    
   if(d$model == "DCRW" || d$model == "hDCRW") {  
     grid.arrange(p1, p2, heights = c(2, 2))
   }
@@ -72,6 +64,17 @@ if(!is.null(fit$model)) {
     }
   }  
   
-  lapply(fit, plt)
+  if(class(fit) == "ssm") lapply(fit, plt)
+  
+  else if(class(fit) == "hssm") {
+    N <- fit$N
+    s <- with(fit, split(summary, summary$id))
+    d <- with(fit, split(data, data$id))
+    fit <- lapply(1:N, function(i) {
+      list(summary = s[[i]], data = d[[i]], model = fit$model)
+    })
+    lapply(fit, plt)
+  }
+  
   invisible()  
 }
