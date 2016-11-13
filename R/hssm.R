@@ -216,21 +216,18 @@ hssm  <-
     if (model == "hDCRWS") {
       b <- apply(psamples$b, 1, mean)
       b.5 <- apply(psamples$b, 1, median)
-      summary <- as_data_frame(cbind(summary, b = b, b.5 = b.5))
+      summary
+      <- as_data_frame(cbind(summary, b = b, b.5 = b.5))
     }
-    out <-
-      list(
-        summary = summary,
-        mcmc = psamples,
-        model = model,
-        mcmc.settings = mcmc.settings,
-        timestep = d$tstep,
-        N = N,
-        Nx = Nx,
-        data = data,
-        inits = inits
-      )
-    class(out) <- "hssm"
-    
-    out
+    list(
+      summary = summary,
+      mcmc = psamples,
+      model = model,
+      mcmc.settings = mcmc.settings,
+      timestep = d$tstep,
+      N = N,
+      Nx = Nx,
+      data = data,
+      inits = inits
+    )
   }

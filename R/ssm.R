@@ -174,8 +174,5 @@ ssm <-
       out
     }
     
-    output <- lapply(d, ssm1)
-    class(output) <- "ssm"
-    
-    output
+    lapply(d, ssm1)
   }

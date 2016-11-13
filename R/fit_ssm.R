@@ -120,6 +120,7 @@ fit_ssm <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5
 	    fit[[i]]
 	  })
 	  names(fit) <- unique(id)
+	  class(fit) <- "ssm"
 	}
 	else {
 	  fit <- hssm(d, model = model, adapt = adapt, samples = samples, thin = thin, 
@@ -128,6 +129,7 @@ fit_ssm <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5
 	  ## reassign original animal id's
 	  fit$summary$id <- factor(fit$summary$id, labels = unique(id))
 	  fit$data$id <- factor(fit$data$id, labels = unique(id))
+	  class(fit) <- "hssm"
 	}
 	
 	cat("Elapsed time: ", round((proc.time() - st)[3] / 60, 2), "min \n")	
