@@ -216,8 +216,7 @@ hssm  <-
     if (model == "hDCRWS") {
       b <- apply(psamples$b, 1, mean)
       b.5 <- apply(psamples$b, 1, median)
-      summary
-      <- as_data_frame(cbind(summary, b = b, b.5 = b.5))
+      summary <- as_data_frame(cbind(summary, b = b, b.5 = b.5))
     }
     list(
       summary = summary,
