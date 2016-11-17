@@ -1,4 +1,4 @@
-# bsam 1.1.0.9001
+# bsam 1.1.1
 * fixed the mis-ordering of animal id's in the summary and data output data.frames caused when a hierarchical model was fit to a dataset with >= 10 individuals
 
 # bsam 1.1.0.9000
