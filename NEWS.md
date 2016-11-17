@@ -1,3 +1,11 @@
+# bsam 1.1.0.9001
+* fixed the mis-ordering of animal id's in the summary and data output data.frames caused when a hierarchical model was fit to a dataset with >= 10 individuals
+
+# bsam 1.1.0.9000
+* changed diag_ssm plot so that diagnostic panels for psi parameters are split into multiple pages of
+5 rows/page when fitting a hierarchical model. Previous version packed all the psi diagnostic plots into a
+single page
+
 # bsam 1.1.0
 * major bug fix - data indexing when fitting hierarchical models was causing improper fits to multi-individual datasets with > 2 individuals. Indexing now works as intended 
 * Added simulate function 
