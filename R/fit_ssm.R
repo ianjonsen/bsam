@@ -127,8 +127,8 @@ fit_ssm <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5
 	              chains = 2, span = span)
 	  
 	  ## reassign original animal id's
-	  fit$summary$id <- factor(fit$summary$id, labels = unique(id))
-	  fit$data$id <- factor(fit$data$id, labels = unique(id))
+	  fit$summary$id <- factor(as.numeric(fit$summary$id), labels = unique(id))
+	  fit$data$id <- factor(as.numeric(fit$data$id), labels = unique(id))
 	  class(fit) <- "hssm"
 	}
 	
