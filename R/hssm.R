@@ -50,6 +50,8 @@ hssm  <-
       xs <-
         cbind(predict(fit.lon, newdata = data.frame(date = as.numeric(dd$ts))),
               predict(fit.lat, newdata = data.frame(date = as.numeric(dd$ts))))
+      
+      if(dim(xs)[1] < 4) stop("\n\nCannot calculate initial values; \n  deployment length and time step imply too few states\n\n")
       ds <- xs[-1,] - xs[-nrow(xs),]
       es <- ds[-1,] - gamma * ds[-nrow(ds),]
       
