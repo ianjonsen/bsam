@@ -94,7 +94,7 @@ dat4jags <- function (d, tstep=1, tpar=tpar()) {
   x.id <- sapply(out, function(x) x$id)
   
   if(min(x.len) < 10) {
-    cat("\nWARNING, at least one individual had < 10 location states\n")
+    cat("\n WARNING, at least one individual had < 10 location states")
   }
   
   out  
