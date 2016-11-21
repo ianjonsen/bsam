@@ -88,6 +88,14 @@ dat4jags <- function (d, tstep=1, tpar=tpar()) {
     )
   }
   
-  lapply(split(dnew, dnew$id), dostuff)
+  out <- lapply(split(dnew, dnew$id), dostuff)
   
+  x.len <- sapply(out, function(x) max(x$idx))
+  x.id <- sapply(out, function(x) x$id)
+  
+  if(min(x.len) < 10) {
+    cat("\nWARNING, at least one individual had < 10 location states\n")
+  }
+  
+  out  
 }

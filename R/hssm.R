@@ -45,6 +45,7 @@ hssm  <-
           na.action = "na.exclude",
           control = loess.control(surface = "direct")
         )
+      
       ## Predict track, increments and stochastic innovations
       xs <-
         cbind(predict(fit.lon, newdata = data.frame(date = as.numeric(dd$ts))),
