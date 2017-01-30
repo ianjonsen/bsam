@@ -187,7 +187,7 @@ hssm  <-
     lat = apply(psamples$x[, 2, ,], 1, mean)
     lon.q = apply(psamples$x[, 1, ,], 1, quantile, c(0.025, 0.5, 0.975))
     lat.q = apply(psamples$x[, 2, ,], 1, quantile, c(0.025, 0.5, 0.975))
-   
+browser()   
     dts <-
       as.POSIXct(unlist(sapply(prep, function(x)
         x$ts)), origin = "1970-01-01", tz = "GMT")

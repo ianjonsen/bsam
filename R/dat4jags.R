@@ -42,6 +42,7 @@
 ##' @references Jonsen ID, Mills Flemming J, Myers RA (2005) Robust state-space modeling of
 ##' animal movement data. Ecology 86:2874-2880 (Appendix A)
 ##' @importFrom dplyr left_join
+##' @importFrom lubridate ymd_hms
 ##' @export
 dat4jags <- function (d, tstep=1, tpar=tpar()) {
   
@@ -58,7 +59,7 @@ dat4jags <- function (d, tstep=1, tpar=tpar()) {
                                               "Z", "G"), 
                  ordered=TRUE)
   ## Ensure POSIXct dates
-  d$date <- as.POSIXct(d$date, format="%Y-%m-%d %H:%M:%S", tz="GMT")
+  d$date <- ymd_hms(d$date, tz = "GMT")
     
   ## Merge ARGOS error (t-distribution) fixed parameters
   dnew <- left_join(d, tpar, by = "lc")

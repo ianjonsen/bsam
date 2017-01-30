@@ -79,6 +79,7 @@ fit <- fit_ssm(ellie, model = "DCRW", tstep = 2, adapt = 5000, samples = 5000,
 diag_ssm(fit)
 map_ssm(fit)
 plot_fit(fit)
+result <- get_summary(fit)
 
 # Fit DCRWS model for state filtering, regularization and behavioural state estimation
  fit.s <- fit_ssm(ellie, model = "DCRWS", tstep = 2, adapt = 5000, samples = 5000, 
@@ -86,6 +87,7 @@ plot_fit(fit)
  diag_ssm(fit.s)
  map_ssm(fit.s)
  plot_fit(fit.s)
+ result.s <- get_summary(fit.s)
 
 # fit hDCRWS model to > 1 tracks simultaneously
 # this may provide better parameter and behavioural state estimation 
@@ -95,6 +97,7 @@ plot_fit(fit)
  diag_ssm(hfit.s)
  map_ssm(hfit.s)
  plot_fit(hfit.s)
+ result.hs <- get_summary(hfit.s)
 }
 }
 \author{
