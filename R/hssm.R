@@ -14,9 +14,9 @@
 #' summary \code{data.frame} of mean and median position estimates.
 #' @seealso Function to be called by \code{\link{fit_ssm}}.
 #' @importFrom rjags jags.samples jags.model
+#' @importFrom lubridate as_datetime
 #' @importFrom msm rtnorm
 #' @importFrom tibble data_frame as_data_frame
-#' @importFrom lubridate as_datetime
 #' @export
 hssm  <-
   function (d,
