@@ -16,6 +16,7 @@
 #' @importFrom rjags jags.samples jags.model
 #' @importFrom msm rtnorm
 #' @importFrom tibble data_frame as_data_frame
+#' @importFrom lubridate as_datetime
 #' @export
 hssm  <-
   function (d,
@@ -187,16 +188,16 @@ hssm  <-
     lat = apply(psamples$x[, 2, ,], 1, mean)
     lon.q = apply(psamples$x[, 1, ,], 1, quantile, c(0.025, 0.5, 0.975))
     lat.q = apply(psamples$x[, 2, ,], 1, quantile, c(0.025, 0.5, 0.975))
-browser()   
+   
     dts <-
-      as.POSIXct(unlist(sapply(prep, function(x)
-        x$ts)), origin = "1970-01-01", tz = "GMT")
+      unlist(lapply(prep, function(x)
+        x$ts))
     id  <- rep(as.character(sapply(prep, function(x)
       x$id)), Nx)
    
     summary <- data_frame(
       id = id,
-      date = dts,
+      date = as_datetime(dts, tz = "GMT"),
       lon,
       lat,
       lon.025 = lon.q[1, ],
