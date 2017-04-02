@@ -23,4 +23,3 @@ a data_frame of true locations and locations with Argos error
 \description{
 For testing bsam models
 }
-

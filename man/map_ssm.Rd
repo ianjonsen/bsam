@@ -38,4 +38,3 @@ hfit.s <- fit_ssm(ellie, model = "hDCRWS", tstep = 1, adapt = 2000, samples = 10
 map_ssm(hfit.s)
 }
 }
-

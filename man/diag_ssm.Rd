@@ -38,4 +38,3 @@ diag_ssm(fit.s2)
 Brooks SP, Gelman A (1998) General methods for monitoring convergence of 
 iterative simulations. Journal of Computational and Graphical Statistics 7:434-455
 }
-

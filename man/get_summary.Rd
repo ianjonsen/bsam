@@ -43,4 +43,3 @@ p
 p + geom_point(aes(lat.5, lon.5), col = "dodgerblue", size = 1)
 }
 }
-

@@ -2,8 +2,8 @@
 % Please edit documentation in R/bsam-package.R
 \docType{package}
 \name{bsam-package}
-\alias{bsam}
 \alias{bsam-package}
+\alias{bsam}
 \title{Fit Bayesian state-space models to animal tracking data}
 \description{
 Models provided are DCRW (for location filtering), DCRWS (for
@@ -38,11 +38,6 @@ map_ssm(fit)
 plot_fit(fit)
 }
 }
-\author{
-Ian Jonsen
-
-Maintainer: Ian Jonsen <ian.jonsen@mq.edu.au>
-}
 \references{
 Jonsen ID, Mills Flemming J, Myers RA (2005) Robust state-space modeling of
 animal movement data. Ecology 86:2874-2880
@@ -53,5 +48,9 @@ state inference from animal movement data. Scientific Reports 6:20625
 \seealso{
 fit_ssm
 }
-\keyword{bsam}
+\author{
+Ian Jonsen
 
+Maintainer: Ian Jonsen <ian.jonsen@mq.edu.au>
+}
+\keyword{bsam}

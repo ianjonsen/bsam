@@ -100,9 +100,6 @@ result <- get_summary(fit)
  result.hs <- get_summary(hfit.s)
 }
 }
-\author{
-Ian Jonsen
-}
 \references{
 Jonsen ID, Mills Flemming J, Myers RA (2005) Robust state-space modeling of
 animal movement data. Ecology 86:2874-2880
@@ -116,4 +113,6 @@ road map. Deep Sea Research II DOI: 10.1016/j.dsr2.2012.07.008
 Jonsen (2016) Joint estimation over multiple individuals improves behavioural state 
 inference from animal movement data. Scientific Reports 6:20625
 }
-
+\author{
+Ian Jonsen
+}

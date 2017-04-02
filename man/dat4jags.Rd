@@ -58,4 +58,3 @@ states, the fitted locations are \code{ws*x[idx+1,] +
 Jonsen ID, Mills Flemming J, Myers RA (2005) Robust state-space modeling of
 animal movement data. Ecology 86:2874-2880 (Appendix A)
 }
-

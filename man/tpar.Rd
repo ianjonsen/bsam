@@ -24,4 +24,3 @@ This is an internal function used by \code{dat4jags} to specify measurement
 These are the fixed parameters (t-distribution scale & df) for ARGOS
 error classes, from Jonsen et al (2005) Ecology 86:2874-2880.
 }
-

@@ -32,4 +32,3 @@ aggregates results. Intended for internal use, called by \code{fit_ssm}.
 \seealso{
 Function to be called by \code{\link{fit_ssm}}.
 }
-
