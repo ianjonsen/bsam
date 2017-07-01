@@ -167,12 +167,11 @@ hssm  <-
     
     ## params
     params <- c("Sigma", "x", "gamma", "psi")
-    if (model == "hDCRWS")
-      params <- c(params, "alpha", "b")
-    
+    if (model == "hDCRWS") { params <- c(params, "alpha", "b") }
+
     model.file <-
       paste(system.file('jags', package = 'bsam'), "/", model, ".txt", sep = "")
-    
+        
     burn <-
       jags.model(model.file,
                         data,

@@ -34,7 +34,7 @@ for(k in 1:N){
 	b[Xidx[k]] ~ dcat(lambda[])  
 
 	for(j in 1:2){
-		x[Xidx[k], j] ~ dt(first.loc[k, j], itau2[Xidx[k], j] * psi[k], nu[Xidx[k], j])	
+		x[Xidx[k], j] ~ dt(first.loc[k, j], itau2[Yidx[k], j] * psi[k], nu[Yidx[k], j])	
 		}
 
 	## Process equation

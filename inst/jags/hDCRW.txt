@@ -23,7 +23,7 @@ for(k in 1:N){
 
   ## Priors for first locations
 	for(i in 1:2){
-		x[Xidx[k], i] ~ dt(first.loc[k, i], itau2[Xidx[k], i] * psi[k], nu[Xidx[k], i])
+		x[Xidx[k], i] ~ dt(first.loc[k, i], itau2[Yidx[k], i] * psi[k], nu[Yidx[k], i])
 		}
 
 	## Process equation

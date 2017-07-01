@@ -111,7 +111,9 @@ fit_ssm <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5
   data$id <- tmp.id
   
   data <- as_data_frame(data)
+ 
 	d <- dat4jags(data, tstep = tstep, tpar=tpar())	
+
 	if(model %in% c("DCRW", "DCRWS")) {
 	  fit <- ssm(d, model = model, adapt = adapt, samples = samples, thin = thin, 
 	             chains = 2, span = span)
