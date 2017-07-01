@@ -9,7 +9,7 @@
 #' data types (type \code{?fit_ssm} for details).
 #' 
 #' \tabular{ll}{ Package: \tab bsam\cr Type: \tab Package\cr Version: \tab
-#' 1.1.1\cr Date: \tab 2016-11-17\cr License: \tab GPL-2\cr LazyLoad: \tab
+#' 1.1.2\cr Date: \tab 2017-07-01\cr License: \tab GPL-2\cr LazyLoad: \tab
 #' yes\cr } Fit Bayesian state-space models to Argos satellite tracking data.
 #' Models provided are DCRW - for location filtering; DCRWS - for location
 #' filtering and behavioural state estimation with 2 behavioural states; hDCRW 
