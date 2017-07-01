@@ -14,7 +14,7 @@ fit_ssm(data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5000,
 "2001-11-13 07:59:59". "lc" is the Argos location quality class of each
 observation, values in ascending order of quality are "Z", "B", "A", "0", "1",
 "2", "3". "lon" is the observed longitude in decimal degrees. "lat" is the
-observed latitude in decimal degress. The Z-class locations are assumed to 
+observed latitude in decimal degrees. The Z-class locations are assumed to 
 have the same error distributions as B-class locations.
 
 Optionally, the input data.frame can specify the error standard deviations 
@@ -38,7 +38,7 @@ phase, adaptation and updates are fixed at adapt/2}
 
 \item{samples}{number of posterior samples to generate after burn-in}
 
-\item{thin}{amount of thining of to be applied to the posterior samples to 
+\item{thin}{amount of thinning of to be applied to the posterior samples to 
 minimize within-chain sample autocorrelation}
 
 \item{span}{parameter that controls the degree of smoothing by \code{stats::loess},
@@ -58,7 +58,7 @@ combined amongst the individuals
 \description{
 Fits state-space models to animal tracking data. User can choose
 between a first difference correlated random walk (DCRW) model, a switching 
-model (DCRWS) for estimating location and behavioural states, and thier 
+model (DCRWS) for estimating location and behavioural states, and their 
 hierarchical versions (hDCRW, hDCRWS). The models are structured for Argos
 satellite data but options exist for fitting to other tracking data types.
 }
