@@ -9,7 +9,10 @@ Authors@R: c(
     role = "ctb"),
     person("Simon", "Wotherspoon",  email = "simon.wotherspoon@utas.edu.au",
     role = "ctb"),
-    person("Michael", "Sumner", email = "mdsumner@gmail.com", role = "ctb"))
+    person("Michael", "Sumner", email = "mdsumner@gmail.com", role = "ctb"),
+    person("Joanna", "Mills Flemming", email = "joanna.flemming@dal.ca", 
+    role = "ctb")
+    )
 Depends:
     R (>= 3.3.0),
     rjags (>= 4-6)
