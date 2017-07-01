@@ -1,3 +1,6 @@
+# bsam 1.1.2
+* fixed indexing on priors for initial location state. A sufficiently short time step could cause the hierarchical models to crash on compilation.
+
 # bsam 1.1.1
 * fixed the mis-ordering of animal id's in the summary and data output data.frames caused when a hierarchical model was fit to a dataset with >= 10 individuals
 
