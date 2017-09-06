@@ -1,7 +1,7 @@
 Package: bsam
 Type: Package
 Title: Bayesian State-Space Models for Animal Movement
-Version: 1.1.2.9000
+Version: 1.1.2.9001
 Authors@R: c(
     person("Ian", "Jonsen", email = "ian.jonsen@mq.edu.au", 
     role = c("aut", "cre")),

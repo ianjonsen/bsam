@@ -1,3 +1,6 @@
+# bsam 1.1.2.9001
+* fixed missing lc = "F" class for fixed (e.g., GPS locations) in dat4jags. This causes models to crash when lc = "F" in data.
+
 # bsam 1.1.2
 * fixed indexing on priors for initial location state. A sufficiently short time step could cause the hierarchical models to crash on compilation.
 
