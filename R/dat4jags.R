@@ -56,7 +56,7 @@ dat4jags <- function (d, tstep=1, tpar=tpar()) {
   
   ## Check ARGOS location accuracies
   d$lc <- factor(as.character(d$lc), levels=c("3", "2", "1", "0", "A", "B", 
-                                              "Z", "G"), 
+                                              "Z", "F", "G"), 
                  ordered=TRUE)
   ## Ensure POSIXct dates
   d$date <- ymd_hms(d$date, tz = "GMT")
