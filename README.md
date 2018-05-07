@@ -1,7 +1,6 @@
 # bsam
 
 [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](http://www.repostatus.org/badges/latest/inactive.svg)](http://www.repostatus.org/#inactive)
-[![Build Status](https://travis-ci.org/ianjonsen/bsam.svg?branch=master)](https://travis-ci.org/ianjonsen/bsam)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/bsam)](https://cran.r-project.org/package=bsam)
 [![CRAN_Downloads](http://cranlogs.r-pkg.org/badges/bsam)](http://www.r-pkg.org/pkg/bsam)
 [![CRAN_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/bsam)](http://r-pkg.org/pkg/bsam)
