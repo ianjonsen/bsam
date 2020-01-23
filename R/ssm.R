@@ -84,13 +84,17 @@ ssm <-
         x <-
           cbind(rnorm(nrow(xs), xs[, 1], 0.1), rnorm(nrow(xs), xs[, 2], 0.1))
         b <- rbinom(nrow(xs), 1, 0.5) + 1
+        deviance <- rnorm(1)
+        pD <- runif(1, 1000)
         
         init <-
           list(
             iSigma = iSigma,
             gamma = gamma[1],
             logpsi = logpsi,
-            x = x
+            x = x,
+            deviance = deviance,
+            pD = pD
           )
         if (model == "DCRWS") {
           init <-
@@ -102,20 +106,30 @@ ssm <-
               lambda = lambda,
               logpsi = logpsi,
               x = x,
-              b = b
+              b = b,
+              deviance = deviance,
+              pD = pD
             )
         }
         init
       }
       inits <- lapply(1:chains, function(i)
         init.fn())
-      params <- c("Sigma", "x", "gamma", "psi")
+      params <- c("Sigma", "x", "gamma", "psi", "deviance", "pD") 
       if (model == "DCRWS")
         params <- c(params, "alpha", "b")
       
       model.file <-
         file.path(system.file("jags", package = "bsam"),
                   paste(model, ".txt", sep = ""))
+      
+      ## load DIC module in JAGS, if not already loaded
+      ## this ensures deviance chains are monitored
+      mods <- list.modules()
+      if(!"dic" %in% mods) {
+        load.module("dic")
+        
+      }
       burn <-
         jags.model(model.file,
                    data,
