@@ -27,7 +27,7 @@ Imports:
     sp (>= 1.2-3),
     tibble (>= 1.1),
     lubridate (>= 1.6.0)
-SystemRequirements: JAGS (>= 4.2.0)    
+SystemRequirements: JAGS (>= 4.3.0)    
 Description: Tools to fit Bayesian state-space models to animal tracking data. Models are provided for location 
     filtering, location filtering and behavioural state estimation, and their hierarchical versions. 
     The models are primarily intended for fitting to ARGOS satellite tracking data but options exist to fit 
