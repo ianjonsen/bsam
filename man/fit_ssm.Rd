@@ -4,8 +4,8 @@
 \alias{fit_ssm}
 \title{Fit Bayesian state-space models to animal movement data}
 \usage{
-fit_ssm(data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5000,
-  thin = 5, span = 0.2)
+fit_ssm(data, model = "DCRW", tstep = 1, adapt = 10000,
+  samples = 5000, thin = 5, span = 0.2)
 }
 \arguments{
 \item{data}{A data frame containing the following columns, "id","date",
