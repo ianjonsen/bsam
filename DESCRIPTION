@@ -14,7 +14,7 @@ Authors@R: c(
     role = "ctb")
     )
 Depends:
-    R (>= 4.0.0),
+    R (>= 3.6.3),
     rjags (>= 4-10)
 Imports:
     coda (>= 0.19-3),
