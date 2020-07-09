@@ -62,6 +62,7 @@ dat4jags <- function (d, tstep=1, tpar=tpar()) {
   
   ## Merge ARGOS error (t-distribution) fixed parameters
   dnew <- left_join(d, tpar, by = "lc")
+  
   if(ncol(d) == 7) {
     dnew$itau2.lon <- d$lonerr ^ -2
     dnew$itau2.lat <- d$laterr ^ -2

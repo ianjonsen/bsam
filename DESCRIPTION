@@ -25,7 +25,7 @@ Imports:
     mvtnorm (>= 1.1-1),
     rworldxtra(>= 1.01),
     sp (>= 1.2-3),
-    tibble (>= 3.0.2),
+    tibble (>= 3.0.1),
     lubridate (>= 1.7.9)
 SystemRequirements: JAGS (>= 4.3.0)    
 Description: Tools to fit Bayesian state-space models to animal tracking data. Models are provided for location 

@@ -78,16 +78,17 @@ or \code{hssm}, which fit the specified state-space model to the data,
 returning a list of results.
 }
 \examples{
-\dontrun{
+
 # Fit DCRW model for state filtering and regularization
 data(ellie)
-fit <- fit_ssm(ellie, model = "DCRW", tstep = 2, adapt = 5000, samples = 5000, 
+fit <- fit_ssm(ellie, model = "DCRW", tstep = 2, adapt = 1000, samples = 500, 
               thin = 5, span = 0.2)
 diag_ssm(fit)
 map_ssm(fit)
 plot_fit(fit)
 result <- get_summary(fit)
 
+\dontrun{
 # Fit DCRWS model for state filtering, regularization and behavioural state estimation
  fit.s <- fit_ssm(ellie, model = "DCRWS", tstep = 2, adapt = 5000, samples = 5000, 
                 thin = 5, span = 0.2)
