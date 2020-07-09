@@ -54,13 +54,12 @@ dat4jags <- function (d, tstep=1, tpar=tpar()) {
     stop("Input data columns 6 and 7 must be labelled `lonerr` and `laterr`, respectively")
   }
   
-  ## Check ARGOS location accuracies
-  d$lc <- factor(as.character(d$lc), levels=c("3", "2", "1", "0", "A", "B", 
-                                              "Z", "F", "G"), 
-                 ordered=TRUE)
   ## Ensure POSIXct dates
   d$date <- ymd_hms(d$date, tz = "GMT")
-    
+
+  ## Check ARGOS lc - make sure it has class 'character' prior to left_join w tpar
+  d$lc <- as.character(d$lc)
+  
   ## Merge ARGOS error (t-distribution) fixed parameters
   dnew <- left_join(d, tpar, by = "lc")
   if(ncol(d) == 7) {
@@ -68,6 +67,11 @@ dat4jags <- function (d, tstep=1, tpar=tpar()) {
     dnew$itau2.lat <- d$laterr ^ -2
     dnew <- dnew[, -c(6,7)]
   }
+  
+  ## now coerce lc to an ordered factor
+  dnew$lc <- factor(as.character(dnew$lc), levels=c("3", "2", "1", "0", "A", "B", 
+                                              "Z", "F", "G"), 
+                 ordered=TRUE)
   
   dostuff <- function(x) {
     ## Interpolation indices and weights

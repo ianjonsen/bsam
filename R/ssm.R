@@ -15,7 +15,7 @@
 #' @seealso Function to be called by \code{\link{fit_ssm}}.
 #' @importFrom rjags jags.samples jags.model list.modules load.module
 #' @importFrom msm rtnorm
-#' @importFrom tibble data_frame
+#' @importFrom tibble tibble
 #' @export
 ssm <-
   function (d,

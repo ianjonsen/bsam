@@ -1,7 +1,7 @@
 Package: bsam
 Type: Package
 Title: Bayesian State-Space Models for Animal Movement
-Version: 1.1.2.9011
+Version: 1.1.3
 Authors@R: c(
     person("Ian", "Jonsen", email = "ian.jonsen@mq.edu.au", 
     role = c("aut", "cre")),
@@ -14,19 +14,19 @@ Authors@R: c(
     role = "ctb")
     )
 Depends:
-    R (>= 3.3.0),
+    R (>= 4.0.1),
     rjags (>= 4-10)
 Imports:
-    coda (>= 0.18-1),
-    dplyr (>= 0.5.0),
-    ggplot2 (>= 2.1.0),
-    gridExtra (>= 2.2.1),
-    msm (>= 1.6.1),
-    mvtnorm (>= 1.0-5),
+    coda (>= 0.19-3),
+    dplyr (>= 1.0.0),
+    ggplot2 (>= 3.3.2),
+    gridExtra (>= 2.3),
+    msm (>= 1.6.8),
+    mvtnorm (>= 1.1-1),
     rworldxtra(>= 1.01),
     sp (>= 1.2-3),
-    tibble (>= 1.1),
-    lubridate (>= 1.6.0)
+    tibble (>= 3.0.2),
+    lubridate (>= 1.7.9)
 SystemRequirements: JAGS (>= 4.3.0)    
 Description: Tools to fit Bayesian state-space models to animal tracking data. Models are provided for location 
     filtering, location filtering and behavioural state estimation, and their hierarchical versions. 
@@ -38,4 +38,5 @@ License: GPL-2
 URL: https://github.com/ianjonsen/bsam
 BugReports: https://github.com/ianjonsen/bsam/issues
 LazyData: yes
-RoxygenNote: 6.1.1
+Encoding: UTF-8
+RoxygenNote: 7.1.1

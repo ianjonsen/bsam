@@ -94,7 +94,7 @@
 #'  plot_fit(hfit.s)
 #'  result.hs <- get_summary(hfit.s)
 #' }
-#' @importFrom tibble as_data_frame
+#' @importFrom tibble as_tibble
 #' @export 
 fit_ssm <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5000, 
                     thin = 5, span = 0.2)
@@ -110,7 +110,7 @@ fit_ssm <- function (data, model = "DCRW", tstep = 1, adapt = 10000, samples = 5
   id <- data$id
   data$id <- tmp.id
   
-  data <- as_data_frame(data)
+  data <- as_tibble(data)
  
 	d <- dat4jags(data, tstep = tstep, tpar=tpar())	
 

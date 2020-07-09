@@ -14,9 +14,7 @@
 ##' \item{\code{nu.lat}}{df parameters for latitude}
 ##' @export
 tpar <- function() {
-  data.frame(lc = factor(c("3", "2", "1", "0", "A", "B", "Z", "F", "G"),
-                       levels = c("3", "2", "1", "0", "A", "B", "Z", "F", "G"),
-                       ordered = TRUE),
+  data.frame(lc = c("3", "2", "1", "0", "A", "B", "Z", "F", "G"),
              itau2.lon = (c(0.289866, 0.3119293, 0.9020423, 2.1625936, 0.507292, 
                        4.2050261, 4.2050261, 0.01, NA) / 6366.71 * 180 / pi) ^ -2,
              itau2.lat = (c(0.1220553, 0.2605126, 0.4603374, 1.607056, 0.5105468, 

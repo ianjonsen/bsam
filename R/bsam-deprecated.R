@@ -5,7 +5,7 @@
 #' @rdname bsam-deprecated
 #' @param ... ignored
 #' @export
-#' @rdname bsam-deprecated 
+
 fitSSM <- function(...) {
   .Deprecated("fit_ssm")
 }
