@@ -1,6 +1,7 @@
 # bsam 1.1.3
 * fixed missing lc = "F" class for fixed (e.g., GPS locations) in dat4jags. This causes models to crash when lc = "F" in data.
 * replaced deprecated tibble functions as_data_frame and data_frame with as_tibble and tibble, respectively
+* fixes an issue where join on data and tpar by 'lc' may error due to incompatible ordered factor types
 
 # bsam 1.1.2
 * fixed indexing on priors for initial location state. A sufficiently short time step could cause the hierarchical models to crash on compilation.
