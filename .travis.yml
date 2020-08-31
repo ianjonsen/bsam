@@ -15,7 +15,7 @@ cache:
   - packages
 
 before_install:
-  - sudo apt-get install -y jags
+  - sudo apt-get install jags
 
 latex: true
 pandoc: true

@@ -3,7 +3,7 @@ This update fixes an error arising from a recent update to the dplyr packge
 
 ## Test environments
 * local OS X install, R 4.0.2
-* ubuntu 18.04 (via rhub), R 4.0.2
+* Ubuntu 18.04 (via travis-ci), R 4.0.2
 * win-builder (devel and release)
 
 ## R CMD check results
