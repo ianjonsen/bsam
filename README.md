@@ -1,9 +1,9 @@
 # bsam
 
-[![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](http://www.repostatus.org/#inactive)
+[![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/bsam)](https://cran.r-project.org/package=bsam)
-[![CRAN_Downloads](http://cranlogs.r-pkg.org/badges/bsam)](https://www.r-pkg.org/pkg/bsam)
-[![CRAN_Downloads](http://cranlogs.r-pkg.org/badges/grand-total/bsam)](https://r-pkg.org/pkg/bsam)
+[![CRAN_Downloads](https://cranlogs.r-pkg.org/badges/bsam)](https://www.r-pkg.org/pkg/bsam)
+[![CRAN_Downloads](https://cranlogs.r-pkg.org/badges/grand-total/bsam)](https://r-pkg.org/pkg/bsam)
 
 **bsam** - **B**ayesian **S**tate-space models for **A**nimal **M**ovement. 
 
@@ -35,5 +35,5 @@ devtools::install_github("ianjonsen/bsam")
 
 ### JAGS installation
 
-Install JAGS: http://mcmc-jags.sourceforge.net/
+Install [JAGS](http://mcmc-jags.sourceforge.net/)
 

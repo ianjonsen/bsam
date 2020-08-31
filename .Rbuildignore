@@ -7,3 +7,4 @@
 ^DCRW3S\.txt$
 ^\.travis\.yml$
 ^inst/jags/DCRW3S\.txt$
+^CRAN-RELEASE$
