@@ -1,26 +1,16 @@
-repos:
-  CRAN: https://cran.rstudio.com
-
+language: r
+cache: packages
 warnings_are_errors: false
 
-deploy.skip_cleanup: true
-
-os:
-  - linux
-
-sudo: true
-dist: bionic
-
-cache:
-  - packages
+r:
+  - oldrel
+  - release
+  - devel
 
 sudo: true
 before_install:
   - sudo apt-get install jags
   - sudo apt-get install r-cran-rjags
-
-latex: true
-pandoc: true
 
 notifications:
   email:
