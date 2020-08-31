@@ -38,8 +38,8 @@
 #' # Fit DCRW model for state filtering and regularization -
 #' # using trivial adapt & samples values for speed
 #' data(ellie)
-#' fit <- fit_ssm(ellie, model = "DCRW", tstep = 1, adapt = 500, samples = 500, 
-#'               thin = 5, span = 0.2)
+#' fit <- fit_ssm(ellie, model = "DCRW", tstep = 1, adapt = 100, samples = 100, 
+#'               thin = 2, span = 0.2)
 #' diag_ssm(fit)
 #' map_ssm(fit)
 #' plot_fit(fit)
