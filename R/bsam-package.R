@@ -35,9 +35,10 @@
 #' @keywords bsam
 #' @examples
 #' \dontrun{
-#' # Fit DCRW model for state filtering and regularization
+#' # Fit DCRW model for state filtering and regularization -
+#' # using trivial adapt & samples values for speed
 #' data(ellie)
-#' fit <- fit_ssm(ellie, model = "DCRW", tstep = 1, adapt = 5000, samples = 5000, 
+#' fit <- fit_ssm(ellie, model = "DCRW", tstep = 1, adapt = 500, samples = 500, 
 #'               thin = 5, span = 0.2)
 #' diag_ssm(fit)
 #' map_ssm(fit)
