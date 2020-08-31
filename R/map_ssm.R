@@ -17,12 +17,12 @@
 #' @examples
 #' \dontrun{
 #' data(ellie)
-#' fit.s <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 500, samples = 200, 
-#'               thin = 2, span = 0.1)
+#' fit.s <- fitSSM(ellie, model = "DCRWS", tstep = 1, adapt = 100, samples = 100, 
+#'               thin = 1, span = 0.1)
 #' map_ssm(fit.s, onemap = TRUE)
 #' 
-#' hfit.s <- fit_ssm(ellie, model = "hDCRWS", tstep = 1, adapt = 500, samples = 200, 
-#'                 thin = 2, span = 0.1)
+#' hfit.s <- fit_ssm(ellie, model = "hDCRWS", tstep = 1, adapt = 100, samples = 100, 
+#'                 thin = 1, span = 0.1)
 #' map_ssm(hfit.s)
 #' }
 #' @importFrom ggplot2 ggplot aes ggtitle geom_point scale_colour_gradient2 xlab ylab aes_string

@@ -83,7 +83,7 @@ returning a list of results.
 # using trivial adapt & samples values for speed
 data(ellie)
 fit <- fit_ssm(ellie, model = "DCRW", tstep = 2, adapt = 100, samples = 100, 
-              thin = 2, span = 0.2)
+              thin = 1, span = 0.2)
 diag_ssm(fit)
 map_ssm(fit)
 plot_fit(fit)
@@ -93,7 +93,7 @@ result <- get_summary(fit)
 # Fit DCRWS model for state filtering, regularization and behavioural state estimation - 
 # using trivial adapt & samples values for speed
  fit.s <- fit_ssm(ellie, model = "DCRWS", tstep = 2, adapt = 100, samples = 100, 
-                thin = 2, span = 0.2)
+                thin = 1, span = 0.2)
  diag_ssm(fit.s)
  map_ssm(fit.s)
  plot_fit(fit.s)
@@ -104,7 +104,7 @@ result <- get_summary(fit)
 # by borrowing strength across multiple track datasets - 
 # using trivial adapt & samples values for speed
  hfit.s <- fit_ssm(ellie, model = "hDCRWS", tstep = 2, adapt = 100, samples = 100, 
-                thin = 2, span = 0.2)
+                thin = 1, span = 0.2)
  diag_ssm(hfit.s)
  map_ssm(hfit.s)
  plot_fit(hfit.s)
