@@ -1,12 +1,11 @@
 ## Submission
-This update fixes an error arising from a recent update to the dplyr packge
+This update fixes an error arising from a recent update to the dplyr package
 
 ## Test environments
-* local OS X install, R 4.0.2
-* Ubuntu 18.04 (via travis-ci), R 4.0.2
-* win-builder (devel and release)
+* local OS X install: release
+* Ubuntu 16.04 (via travis-ci): release, devel and oldrelease
+* Windows (via win-builder): devel and release
 
 ## R CMD check results
-There were no ERRORs or WARNINGs. 2 NOTEs
+There were no ERRORs, WARNINGs, or NOTEs
 
-NOTEs related to elapsed time required for testing examples.
