@@ -25,7 +25,7 @@ states corresponding to each estimated location are also provided.
 \examples{
 \dontrun{
 data(ellie)
-fit <- fit_ssm(ellie, model = "DCRW", tstep = 1, adapt = 2000, samples = 1000, 
+fit <- fit_ssm(ellie, model = "DCRW", tstep = 1, adapt = 500, samples = 200, 
                 thin = 2, span = 0.1)
                 
 ## print to console                 
