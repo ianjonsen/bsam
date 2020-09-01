@@ -21,19 +21,6 @@ increasing number of iterations. See the \code{coda} package for further details
 Takes a fitted \code{fit_ssm} object and uses standard McMC convergence diagnostic plots to
 aid assessment of lack of convergence.
 }
-\examples{
-\dontrun{
-data(ellie)
-fit.s <- fit_ssm(ellie, model = "DCRWS", tstep = 1, adapt = 100, samples = 100, 
-              thin = 1, span = 0.1)
-diag_ssm(fit.s)
-
-# increase burnin, posterior sample numbers, and thinning factor
-fit.s2 <- fit_ssm(ellie, model = "DCRWS", tstep = 1, adapt = 100, samples = 100, 
-              thin = 1, span = 0.1)
-diag_ssm(fit.s2)
-}             
-}
 \references{
 Brooks SP, Gelman A (1998) General methods for monitoring convergence of 
 iterative simulations. Journal of Computational and Graphical Statistics 7:434-455

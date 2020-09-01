@@ -8,17 +8,6 @@
 #' @return Observed locations are plotted as filled circles and estimated locations as blue
 #' lines with the 95\% credible interval as a ribbon. Uses \code{ggplot2} plotting functions.
 #' 
-#' @examples
-#' \dontrun{
-#' data(ellie)
-#' fit.s <- fit_ssm(ellie, model = "DCRWS", tstep = 1, adapt = 100, samples = 100, 
-#'               thin = 1, span = 0.1)
-#' plot_fit(fit.s)
-#' 
-#' hfit.s <- fit_ssm(ellie, model = "hDCRWS", tstep = 1, adapt = 100, samples = 100, 
-#'                 thin = 1, span = 0.1)
-#' plot_fit(hfit.s)
-#' }
 #' @importFrom ggplot2 ggplot aes ggtitle geom_point scale_color_gradient2 xlab ylab aes_string 
 #' @importFrom ggplot2 ylim geom_line geom_ribbon
 #' @importFrom gridExtra grid.arrange

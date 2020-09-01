@@ -22,24 +22,3 @@ posterior mean longitude and latitude, and the 2.5, 50, and 97.5 %-iles of the p
 longitude and latitude. For the \code{DCRWS} and \code{hDCRWS} models, the posterior mean and median behavioural
 states corresponding to each estimated location are also provided.
 }
-\examples{
-\dontrun{
-data(ellie)
-fit <- fit_ssm(ellie, model = "DCRW", tstep = 1, adapt = 100, samples = 100, 
-                thin = 1, span = 0.1)
-                
-## print to console                 
-get_summary(fit)
-
-## export to .csv file
-get_summary(fit, file = "ellie_dcrw.csv")
-
-## plot track of second animal (posterior mean longitude and latitude)
-p <- ggplot(data = subset(get_summary(fit), id == unique(id)[2])) + 
-       geom_point(aes(lat, lon), col = "firebrick", size = 2)
-p
-
-## overlay posterior median longitude and latitude
-p + geom_point(aes(lat.5, lon.5), col = "dodgerblue", size = 1)
-}
-}

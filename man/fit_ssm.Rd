@@ -81,18 +81,14 @@ returning a list of results.
 
 # Fit DCRW model for state filtering and regularization - 
 # using trivial adapt & samples values for speed
-data(ellie)
-fit <- fit_ssm(ellie, model = "DCRW", tstep = 2, adapt = 100, samples = 100, 
+data(ellie1)
+fit <- fit_ssm(ellie1, model = "DCRW", tstep = 4, adapt = 10, samples = 100, 
               thin = 1, span = 0.2)
-diag_ssm(fit)
-map_ssm(fit)
-plot_fit(fit)
-result <- get_summary(fit)
 
-\dontrun{
+\donttest{
 # Fit DCRWS model for state filtering, regularization and behavioural state estimation - 
 # using trivial adapt & samples values for speed
- fit.s <- fit_ssm(ellie, model = "DCRWS", tstep = 2, adapt = 100, samples = 100, 
+ fit.s <- fit_ssm(ellie1, model = "DCRWS", tstep = 2, adapt = 10, samples = 100, 
                 thin = 1, span = 0.2)
  diag_ssm(fit.s)
  map_ssm(fit.s)
@@ -103,12 +99,13 @@ result <- get_summary(fit)
 # this may provide better parameter and behavioural state estimation 
 # by borrowing strength across multiple track datasets - 
 # using trivial adapt & samples values for speed
- hfit.s <- fit_ssm(ellie, model = "hDCRWS", tstep = 2, adapt = 100, samples = 100, 
+data(ellie2)
+hfit.s <- fit_ssm(ellie2, model = "hDCRWS", tstep = 2, adapt = 10, samples = 100, 
                 thin = 1, span = 0.2)
- diag_ssm(hfit.s)
- map_ssm(hfit.s)
- plot_fit(hfit.s)
- result.hs <- get_summary(hfit.s)
+diag_ssm(hfit.s)
+map_ssm(hfit.s)
+plot_fit(hfit.s)
+result.hs <- get_summary(hfit.s)
 }
 }
 \references{

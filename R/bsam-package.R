@@ -37,8 +37,8 @@
 #' \dontrun{
 #' # Fit DCRW model for state filtering and regularization -
 #' # using trivial adapt & samples values for speed
-#' data(ellie)
-#' fit <- fit_ssm(ellie, model = "DCRW", tstep = 1, adapt = 100, samples = 100, 
+#' data(ellie1)
+#' fit <- fit_ssm(ellie1, model = "DCRW", tstep = 1, adapt = 10, samples = 100, 
 #'               thin = 1, span = 0.2)
 #' diag_ssm(fit)
 #' map_ssm(fit)
@@ -54,7 +54,18 @@ NULL
 
 
 
-##' @name ellie
+##' @name ellie1
+##' @docType data
+##' @title Elephant seal Argos satellite data (1 individual)
+##' @format .RData
+##' @keywords data 
+##' @description Example elephant seal Argos tracking data. Data were sourced from 
+##' the Integrated Marine Observing System (IMOS) - IMOS is supported by the 
+##' Australian Government through the National Collaborative Research Infrastructure 
+##' Strategy and the Super Science Initiative.
+NULL
+
+##' @name ellie2
 ##' @docType data
 ##' @title Elephant seal Argos satellite data (2 individuals)
 ##' @format .RData
@@ -64,5 +75,3 @@ NULL
 ##' Australian Government through the National Collaborative Research Infrastructure 
 ##' Strategy and the Super Science Initiative.
 NULL
-
-
