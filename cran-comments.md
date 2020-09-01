@@ -1,5 +1,5 @@
 ## Submission
-This update fixes an error arising from a recent update to the dplyr package
+This update fixes NOTES generated from incoming automated checks
 
 ## Test environments
 * local OS X install: release
