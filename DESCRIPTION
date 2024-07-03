@@ -4,11 +4,11 @@ Title: Bayesian State-Space Models for Animal Movement
 Version: 1.1.3
 Date: 2020-08-31
 Authors@R: c(
-    person("Ian", "Jonsen", email = "ian.jonsen@mq.edu.au", 
+    person("Ian", "Jonsen", email = "jonsen@stochastic-qc.org",
     role = c("aut", "cre")),
-    person("Sophie", "Bestley", email = "sophie.bestley@aad.gov.au",
+    person("Sophie", "Bestley", email = "sophie.bestley@utas.edu.au",
     role = "ctb"),
-    person("Simon", "Wotherspoon",  email = "simon.wotherspoon@utas.edu.au",
+    person("Simon", "Wotherspoon",  email = "simon.wotherspoon@aad.gov.au",
     role = "ctb"),
     person("Michael", "Sumner", email = "mdsumner@gmail.com", role = "ctb"),
     person("Joanna", "Mills Flemming", email = "joanna.flemming@dal.ca", 
